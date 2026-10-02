@@ -1,0 +1,144 @@
+---
+title: "Introduction to SQL"
+author: "Simran Kaur"
+date: September 26, 2026
+format:
+  html:
+    toc: true
+    toc-title: "Contents"
+    toc-depth: 3
+    number-sections: true
+    smooth-scroll: true
+    embed-resources: true
+---
+
+**Course:** IBM 6500
+
+# Course-Completion Evidence
+
+![My DataCamp Introduction to SQL certificate](images/Intro%20to%20SQL%20certificate.png)
+
+# Learning Notes and Key Takeaways
+
+## Chapter 1: Relational Databases
+
+### Main ideas
+
+This chapter helped me understand what SQL works with before I started writing queries. A database stores and organizes data so it can be retrieved and used. A relational database keeps related information in tables. In a products table, one row could represent one product, while columns such as `product_name`, `price`, and `category` describe it.
+
+Tables can be connected through identifiers. For example, a customer ID can identify one customer even if two customers have the same name. Keeping customer and order information in separate related tables can make the data easier to maintain and reduce repeated details.
+
+### Important concepts
+
+| Term | What it means | Example |
+|------------------------|------------------------|------------------------|
+| Table | A set of records about one subject | `customers` |
+| Row or record | One item or observation | One customer |
+| Column or field | One attribute shared by the records | `signup_date` |
+| Unique identifier | A value that identifies one row | `customer_id` |
+| Data type | The kind of value a column holds | Text, number, or date |
+| Schema | A description of tables, columns, and their relationships | Customer and order tables |
+
+An email address or name may look unique in a small sample, but a dedicated ID is safer when identifying records. A column's data type matters too: a price should be stored as a number if I want to calculate a total or average.
+
+### SQL example and explanation
+
+``` sql
+SELECT *
+FROM customers;
+```
+
+`SELECT *` asks for every column, and `FROM customers` identifies the table. The result shows the available customer records without changing the stored data. I would use this to inspect a small table before choosing the columns needed for a report.
+
+### CEP application
+
+In a marketing project, I might have separate tables for customers, campaign activity, and purchases. Knowing what each row represents and which ID connects the tables would help me avoid counting the same customer or purchase incorrectly. I would also check data types before calculating campaign revenue or comparing signup dates.
+
+## Chapter 2: Querying
+
+### Main ideas
+
+In this chapter, I learned how to ask a database for specific information. `SELECT` chooses columns and `FROM` chooses the table. The output of a query is a result set. I also practiced returning unique values with `DISTINCT`, giving a result column a clearer name with `AS`, saving a query as a view, and limiting how many rows are shown.
+
+### Important SQL syntax
+
+| Syntax | Use |
+|----|----|
+| `SELECT column_name` | Return one column |
+| `SELECT column_1, column_2` | Return selected columns |
+| `SELECT *` | Return all columns |
+| `FROM table_name` | Specify the source table |
+| `DISTINCT` | Remove duplicate rows from the selected result |
+| `AS` | Give a result column an alias |
+| `CREATE VIEW name AS` | Save a reusable query definition |
+| `LIMIT 5` | Show up to five rows in PostgreSQL and BigQuery |
+
+I write SQL keywords in uppercase and place the main clauses on separate lines so I can read the query more easily later. SQL systems have different dialects, so I will check the syntax when moving between PostgreSQL, SQL Server, and BigQuery. For example, SQL Server commonly uses `TOP` where PostgreSQL uses `LIMIT`.
+
+### Example: Select the fields I need
+
+``` sql
+SELECT title, author, genre
+FROM books;
+```
+
+This returns three columns from the `books` table. It is easier to review than returning every field when I only need the title, author, and genre.
+
+### Example: Find unique authors
+
+``` sql
+SELECT DISTINCT author AS unique_author
+FROM books;
+```
+
+This returns each author once and labels the result `unique_author`. The alias only changes the result's display name; it does not rename the field in the original table.
+
+### Example: Save a reusable query
+
+``` sql
+CREATE VIEW library_authors AS
+SELECT DISTINCT author AS unique_author
+FROM books;
+```
+
+The view stores the query definition. I can then retrieve its result with:
+
+``` sql
+SELECT *
+FROM library_authors;
+```
+
+This would be useful if library staff regularly need the same list of authors. A regular view reflects the underlying data when queried rather than storing a separate copy of those rows.
+
+### Example: Preview a table
+
+``` sql
+SELECT title, author
+FROM books
+LIMIT 5;
+```
+
+This returns at most five rows, which is helpful when checking that I selected the correct table and columns. Without `ORDER BY`, the five rows are not guaranteed to be in any particular order.
+
+### CEP application
+
+In this course, I practiced using `DISTINCT` to find unique authors, `AS` to give a column a clearer name, and a view called `library_authors` to save and query the result. I can see myself using the same approach in a marketing project to list unique campaign channels and make report fields easier to read.
+
+For our CEP project, I’m realizing that I need to understand what each row represents before creating perceptual maps. Based on what we know so far, we expect separate data for AI panel responses and about 600 human respondents. I’ll check whether each row represents a person, a brand rating, or a model response, and which IDs connect the tables. That should help me avoid double-counting responses or comparing answers to different questions. I’ll also check that Likert ratings are stored as numbers and ZIP codes as text before calculating brand positions or linking the data to Census information if present in the data.
+
+# Overall Reflection and Future Reference
+
+Before this course, I knew databases stored information, but I had not really thought about how the tables fit together. The examples with books helped me see the difference between a row, a field, and a unique ID. Writing `SELECT` queries felt less intimidating once I understood what I was asking the database to return.
+
+The part I liked most was seeing a query become more useful with small changes. I could start by viewing every field, select just the titles and authors, then use `DISTINCT` to get a list without repeats. Creating `library_authors` also showed me why someone would save a query to use again. When I tried to query the view and got an error because it did not exist in that session, I had to go back and check the order of my steps. That helped the idea stick.
+
+I still need more practice with SQL syntax, especially remembering when PostgreSQL uses `LIMIT` and SQL Server uses `TOP`. For our CEP, I can see myself using SQL to pull the specific customer, survey, or campaign fields we need and to check for repeated categories before analyzing them. My next goal is to practice with a real project dataset so I can move beyond the course examples.
+
+# Appendix: Publication Links
+
+-   **GitHub Repository:** <https://github.com/Simrank-DM/IBM6500-SQL>
+-   **Published Introduction to SQL Report:** <https://simrank-dm.github.io/IBM6500-SQL/Kaur-Simran-Introduction-to-SQL.html>
+
+## Source
+
+DataCamp, *Introduction to SQL* course materials.

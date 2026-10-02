@@ -1,0 +1,183 @@
+---
+title: "M05 | Visualizing Data with Tables"
+subtitle: "A category-level sales view using gt and gtExtras"
+author: "Simran Kaur"
+date: today
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    toc-expand: true
+    number-sections: true
+    code-link: true
+    code-fold: true
+    code-tools: true
+    code-overflow: wrap
+    embed-resources: true
+editor: visual
+execute:
+  echo: false
+  warning: false
+  message: false
+  freeze: auto
+---
+
+::: {.callout-note title="Project context"}
+I used the `pizzaplace` dataset that comes with **gt** because our CEP group does not have any data yet as our project is different than traditional marketing projects. It is practice data, but the same table design could work with our project data later.
+:::
+
+# What I learned about tables
+
+## Prompt 1: Summarize what you learned from the videos you watched.
+
+I learned that a good table starts with a clear question. Before making it look nice, I need to group and summarize the data. Then **gt** lets me add a title, better labels, dollar signs, footnotes, and a source. I also saw how small changes to color and spacing make a table easier to read. **gtExtras** can add a small chart right inside the table, so readers can see the pattern and the exact number together.
+
+> My main takeaway: decide what I want people to understand and compare before I start styling the table.
+
+## Prompt 2: What did you like about the gt and gtExtras packages demonstrated in the videos?
+
+I liked that I can build a **gt** table one step at a time. I can start with the data and then add labels and formatting as I go. My favorite feature in **gtExtras** is the small bar inside a cell. It helps me compare the categories quickly without giving up the actual numbers.
+
+## Prompt 3: How do tables complement charts for data visualization?
+
+Charts help me spot a pattern quickly. Tables help me find the exact numbers behind it. For example, a chart could show which pizza category sells the most, while my table shows the revenue, number sold, average price, and share of total sales. I think using both makes the story clearer.[^1]
+
+[^1]: I would choose the format based on what the audience needs to learn from the data.
+
+## Prompt 4: Under what circumstances would you prefer tables rather than charts?
+
+I would use a table when someone needs to:
+
+-   Find an exact number or percentage.
+-   Compare a few groups across several measures.
+-   See notes explaining where the numbers came from.
+-   Use the numbers in a report or presentation.
+
+If I had many categories or wanted to show a trend over time, I would start with a chart instead.
+
+# A table for the MSDM project
+
+## Prompt 5: Use CEP data, or pizzaplace if CEP data are unavailable, to show descriptive statistics with gt and gtExtras.
+
+### Question and analytic objective
+
+**Practice analytics objective:** Compare pizza categories to see which ones sell the most and bring in the most revenue. This is just an example for the assignment, not one of our client's final CEP objectives.
+
+Each row in the dataset is **one pizza sold**. I grouped the rows by pizza category and calculated how many pizzas sold, total revenue, average price, and each category's share. The small bars show each category's share of **all** revenue.
+
+```{r}
+#| label: setup
+#| include: false
+library(dplyr)
+library(gt)
+library(gtExtras)
+
+pizza_summary <- gt::pizzaplace |>
+  group_by(type) |>
+  summarise(
+    pizzas_sold = n(),
+    revenue = sum(price, na.rm = TRUE),
+    avg_price = mean(price, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  mutate(
+    category = tools::toTitleCase(type),
+    share_units = pizzas_sold / sum(pizzas_sold) * 100,
+    share_revenue = revenue / sum(revenue) * 100,
+    revenue_bar = share_revenue
+  ) |>
+  select(category, pizzas_sold, share_units,
+         revenue, avg_price, share_revenue, revenue_bar) |>
+  arrange(desc(revenue))
+```
+
+::: panel-tabset
+### Category comparison
+
+```{r}
+#| label: tbl-pizza-categories
+#| tbl-cap: "Pizza category demand and sales performance"
+pizza_summary |>
+  gt(rowname_col = "category") |>
+  tab_header(
+    title = md("**Which pizza categories drive sales?**"),
+    subtitle = "Units, revenue, average price, and revenue share"
+  ) |>
+  tab_stubhead(label = "Pizza category") |>
+  tab_spanner(label = "Demand", columns = c(pizzas_sold, share_units)) |>
+  tab_spanner(
+    label = "Sales performance",
+    columns = c(revenue, avg_price, share_revenue, revenue_bar)
+  ) |>
+  cols_label(
+    pizzas_sold = "Pizzas sold",
+    share_units = "Unit share",
+    revenue = "Revenue",
+    avg_price = "Avg. price",
+    share_revenue = "Revenue share",
+    revenue_bar = "Share of total"
+  ) |>
+  fmt_number(columns = pizzas_sold, decimals = 0) |>
+  fmt_number(columns = c(share_units, share_revenue),
+             decimals = 2, suffix = "%") |>
+  fmt_currency(columns = c(revenue, avg_price),
+               currency = "USD", decimals = 2) |>
+  data_color(columns = revenue,
+             palette = c("#F0F7F5", "#B8D9D2")) |>
+  tab_footnote(
+    footnote = "One dataset row represents one pizza sold, not necessarily one complete order.",
+    locations = cells_column_labels(columns = pizzas_sold)
+  ) |>
+  tab_footnote(
+    footnote = "Revenue share is a percentage of revenue across all four categories.",
+    locations = cells_column_labels(columns = share_revenue)
+  ) |>
+  tab_source_note(
+    source_note = md("**Source:** `gt::pizzaplace` (synthetic pizza sales data).")
+  ) |>
+  gtExtras::gt_plt_bar_pct(
+    column = revenue_bar,
+    scaled = TRUE,
+    fill = "#247B75",
+    background = "#E5EFED",
+    labels = FALSE,
+    width = 125
+  ) |>
+  cols_align(align = "center", columns = c(share_units, share_revenue, revenue_bar)) |>
+  cols_width(revenue_bar ~ px(160)) |>
+  opt_row_striping() |>
+  opt_table_font(font = "Arial")
+```
+
+### How to read this table
+
+The **Revenue** column shows the exact dollar amount. The small bars make it easier to compare each category's share of total revenue. I included average price so I can see whether a category earns more because it sells more pizzas or because its pizzas cost more. This is sample data, so I would not use it to make a real restaurant decision.
+:::
+
+### Key comparison
+
+In this dataset, **`r pizza_summary$category[1]`** has the highest revenue. It accounts for **`r sprintf("%.2f%%", pizza_summary$share_revenue[1])`** of total revenue. In @tbl-pizza-categories, I can compare that result with the number of pizzas sold and the average price.
+
+## Prompt 6: Explain why the table belongs in the CEP report or slides.
+
+I would add a table like this to our CEP presentation because it puts the main numbers and a quick visual comparison in one place. The audience can see which group leads and still check the exact figures. Once we have our own data, I can replace the pizza categories with the groups that matter for our project.
+
+::: {.callout-tip title="Design choice"}
+The bars and the nearby percentage column both show a share of **total** revenue, so they tell the same story.
+:::
+
+# References
+
+-   [gt package documentation and function reference](https://gt.rstudio.com/reference/index.html)
+-   [Description of the `pizzaplace` dataset](https://gt.rstudio.com/reference/pizzaplace.html)
+-   [gtExtras plotting guide](https://jthomasmock.github.io/gtExtras/articles/plotting-with-gtExtras.html)
+
+# Appendix: Project links
+
+::: {.callout-warning title="Add your links before submitting"}
+After pushing the M05 folder to GitHub and publishing the HTML with GitHub Pages, replace the two URLs below with your actual working links. Both links are required by the assignment.
+:::
+
+-   **GitHub repository:** <https://github.com/Simrank-DM/IBM6500-M05>
+-   **GitHub Pages report:** <https://simrank-dm.github.io/IBM6500-M05/Kaur-Simran-M05-Table-Viz.html>

@@ -1,0 +1,29 @@
+---
+title: "Week 05 In-Class Reflection"
+author: "Simran Kaur"
+date: 2026-09-24
+format:
+  html:
+    theme: cosmo
+    toc: true
+    embed-resources: true
+---
+
+I arrived about an hour late because I was attending a Deloitte workshop scheduled from 4:00 to 8:00 p.m. Before the group presentations, the class reviewed the Employees Federal Credit Union case and its construct and measurement table. The activity connected research questions and hypotheses to measurable survey items, variables, and response scales, using examples about credit union membership, borrowing, and perceptions of employees.
+
+## Group presentations and peer feedback
+
+The groups that presented briefly explained their project objectives (POs) and analytics objectives (AOs). Groups 1 and 2 did not present. Our group introduced our simulated market research project and explained that we plan to compare AI-generated survey responses with responses from real people.
+
+I noted these points from the other presentations:
+
+-   **Group 3 : Collins College:** The team connected declining enrollment with student retention. I found their idea of identifying first-year courses associated with students leaving especially practical for targeting academic support.
+-   **Group 4: Glendora Education Foundation:** The \$25 membership campaign offers a way to reach new families. I was interested in whether school events or digital outreach would bring in more first-time members.
+-   **Group 5 : CPP Farm Store:** The team discussed inventory, online shopping, and customer loyalty. Their product-level Clover analysis could help staff decide what to restock and when.
+-   **Group 6: PhD Orthodontics:** The group focused on improving digital visibility and consultation inquiries. I liked their attention to the information adult patients want before booking and the need to measure actual inquiries.
+-   **Group 7 : Avenue Shabu:** The team looked at digital visibility, customer reviews, and whether promotions actually bring in profitable visits. I found their plan to use QR or promotional codes to connect online campaigns with walk-in sales especially useful.
+-   **Group 9 : The Restaurant at Kellogg Ranch:** The team discussed a newsletter offer and factors behind repeat visits. I liked that they planned to look beyond clicks to whether guests redeem the offer.
+
+## Reflection
+
+The presentations helped me think about how to make our own objectives more specific and testable. The questionnaire example reinforced that each survey item should connect to a research question and have a clear plan for how its responses will be analyzed.

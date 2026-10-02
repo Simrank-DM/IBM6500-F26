@@ -1,0 +1,251 @@
+---
+title: "M01-2-Introduction to Literate Programming-Application Assignment"
+author: "Simran Kaur"
+date: '`r format(Sys.time())`'
+format:
+  html:
+    toc: true
+    toc-depth: 4
+    number-sections: true
+    code-line-numbers: true
+    code-fold: false
+    code-link: true
+    embed-resources: true
+editor: visual
+execute:
+  freeze: auto
+  warning: false
+---
+
+# Exercise 1: Creating a Variable
+
+> **Question:** Create a variable called `X` and assign the text *"This is my first assignment"* to it.
+
+::: callout-tip
+Use the assignment operator `<-` to save text inside a variable.
+:::
+
+```{r}
+#| label: exercise-1
+
+# Create the variable X
+X <- "This is my first assignment"
+
+# Print X to confirm that it worked
+X
+```
+
+# Exercise 2: Adding Text in Base R
+
+## Part 1: Exploring `paste()` and `paste0()`
+
+> **Question:** Use R Help to learn about the `paste()` function. Run examples to understand the difference between `paste()` and `paste0()`.
+
+::: callout-note
+The `paste()` function combines values with a space by default. The `paste0()` function combines them without adding a space.
+:::
+
+```{r}
+#| label: exercise-2-part-1
+
+# Open the help document
+?paste
+
+# paste() adds a space between the text and number
+paste("Item", 1:3)
+
+# paste0() joins them without a space
+paste0("Item", 1:3)
+
+# collapse combines multiple values into one text string
+paste(1:5, collapse = ", ")
+```
+
+## Part 2: Adding Text to `X`
+
+> **Question:** Using the `paste()` function, add *"and I'm loving it!"* to the variable `X`.
+
+```{r}
+#| label: exercise-2-part-2
+
+# Add new text to X and save the updated result
+X <- paste(X, "and I'm loving it!")
+
+# Print X to confirm the change
+X
+```
+
+# Exercise 3: Creating and Updating a Vector
+
+> **Question:** Create a vector called `Y` containing the numbers 2, 3, 4, and 5. Multiply the vector by 2 and save the updated values as `Y` again.
+
+::: callout-tip
+Use the `c()` function to combine multiple numbers into one vector.
+:::
+
+```{r}
+#| label: exercise-3
+
+# Create the vector
+Y <- c(2, 3, 4, 5)
+
+# Multiply every value by 2 and save it as Y
+Y <- Y * 2
+
+# Print Y to confirm the operation
+Y
+```
+
+# Exercise 4: Printing the Variable and Vector
+
+> **Question:** Print both the variable `X` and the vector `Y`.
+
+```{r}
+#| label: exercise-4
+
+# Print the text variable
+print(X)
+
+# Print the numeric vector
+print(Y)
+```
+
+# Exercise 5: Finding Maximum and Minimum Values
+
+> **Question:** Show the maximum and minimum values of the vector `Y`.
+
+```{r}
+#| label: exercise-5
+
+# Find the largest value
+max(Y)
+
+# Find the smallest value
+min(Y)
+```
+
+# Exercise 6: Loading `ggplot2` and Viewing Data
+
+> **Question:** Load the `ggplot2` package and display the first six rows of the `economics` dataset.
+
+::: callout-tip
+Install a package only once. Keep the `install.packages()` line commented out when rendering.
+:::
+
+```{r}
+#| label: exercise-6
+
+# Install only if ggplot2 is not already installed
+# install.packages("ggplot2")
+
+# Load the package
+library(ggplot2)
+
+# Display the first six rows
+head(economics)
+```
+
+# Exercise 7: Exploring the `economics` Dataset
+
+> **Question:** Review the definitions of the six variables in the `economics` dataset. Select two related variables and create a scatterplot with a title and complete axis labels.
+
+## Variable Definitions
+
+The `economics` dataset contains the following variables:
+
+- `date`: Month when the data were collected.
+- `pce`: Personal consumption expenditures, measured in billions of dollars.
+- `pop`: Total population, measured in thousands.
+- `psavert`: Personal savings rate.
+- `uempmed`: Median duration of unemployment, measured in weeks.
+- `unemploy`: Number of unemployed people, measured in thousands.
+
+::: callout-note
+I selected `unemploy` and `uempmed` because the number of unemployed people may be related to the typical length of time people remain unemployed.
+:::
+
+```{r}
+#| label: exercise-7
+
+# Open the help documentation
+?economics
+
+# Create the basic scatterplot
+plot <- ggplot(
+  data = economics,
+  mapping = aes(x = unemploy, y = uempmed)
+) +
+  geom_point(color = "#7B2CBF", alpha = 0.65)
+
+# Add the title and complete axis labels
+plot +
+  labs(
+    title = "Unemployment Level and Duration",
+    x = "Number of Unemployed People (Thousands)",
+    y = "Median Duration of Unemployment (Weeks)"
+  ) +
+  theme_minimal()
+```
+
+# Exercise 8: Creating a Chart with a Pipe
+
+> **Question:** Recreate the previous chart using the pipe operator without saving the chart as an object. Add a figure label, caption, width, and aspect ratio.
+
+::: callout-tip
+The pipe operator `|>` sends the `economics` dataset directly into the `ggplot()` function.
+:::
+
+```{r}
+#| label: fig-unemployment-duration
+#| fig-cap: "Relationship between the number of unemployed people and the median duration of unemployment."
+#| fig-width: 5
+#| fig-asp: 0.6
+
+economics |>
+  ggplot(mapping = aes(x = unemploy, y = uempmed)) +
+  geom_point(color = "#7B2CBF", alpha = 0.65) +
+  labs(
+    title = "Unemployment Level and Duration",
+    x = "Number of Unemployed People (Thousands)",
+    y = "Median Duration of Unemployment (Weeks)"
+  ) +
+  theme_minimal()
+```
+
+# Exercise 9: Interpretation of the Results
+
+> **Question:** Use a callout block to describe the findings and cross-reference the figure created in Exercise 8.
+
+## Checking the Relationship
+
+```{r}
+#| label: exercise-9-correlation
+
+# Calculate the correlation to help confirm the relationship
+cor(
+  economics$unemploy,
+  economics$uempmed,
+  use = "complete.obs"
+)
+```
+
+::: callout-important
+## Finding
+
+As shown in @fig-unemployment-duration, there appears to be a **positive relationship** between the number of unemployed people and the median duration of unemployment. When the number of unemployed people is higher, unemployment also tends to last longer. However, the variation among the points suggests that this relationship is not exact and may also be influenced by other economic conditions.
+:::
+
+# 10: Organization 
+
+I used the following Quarto and Markdown tools to make my report organized, readable, and reproducible:
+
+1. I used `#` and `##` to create headings and subheadings.
+2. I used **bold formatting** to emphasize important information.
+3. I used *italic formatting* to highlight selected text.
+4. I used `callout-tip` blocks to present helpful coding hints.
+5. I used `callout-note` blocks to provide additional explanations.
+6. I used `callout-important` to emphasize the main finding.
+7. I used blockquotes for every exercise question.
+8. I used backticks to distinguish functions such as `paste()` and `ggplot()`.
+9. I cross-referenced the figure using `@fig-unemployment-duration`.
+10. I used code-cell options beginning with `#|` to add labels, captions, and figure dimensions.

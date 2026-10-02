@@ -1,0 +1,70 @@
+---
+title: "M03 Reflection Essay: Introduction to Positron"
+author: "Simran Kaur"
+date: today
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 4
+    toc-expand: 2
+    number-sections: true
+    code-link: true
+    code-fold: true
+    code-tools: true
+    code-overflow: wrap
+    embed-resources: true
+editor: visual
+execute:
+  freeze: auto
+  warning: false
+---
+# Getting Started with Positron
+
+> **Prompt 1:** Download and install Positron. As you watch the videos in Step 1 and Step 3, follow the activities in the videos and become familiar with Positron.
+
+Since I have used Positron before, I already knew that it was a useful alternative to RStudio. I like its modern interface and how the editor, console, variables, plots, and files are organized. The Data Explorer also makes it easier to examine and filter data visually.
+
+I still feel more comfortable using RStudio because I have more experience with it. However, Positron feels more flexible because it supports R, Python, Git, and AI tools in one workspace. I also find it convenient when I am travelling or when RStudio is not working properly.
+
+::: {.callout-note}
+**My first impression:** Positron combines familiar RStudio features with a more modern workspace for R and Python and is also a convenient alternative to RStudio.
+:::
+# Reflection on AI-Powered Data Science
+
+> **Prompt 3:** In Step 4, the video demonstrates how you can use AI inside Positron.
+>
+> 1. Describe the different ways AI can be used inside Positron. Some options are free, while others are paid.
+> 2. Which AI tools have you installed or set up? Which tools did you find beneficial?
+> 3. Apply for GitHub Copilot through GitHub Education, provide a screenshot showing your acceptance, and explain whether you found Copilot helpful or distracting.
+
+## Ways I Can Use AI in Positron
+
+The video showed me that AI can support several parts of a data-science project. Posit Assistant can explain code, generate new code, identify errors, and suggest corrections. Inline suggestions can complete code while I am typing, and Databot can explore data, create summaries, generate visualizations, and help organize findings for a report.
+
+I like that the AI tools work within the coding environment because I do not have to continuously switch between Positron and another website. However, I would still review the generated code because AI suggestions are not always correct.
+
+## AI Tools I Have Used or Set Up
+
+I already use ChatGPT and Claude outside Positron for brainstorming, understanding errors, and explaining code. For this activity, I connected my GitHub account and applied for GitHub Education so I could receive student access to GitHub Copilot.
+
+The most beneficial features for me are debugging assistance and inline code suggestions. Debugging can save time when I cannot understand an error, while inline suggestions can help me remember unfamiliar R or Python syntax. I have not connected a paid API provider because I would prefer to begin with the student tools available without an additional cost.
+
+## GitHub Copilot
+
+My GitHub Education application was approved, as shown in screenshot @fig-github-education. At the time of writing, GitHub was still activating my education benefits and stated that the process could take up to 72 hours.
+
+![GitHub Education approval showing my verified student status.](github-education-acceptance.png){#fig-github-education width=80%}
+
+I have already used GitHub Copilot with R through Visual Studio Code. It has helped me complete commands, remember functions, identify errors, and generate suggestions when I was unsure how to continue my code.
+
+I find GitHub Copilot especially beneficial because its suggestions appear directly inside the code editor. This allows me to receive help without continuously switching between my code and another website.
+
+::: {.callout-note}
+**★:** AI for me is most useful when it supports my thinking and learning instead of replacing them.
+
+:::
+# Appendix
+
+* [GitHub Repository](https://github.com/Simrank-DM/M03-Introduction-to-Positron)
+* [Published GitHub Pages Report](https://simrank-dm.github.io/M03-Introduction-to-Positron/Kaur_Simran-M03-Reflection-Intro-Positron.html)

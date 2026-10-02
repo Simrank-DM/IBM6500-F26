@@ -1,0 +1,32 @@
+---
+title: "M01-1: How to use Quarto's visual mode"
+author: "Simran Kaur"
+date: '`r format(Sys.time())`'
+format:
+  html:
+    toc: true
+    toc-depth: 4
+    number-sections: true
+    code-line-numbers: true
+    code-fold: false
+    code-link: true
+    embed-resources: true
+    df-print: paged
+editor: visual
+execute:
+  freeze: auto
+  warning: false
+---
+# Literate Programming
+
+## Basic Operations
+
+This section demonstrates basic mathematical operations and how to create objects in R.
+
+```{r}
+#| label: basic-operations
+
+1 + 1
+2 * 2
+2^3
+```
