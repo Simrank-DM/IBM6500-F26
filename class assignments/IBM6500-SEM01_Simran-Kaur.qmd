@@ -18,118 +18,118 @@ lang: en
 
 # Introduction
 
-- SEM studies relationships between concepts measured through several indicators.
-- Anderson and Gerbing recommend checking the measurement model first, then testing the structural model.
-- My main takeaway: good relationships are hard to interpret if the questions do not measure the concepts clearly.
+-   SEM studies relationships between concepts measured through several indicators.
+-   Anderson and Gerbing recommend checking the measurement model first, then testing the structural model.
+-   My main takeaway: good relationships are hard to interpret if the questions do not measure the concepts clearly.
 
 # Background
 
 ## Exploratory Versus Confirmatory Analyses
 
-- Exploratory analysis looks for patterns. Confirmatory analysis tests a structure specified beforehand.
-- Changing a model using the same data makes the analysis partly exploratory.
-- Testing the revised model on a new sample gives stronger support.
+-   Exploratory analysis looks for patterns. Confirmatory analysis tests a structure specified beforehand.
+-   Changing a model using the same data makes the analysis partly exploratory.
+-   Testing the revised model on a new sample gives stronger support.
 
 ## Complementary Approaches for Theory Testing Versus Predictive Application
 
-- The authors discuss ML and GLS for theory testing, and PLS for prediction.
-- Common-factor models separate measurement error from the constructs. PLS creates components from observed measures.
-- Their two-step recommendation focuses on theory testing with ML or GLS.
+-   The authors discuss ML and GLS for theory testing, and PLS for prediction.
+-   Common-factor models separate measurement error from the constructs. PLS creates components from observed measures.
+-   Their two-step recommendation focuses on theory testing with ML or GLS.
 
 ## Estimation Methods
 
-- ML relies on distributional assumptions and large-sample properties.
-- Nonnormal data can affect standard errors and fit tests, even when estimates seem reasonable.
-- Alternative estimators relax assumptions but may need larger samples. The response scales also matter when choosing a method.
+-   ML relies on distributional assumptions and large-sample properties.
+-   Nonnormal data can affect standard errors and fit tests, even when estimates seem reasonable.
+-   Alternative estimators relax assumptions but may need larger samples. The response scales also matter when choosing a method.
 
 # Confirmatory Measurement Model
 
-- This model links survey questions to their intended constructs while allowing the constructs to correlate freely.
-- It helps us check measurement before imposing theoretical relationships.
+-   This model links survey questions to their intended constructs while allowing the constructs to correlate freely.
+-   It helps us check measurement before imposing theoretical relationships.
 
 ## Need for Unidimensional Measurement
 
-- Each set of indicators should measure one underlying concept.
-- Internal consistency checks relationships within a set of indicators. External consistency checks their relationships with indicators of other constructs.
-- High reliability alone does not establish unidimensionality. Cross-loadings can make a factor's meaning unclear.
+-   Each set of indicators should measure one underlying concept.
+-   Internal consistency checks relationships within a set of indicators. External consistency checks their relationships with indicators of other constructs.
+-   High reliability alone does not establish unidimensionality. Cross-loadings can make a factor's meaning unclear.
 
 ## Specification
 
-- Researchers must set each factor's scale so the model can be identified.
-- The authors prefer fixing factor variances to one, which allows all loadings to be tested.
-- Multiple indicators are preferred. Single indicators require assumptions about measurement error.
-- Small samples can produce imprecise estimates, nonconvergence, or impossible values such as negative variances.
+-   Researchers must set each factor's scale so the model can be identified.
+-   The authors prefer fixing factor variances to one, which allows all loadings to be tested.
+-   Multiple indicators are preferred. Single indicators require assumptions about measurement error.
+-   Small samples can produce imprecise estimates, nonconvergence, or impossible values such as negative variances.
 
 ## Assessment of Fit
 
-- First check that the model converges and gives sensible estimates, then assess overall fit and residuals.
-- Convergent validity means the indicators relate to their intended construct.
-- Discriminant validity means different constructs are distinguishable. The authors test whether a pair's correlation can be treated as one (Anderson and Gerbing 1988, p. 416).
-- Fit statistics need to be considered alongside theory and practical meaning.
+-   First check that the model converges and gives sensible estimates, then assess overall fit and residuals.
+-   Convergent validity means the indicators relate to their intended construct.
+-   Discriminant validity means different constructs are distinguishable. The authors test whether a pair's correlation can be treated as one (Anderson and Gerbing 1988, p. 416).
+-   Fit statistics need to be considered alongside theory and practical meaning.
 
 ## Respecification
 
-- Revisions should make sense based on theory and question content, not just improve fit.
-- Residual patterns can help identify a question assigned to the wrong factor.
-- The authors prefer justified reassignment or removal over adding cross-loadings or correlated errors simply to improve fit.
-- Repeated changes may fit chance patterns in the sample, so validation matters.
+-   Revisions should make sense based on theory and question content, not just improve fit.
+-   Residual patterns can help identify a question assigned to the wrong factor.
+-   The authors prefer justified reassignment or removal over adding cross-loadings or correlated errors simply to improve fit.
+-   Repeated changes may fit chance patterns in the sample, so validation matters.
 
 # One-Step Versus Two-Step Modeling Approaches
 
-- One-step modeling estimates measurement and structural relationships together from the start.
-- Two-step modeling checks measurement separately before testing the full model.
+-   One-step modeling estimates measurement and structural relationships together from the start.
+-   Two-step modeling checks measurement separately before testing the full model.
 
 ## The Confirmatory Structural Model
 
-- The structural model tests proposed relationships among latent constructs.
-- Exogenous constructs are not predicted within the model. Endogenous constructs have predictors within it.
-- Nomological validity asks whether the relationships among constructs match the theory.
+-   The structural model tests proposed relationships among latent constructs.
+-   Exogenous constructs are not predicted within the model. Endogenous constructs have predictors within it.
+-   Nomological validity asks whether the relationships among constructs match the theory.
 
 ## Recommended Two-Step Modeling Approach
 
 **Step 1: Check the measurement model**
 
-1. Specify which indicators measure each construct and allow the constructs to correlate.
-2. Check fit, loadings, unidimensionality, convergent validity, and discriminant validity.
-3. If measurement is weak, investigate the questions and model specification. Make changes only when they are justified.
+1.  Specify which indicators measure each construct and allow the constructs to correlate.
+2.  Check fit, loadings, unidimensionality, convergent validity, and discriminant validity.
+3.  If measurement is weak, investigate the questions and model specification. Make changes only when they are justified.
 
 **Step 2: Check the structural model**
 
-1. After establishing acceptable measurement, add the relationships proposed by the theory.
-2. Estimate the full model and assess whether its structural restrictions explain the construct relationships adequately.
-3. Compare plausible alternative models. This provides evidence about nomological validity.
+1.  After establishing acceptable measurement, add the relationships proposed by the theory.
+2.  Estimate the full model and assess whether its structural restrictions explain the construct relationships adequately.
+3.  Compare plausible alternative models. This provides evidence about nomological validity.
 
 **Technical notes**
 
-- The authors compare five nested models: null, constrained alternative, proposed theory, unconstrained alternative, and saturated structural model.
-- A nested model restricts parameters that another model estimates freely. Chi-square difference tests assess whether those restrictions worsen fit.
-- The measurement model serves as the unrestricted structural baseline. Its measurement component can still have imperfect fit.
-- Their preliminary pseudo chi-square check can flag measurement problems that adding structural paths will not solve (Anderson and Gerbing 1988, pp. 418–20).
-- Step 2 re-estimates the full SEM; it does not simply freeze the measurement estimates.
+-   The authors compare five nested models: null, constrained alternative, proposed theory, unconstrained alternative, and saturated structural model.
+-   A nested model restricts parameters that another model estimates freely. Chi-square difference tests assess whether those restrictions worsen fit.
+-   The measurement model serves as the unrestricted structural baseline. Its measurement component can still have imperfect fit.
+-   Their preliminary pseudo chi-square check can flag measurement problems that adding structural paths will not solve (Anderson and Gerbing 1988, pp. 418–20).
+-   Step 2 re-estimates the full SEM; it does not simply freeze the measurement estimates.
 
 **My example**
 
-- For AI fashion ads, I would first check questions measuring trust, engagement, and purchase intention.
-- Then I could test whether trust predicts engagement and engagement predicts purchase intention.
+-   For AI fashion ads, I would first check questions measuring trust, engagement, and purchase intention.
+-   Then I could test whether trust predicts engagement and engagement predicts purchase intention.
 
 ## Advantages of the Two-Step Approach
 
-- It helps separate problems with the questions from problems with the theory.
-- Good fit in one component is less likely to hide poor fit in another.
-- It reduces interpretational confounding: a construct's meaning should not change substantially when structural paths change.
-- It gives a clearer basis for comparing alternative theories and deciding whether extra paths are useful.
+-   It helps separate problems with the questions from problems with the theory.
+-   Good fit in one component is less likely to hide poor fit in another.
+-   It reduces interpretational confounding: a construct's meaning should not change substantially when structural paths change.
+-   It gives a clearer basis for comparing alternative theories and deciding whether extra paths are useful.
 
 ## Additional Considerations in Structural Model Interpretation
 
-- Statistical significance does not always mean a practically important difference, especially with large samples.
-- Good fit supports a model but does not prove it is the only explanation.
-- SEM arrows do not prove causation. Adding every possible path also leaves fewer restrictions to test.
-- A factor's label does not guarantee valid measurement. Revised models need cautious interpretation and, ideally, a new validation sample.
+-   Statistical significance does not always mean a practically important difference, especially with large samples.
+-   Good fit supports a model but does not prove it is the only explanation.
+-   SEM arrows do not prove causation. Adding every possible path also leaves fewer restrictions to test.
+-   A factor's label does not guarantee valid measurement. Revised models need cautious interpretation and, ideally, a new validation sample.
 
 # Conclusion
 
-- The main lesson is to check measurement before testing relationships.
-- For me, this connects survey design with analysis: unclear questions can lead to unclear conclusions, even when the model looks convincing.
+-   The main lesson is to check measurement before testing relationships.
+-   For me, this connects survey design with analysis: unclear questions can lead to unclear conclusions, even when the model looks convincing.
 
 # References
 
@@ -137,6 +137,5 @@ Anderson, James C. and David W. Gerbing (1988), “Structural Equation Modeling 
 
 # Appendix
 
-- [GitHub Repository](https://github.com/Simrank-DM/SEM01-Anderson-Gerbing-1988)
-- [Published Article Notes on GitHub Pages](https://simrank-dm.github.io/SEM01-Anderson-Gerbing-1988/)
-- Publication and link verification are pending.
+-   [GitHub Repository](https://github.com/Simrank-DM/IBM6500-F26)
+-   [Published Article Notes on GitHub Pages](https://simrank-dm.github.io/IBM6500-F26/class%20assignments/IBM6500-SEM01_Simran-Kaur.html)
