@@ -2255,17 +2255,17 @@ vertical-align: -.125em;
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled" title="Draft to personalize">
+<div class="callout callout-style-default callout-note callout-titled" title="Practice data">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Draft to personalize
+<span class="screen-reader-only">Note</span>Practice data
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Replace the presentation placeholders and review the reflection against your actual experience before submitting. The coding examples use invented demonstration data, not CEP survey results.</p>
+<p>The coding examples use invented demonstration data, not actual CEP survey results.</p>
 </div>
 </div>
 <section id="revealjs-reflection" class="level1" data-number="1">
@@ -2314,21 +2314,23 @@ vertical-align: -.125em;
 <section id="my-presentation" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> My Presentation</h1>
 <p><strong>Prompt:</strong> In Step 2, you were asked to create a Revealjs presentation. Provide a link to the presentation you published on the web. Add at least one reproducible chart or table in the presentation. Briefly describe what the presentation is about. What did you learn from the experience of the Revealjs presentation?</p>
-<p><strong>Published presentation:</strong> [INSERT YOUR PUBLISHED REVEALJS PRESENTATION URL]</p>
-<p>My presentation focuses on <strong>[insert your CEP project topic and analytics objective]</strong>. It explains the business problem, why the objective matters, the relevant literature, and the proposed methods. The reproducible <strong>[chart/table]</strong> shows <strong>[describe what it displays and identify whether it uses project data or demonstration data]</strong>.</p>
+<p><strong>Published presentation:</strong> <a href="https://simrank-dm.github.io/IBM6500-F26/MO6/Simran-Kaur-M06-CEP-Presentation.html">Perceptual Maps and Customer Segments</a></p>
+<p>My presentation focuses on <strong>AO2: Perceptual Maps and Customer Segments</strong> for our TBFI CEP project. It explains how we plan to understand customers’ views of brands and identify groups with similar preferences. I included the business problem, a brief literature review, and our proposed data and methods.</p>
+<p>The reproducible table summarizes average affordability and quality ratings for three invented brands. Four demonstration respondents rate each brand on a 1–5 scale. R calculates the averages when I render the slides. These ratings are only for practice,and not actual findings from our CEP project.</p>
+<p>Since this was my first Revealjs presentation, I kept the explanations simple and focused on features I could understand, such as columns, incremental lists, speaker notes, and a theme. This helped me practice the format without making the slides too complicated.</p>
 <p>While working on the presentation, I learned that creating slides requires a different approach from writing a report. A report gives me room to explain details, but a slide needs a clear main point that the audience can understand quickly. This encouraged me to think more carefully about what belongs on the screen and what I should explain verbally or include in speaker notes.</p>
 <p>I also learned that visual design involves more than choosing colors or adding effects. The spacing, headings, and order of the content all affect how easily someone can follow the story. For me, the most valuable part of this exercise was connecting the analytical work with the way I communicate it.</p>
-<div class="callout callout-style-default callout-important callout-titled" title="Presentation requirement">
+<div class="callout callout-style-default callout-note callout-titled" title="Reproducibility">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Presentation requirement
+<span class="screen-reader-only">Note</span>Reproducibility
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The examples below belong to this reflection report. The published Revealjs presentation must also contain at least one reproducible chart or table of its own.</p>
+<p>The published presentation includes an R-generated table. The examples below demonstrate three different data-wrangling functions in this reflection report.</p>
 </div>
 </div>
 </section>
@@ -2531,6 +2533,7 @@ Table 3: Average demonstration survey ratings
 <li><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">dplyr documentation: mutating joins</a></li>
 <li><a href="https://dplyr.tidyverse.org/reference/case_when.html">dplyr documentation: case_when()</a></li>
 <li><a href="https://dplyr.tidyverse.org/reference/across.html">dplyr documentation: across()</a></li>
+<li><strong>Published presentation:</strong> <a href="https://simrank-dm.github.io/IBM6500-F26/MO6/Simran-Kaur-M06-CEP-Presentation.html">Perceptual Maps and Customer Segments</a></li>
 </ul>
 <!-- -->
 
@@ -3020,8 +3023,8 @@ Table 3: Average demonstration survey ratings
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">  freeze: auto</span></span>
 <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title=&quot;Draft to personalize&quot;}</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>Replace the presentation placeholders and review the reflection against your actual experience before submitting. The coding examples use invented demonstration data, not CEP survey results.</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title=&quot;Practice data&quot;}</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>The coding examples use invented demonstration data, not actual CEP survey results.</span>
 <span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
@@ -3052,123 +3055,128 @@ Table 3: Average demonstration survey ratings
 <span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>**Prompt:** In Step 2, you were asked to create a Revealjs presentation. Provide a link to the presentation you published on the web. Add at least one reproducible chart or table in the presentation. Briefly describe what the presentation is about. What did you learn from the experience of the Revealjs presentation?</span>
 <span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>**Published presentation:** <span class="sc">\[</span>INSERT YOUR PUBLISHED REVEALJS PRESENTATION URL<span class="sc">\]</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>**Published presentation:** <span class="co">[</span><span class="ot">Perceptual Maps and Customer Segments</span><span class="co">](https://simrank-dm.github.io/IBM6500-F26/MO6/Simran-Kaur-M06-CEP-Presentation.html)</span></span>
 <span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>My presentation focuses on **\[insert your CEP project topic and analytics objective\]**. It explains the business problem, why the objective matters, the relevant literature, and the proposed methods. The reproducible **\[chart/table\]** shows **\[describe what it displays and identify whether it uses project data or demonstration data\]**.</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>My presentation focuses on **AO2: Perceptual Maps and Customer Segments** for our TBFI CEP project. It explains how we plan to understand customers&#39; views of brands and identify groups with similar preferences. I included the business problem, a brief literature review, and our proposed data and methods.</span>
 <span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>While working on the presentation, I learned that creating slides requires a different approach from writing a report. A report gives me room to explain details, but a slide needs a clear main point that the audience can understand quickly. This encouraged me to think more carefully about what belongs on the screen and what I should explain verbally or include in speaker notes.</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>The reproducible table summarizes average affordability and quality ratings for three invented brands. Four demonstration respondents rate each brand on a 1–5 scale. R calculates the averages when I render the slides. These ratings are only for practice,and not actual findings from our CEP project.</span>
 <span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>I also learned that visual design involves more than choosing colors or adding effects. The spacing, headings, and order of the content all affect how easily someone can follow the story. For me, the most valuable part of this exercise was connecting the analytical work with the way I communicate it.</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>Since this was my first Revealjs presentation, I kept the explanations simple and focused on features I could understand, such as columns, incremental lists, speaker notes, and a theme. This helped me practice the format without making the slides too complicated.</span>
 <span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>::: {.callout-important title=&quot;Presentation requirement&quot;}</span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>The examples below belong to this reflection report. The published Revealjs presentation must also contain at least one reproducible chart or table of its own.</span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>While working on the presentation, I learned that creating slides requires a different approach from writing a report. A report gives me room to explain details, but a slide needs a clear main point that the audience can understand quickly. This encouraged me to think more carefully about what belongs on the screen and what I should explain verbally or include in speaker notes.</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>I also learned that visual design involves more than choosing colors or adding effects. The spacing, headings, and order of the content all affect how easily someone can follow the story. For me, the most valuable part of this exercise was connecting the analytical work with the way I communicate it.</span>
 <span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data Wrangling</span></span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>**Prompt:** My advanced wrangling lecture in Step 3 introduced new concepts, including how to join relational databases. Pick three different functions, each from a different category. Describe when to use them and give one coding example along with an output for each function. To clarify, you are expected to do literate programming to weave your narratives with the code.</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title=&quot;Reproducibility&quot;}</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>The published presentation includes an R-generated table. The examples below demonstrate three different data-wrangling functions in this reflection report.</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="fu">## Joining: `left_join()`</span></span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data Wrangling</span></span>
 <span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>I chose <span class="in">`left_join()`</span> because information for a project may be stored in separate tables. For example, one table could contain survey responses while another contains participant characteristics. A shared respondent ID allows me to connect the information while keeping all the rows from the first table.</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>**Prompt:** My advanced wrangling lecture in Step 3 introduced new concepts, including how to join relational databases. Pick three different functions, each from a different category. Describe when to use them and give one coding example along with an output for each function. To clarify, you are expected to do literate programming to weave your narratives with the code.</span>
 <span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>In this demonstration, I have four survey responses but demographic information for only three of those respondents. I join the tables using <span class="in">`respondent_id`</span>.</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="fu">## Joining: `left_join()`</span></span>
 <span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-joined</span></span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: &quot;Survey responses joined with participant information&quot;</span></span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>responses <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>  <span class="at">respondent_id =</span> <span class="fu">c</span>(<span class="st">&quot;R01&quot;</span>, <span class="st">&quot;R02&quot;</span>, <span class="st">&quot;R03&quot;</span>, <span class="st">&quot;R04&quot;</span>),</span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>  <span class="at">satisfaction =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">4</span>)</span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>demographics <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>  <span class="at">respondent_id =</span> <span class="fu">c</span>(<span class="st">&quot;R01&quot;</span>, <span class="st">&quot;R02&quot;</span>, <span class="st">&quot;R03&quot;</span>),</span>
-<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_group =</span> <span class="fu">c</span>(<span class="st">&quot;18-24&quot;</span>, <span class="st">&quot;25-34&quot;</span>, <span class="st">&quot;35-44&quot;</span>)</span>
-<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>joined_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(</span>
-<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>  responses, demographics, <span class="at">by =</span> <span class="st">&quot;respondent_id&quot;</span></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>I chose <span class="in">`left_join()`</span> because information for a project may be stored in separate tables. For example, one table could contain survey responses while another contains participant characteristics. A shared respondent ID allows me to connect the information while keeping all the rows from the first table.</span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>In this demonstration, I have four survey responses but demographic information for only three of those respondents. I join the tables using <span class="in">`respondent_id`</span>.</span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-joined</span></span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: &quot;Survey responses joined with participant information&quot;</span></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>responses <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>  <span class="at">respondent_id =</span> <span class="fu">c</span>(<span class="st">&quot;R01&quot;</span>, <span class="st">&quot;R02&quot;</span>, <span class="st">&quot;R03&quot;</span>, <span class="st">&quot;R04&quot;</span>),</span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>  <span class="at">satisfaction =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">4</span>)</span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>demographics <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>  <span class="at">respondent_id =</span> <span class="fu">c</span>(<span class="st">&quot;R01&quot;</span>, <span class="st">&quot;R02&quot;</span>, <span class="st">&quot;R03&quot;</span>),</span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_group =</span> <span class="fu">c</span>(<span class="st">&quot;18-24&quot;</span>, <span class="st">&quot;25-34&quot;</span>, <span class="st">&quot;35-44&quot;</span>)</span>
 <span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(joined_data)</span>
-<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>As shown in @tbl-joined, all <span class="in">`r nrow(joined_data)`</span> survey responses remain in the output. Respondent R04 has <span class="in">`NA`</span> for age group because that ID does not appear in the demographic table. This missing value signals that the information was unavailable; it does not mean that the respondent had no age group.</span>
-<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>This helped me understand why checking IDs matters before joining data. A join can run successfully and still produce misleading results if the matching table contains duplicate IDs. I would need to check the keys and review the output before using the combined data for analysis.<span class="ot">[^1]</span></span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>joined_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(</span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>  responses, demographics, <span class="at">by =</span> <span class="st">&quot;respondent_id&quot;</span></span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(joined_data)</span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>A primary key identifies a row uniquely. A foreign key links a row to a record in another table. Duplicate or missing keys need attention before joining data.</span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>As shown in @tbl-joined, all <span class="in">`r nrow(joined_data)`</span> survey responses remain in the output. Respondent R04 has <span class="in">`NA`</span> for age group because that ID does not appear in the demographic table. This missing value signals that the information was unavailable; it does not mean that the respondent had no age group.</span>
 <span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conditional Transformation: `case_when()`</span></span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a>This helped me understand why checking IDs matters before joining data. A join can run successfully and still produce misleading results if the matching table contains duplicate IDs. I would need to check the keys and review the output before using the combined data for analysis.<span class="ot">[^1]</span></span>
 <span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a>I chose <span class="in">`case_when()`</span> because it makes conditional rules easier to read. For example, I can use it to classify survey scores into low, medium, and high groups. In this example, the rules are only for practice: scores of 1-2 are low, 3 is medium, and 4-5 are high.</span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>A primary key identifies a row uniquely. A foreign key links a row to a record in another table. Duplicate or missing keys need attention before joining data.</span>
 <span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-categories</span></span>
-<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: &quot;Demonstration satisfaction categories&quot;</span></span>
-<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a>categorized_data <span class="ot">&lt;-</span> responses <span class="sc">%&gt;%</span></span>
-<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a>    <span class="at">satisfaction_group =</span> <span class="fu">case_when</span>(</span>
-<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(satisfaction) <span class="sc">~</span> <span class="st">&quot;Missing&quot;</span>,</span>
-<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a>      satisfaction <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span> <span class="sc">~</span> <span class="st">&quot;Low&quot;</span>,</span>
-<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a>      satisfaction <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">&quot;Medium&quot;</span>,</span>
-<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>      satisfaction <span class="sc">%in%</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span> <span class="sc">~</span> <span class="st">&quot;High&quot;</span>,</span>
-<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Check value&quot;</span></span>
-<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(categorized_data)</span>
-<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a>In @tbl-categories, R01 is placed in the low group, R02 in the medium group, and R03 and R04 in the high group. The original score remains available, so I can inspect both the numeric response and its category.</span>
-<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a>My main takeaway is that creating categories requires judgment. The code applies the rules I give it, but I still need to explain why those cutoffs make sense. I would also consider whether grouping the scores removes information that could be useful in the analysis. These categories describe one satisfaction measure; they are not a complete customer segmentation analysis.</span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conditional Transformation: `case_when()`</span></span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a>I chose <span class="in">`case_when()`</span> because it makes conditional rules easier to read. For example, I can use it to classify survey scores into low, medium, and high groups. In this example, the rules are only for practice: scores of 1-2 are low, 3 is medium, and 4-5 are high.</span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-categories</span></span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: &quot;Demonstration satisfaction categories&quot;</span></span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a>categorized_data <span class="ot">&lt;-</span> responses <span class="sc">%&gt;%</span></span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>    <span class="at">satisfaction_group =</span> <span class="fu">case_when</span>(</span>
+<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(satisfaction) <span class="sc">~</span> <span class="st">&quot;Missing&quot;</span>,</span>
+<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a>      satisfaction <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span> <span class="sc">~</span> <span class="st">&quot;Low&quot;</span>,</span>
+<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a>      satisfaction <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">&quot;Medium&quot;</span>,</span>
+<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a>      satisfaction <span class="sc">%in%</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span> <span class="sc">~</span> <span class="st">&quot;High&quot;</span>,</span>
+<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Check value&quot;</span></span>
+<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(categorized_data)</span>
+<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a><span class="fu">## Column Operations: `across()`</span></span>
+<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a>In @tbl-categories, R01 is placed in the low group, R02 in the medium group, and R03 and R04 in the high group. The original score remains available, so I can inspect both the numeric response and its category.</span>
 <span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a>I chose <span class="in">`across()`</span> because survey datasets often contain several columns that need the same calculation. Instead of writing a separate line for every variable, I can apply a function to selected columns together.</span>
+<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a>My main takeaway is that creating categories requires judgment. The code applies the rules I give it, but I still need to explain why those cutoffs make sense. I would also consider whether grouping the scores removes information that could be useful in the analysis. These categories describe one satisfaction measure; they are not a complete customer segmentation analysis.</span>
 <span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a>Here, I calculate the mean of three demonstration rating variables. I name the columns explicitly so that the respondent ID cannot accidentally enter the calculation.</span>
+<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a><span class="fu">## Column Operations: `across()`</span></span>
 <span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-means</span></span>
-<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: &quot;Average demonstration survey ratings&quot;</span></span>
-<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a>ratings <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a>  <span class="at">respondent_id =</span> <span class="fu">c</span>(<span class="st">&quot;R01&quot;</span>, <span class="st">&quot;R02&quot;</span>, <span class="st">&quot;R03&quot;</span>, <span class="st">&quot;R04&quot;</span>),</span>
-<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a>  <span class="at">quality =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">4</span>),</span>
-<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>),</span>
-<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a>  <span class="at">trust =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">3</span>)</span>
-<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a>rating_summary <span class="ot">&lt;-</span> ratings <span class="sc">%&gt;%</span></span>
-<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
-<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(quality, value, trust),</span>
-<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span> <span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb4-160"><a href="#cb4-160" aria-hidden="true" tabindex="-1"></a>      <span class="at">.names =</span> <span class="st">&quot;mean_{.col}&quot;</span></span>
-<span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-163"><a href="#cb4-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-164"><a href="#cb4-164" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(rating_summary, <span class="at">digits =</span> <span class="dv">2</span>)</span>
-<span id="cb4-165"><a href="#cb4-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a>The output in @tbl-means shows a mean of 4 for quality, value, and trust. Although the averages are equal, the individual ratings differ. This reminds me that a summary can hide variation, so I would examine the distributions before drawing conclusions.</span>
-<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a>This function showed me how to make my code more consistent and easier to maintain. However, I still need to select the columns carefully. A respondent ID might be numeric, but calculating its average would not provide a meaningful insight.</span>
+<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a>I chose <span class="in">`across()`</span> because survey datasets often contain several columns that need the same calculation. Instead of writing a separate line for every variable, I can apply a function to selected columns together.</span>
+<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a>Here, I calculate the mean of three demonstration rating variables. I name the columns explicitly so that the respondent ID cannot accidentally enter the calculation.</span>
+<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-means</span></span>
+<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: &quot;Average demonstration survey ratings&quot;</span></span>
+<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a>ratings <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a>  <span class="at">respondent_id =</span> <span class="fu">c</span>(<span class="st">&quot;R01&quot;</span>, <span class="st">&quot;R02&quot;</span>, <span class="st">&quot;R03&quot;</span>, <span class="st">&quot;R04&quot;</span>),</span>
+<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a>  <span class="at">quality =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">4</span>),</span>
+<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>),</span>
+<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a>  <span class="at">trust =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">3</span>)</span>
+<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a>rating_summary <span class="ot">&lt;-</span> ratings <span class="sc">%&gt;%</span></span>
+<span id="cb4-160"><a href="#cb4-160" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(quality, value, trust),</span>
+<span id="cb4-163"><a href="#cb4-163" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span> <span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb4-164"><a href="#cb4-164" aria-hidden="true" tabindex="-1"></a>      <span class="at">.names =</span> <span class="st">&quot;mean_{.col}&quot;</span></span>
+<span id="cb4-165"><a href="#cb4-165" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(rating_summary, <span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb4-170"><a href="#cb4-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a><span class="fu">## My Takeaway</span></span>
+<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a>The output in @tbl-means shows a mean of 4 for quality, value, and trust. Although the averages are equal, the individual ratings differ. This reminds me that a summary can hide variation, so I would examine the distributions before drawing conclusions.</span>
 <span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a>Overall, these functions helped me see data preparation as part of the reasoning behind an analysis. Combining tables, creating categories, and summarizing variables all influence the results. Running the code one step at a time would help me understand those changes and catch problems before moving forward.</span>
+<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a>This function showed me how to make my code more consistent and easier to maintain. However, I still need to select the columns carefully. A respondent ID might be numeric, but calculating its average would not provide a meaningful insight.</span>
 <span id="cb4-174"><a href="#cb4-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; My main takeaway is that clean-looking output is only useful when I understand how the code produced it.</span></span>
+<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a><span class="fu">## My Takeaway</span></span>
 <span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a><span class="fu"># Resources</span></span>
+<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a>Overall, these functions helped me see data preparation as part of the reasoning behind an analysis. Combining tables, creating categories, and summarizing variables all influence the results. Running the code one step at a time would help me understand those changes and catch problems before moving forward.</span>
 <span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-179"><a href="#cb4-179" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Module advanced wrangling slides and code</span><span class="co">](https://jmjung.quarto.pub/m06-advanced-wrangling-with-dplyr/)</span></span>
-<span id="cb4-180"><a href="#cb4-180" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">dplyr documentation: mutating joins</span><span class="co">](https://dplyr.tidyverse.org/reference/mutate-joins.html)</span></span>
-<span id="cb4-181"><a href="#cb4-181" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">dplyr documentation: case_when()</span><span class="co">](https://dplyr.tidyverse.org/reference/case_when.html)</span></span>
-<span id="cb4-182"><a href="#cb4-182" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">dplyr documentation: across()</span><span class="co">](https://dplyr.tidyverse.org/reference/across.html)</span></span>
+<span id="cb4-179"><a href="#cb4-179" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; My main takeaway is that clean-looking output is only useful when I understand how the code produced it.</span></span>
+<span id="cb4-180"><a href="#cb4-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-181"><a href="#cb4-181" aria-hidden="true" tabindex="-1"></a><span class="fu"># Resources</span></span>
+<span id="cb4-182"><a href="#cb4-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-183"><a href="#cb4-183" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Module advanced wrangling slides and code</span><span class="co">](https://jmjung.quarto.pub/m06-advanced-wrangling-with-dplyr/)</span></span>
+<span id="cb4-184"><a href="#cb4-184" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">dplyr documentation: mutating joins</span><span class="co">](https://dplyr.tidyverse.org/reference/mutate-joins.html)</span></span>
+<span id="cb4-185"><a href="#cb4-185" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">dplyr documentation: case_when()</span><span class="co">](https://dplyr.tidyverse.org/reference/case_when.html)</span></span>
+<span id="cb4-186"><a href="#cb4-186" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">dplyr documentation: across()</span><span class="co">](https://dplyr.tidyverse.org/reference/across.html)</span></span>
+<span id="cb4-187"><a href="#cb4-187" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Published presentation:** <span class="co">[</span><span class="ot">Perceptual Maps and Customer Segments</span><span class="co">](https://simrank-dm.github.io/IBM6500-F26/MO6/Simran-Kaur-M06-CEP-Presentation.html)</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

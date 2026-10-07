@@ -23,8 +23,8 @@ execute:
   freeze: auto
 ---
 
-::: {.callout-note title="Draft to personalize"}
-Replace the presentation placeholders and review the reflection against your actual experience before submitting. The coding examples use invented demonstration data, not CEP survey results.
+::: {.callout-note title="Practice data"}
+The coding examples use invented demonstration data, not actual CEP survey results.
 :::
 
 ```{r}
@@ -55,16 +55,20 @@ Compared with PowerPoint, Revealjs offers a useful workflow for presentations th
 
 **Prompt:** In Step 2, you were asked to create a Revealjs presentation. Provide a link to the presentation you published on the web. Add at least one reproducible chart or table in the presentation. Briefly describe what the presentation is about. What did you learn from the experience of the Revealjs presentation?
 
-**Published presentation:** \[INSERT YOUR PUBLISHED REVEALJS PRESENTATION URL\]
+**Published presentation:** [Perceptual Maps and Customer Segments](https://simrank-dm.github.io/IBM6500-F26/MO6/Simran-Kaur-M06-CEP-Presentation.html)
 
-My presentation focuses on **\[insert your CEP project topic and analytics objective\]**. It explains the business problem, why the objective matters, the relevant literature, and the proposed methods. The reproducible **\[chart/table\]** shows **\[describe what it displays and identify whether it uses project data or demonstration data\]**.
+My presentation focuses on **AO2: Perceptual Maps and Customer Segments** for our TBFI CEP project. It explains how we plan to understand customers' views of brands and identify groups with similar preferences. I included the business problem, a brief literature review, and our proposed data and methods.
+
+The reproducible table summarizes average affordability and quality ratings for three invented brands. Four demonstration respondents rate each brand on a 1–5 scale. R calculates the averages when I render the slides. These ratings are only for practice,and not actual findings from our CEP project.
+
+Since this was my first Revealjs presentation, I kept the explanations simple and focused on features I could understand, such as columns, incremental lists, speaker notes, and a theme. This helped me practice the format without making the slides too complicated.
 
 While working on the presentation, I learned that creating slides requires a different approach from writing a report. A report gives me room to explain details, but a slide needs a clear main point that the audience can understand quickly. This encouraged me to think more carefully about what belongs on the screen and what I should explain verbally or include in speaker notes.
 
 I also learned that visual design involves more than choosing colors or adding effects. The spacing, headings, and order of the content all affect how easily someone can follow the story. For me, the most valuable part of this exercise was connecting the analytical work with the way I communicate it.
 
-::: {.callout-important title="Presentation requirement"}
-The examples below belong to this reflection report. The published Revealjs presentation must also contain at least one reproducible chart or table of its own.
+::: {.callout-note title="Reproducibility"}
+The published presentation includes an R-generated table. The examples below demonstrate three different data-wrangling functions in this reflection report.
 :::
 
 # Data Wrangling
@@ -172,3 +176,4 @@ Overall, these functions helped me see data preparation as part of the reasoning
 -   [dplyr documentation: mutating joins](https://dplyr.tidyverse.org/reference/mutate-joins.html)
 -   [dplyr documentation: case_when()](https://dplyr.tidyverse.org/reference/case_when.html)
 -   [dplyr documentation: across()](https://dplyr.tidyverse.org/reference/across.html)
+-   **Published presentation:** [Perceptual Maps and Customer Segments](https://simrank-dm.github.io/IBM6500-F26/MO6/Simran-Kaur-M06-CEP-Presentation.html)
