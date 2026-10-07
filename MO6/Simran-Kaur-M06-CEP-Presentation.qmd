@@ -1,0 +1,201 @@
+---
+title: "Perceptual Maps and Customer Segments"
+subtitle: "TBFI CEP Project: My AO2 Proposal"
+author: "Simran Kaur"
+institute: "MS Digital Marketing & Analytics, Cal Poly Pomona"
+date: today
+format:
+  revealjs:
+    theme: serif
+    include-in-header:
+      text: |
+        <style>
+        :root { --r-background-color: #fbf8f3; --r-main-color: #26342f; --r-heading-color: #234c43; --r-link-color: #816038; --r-main-font: Georgia, serif; --r-heading-font: Georgia, serif; --r-main-font-size: 38px; }
+        .reveal h1 { font-size: 1.8em; }
+        .reveal h2 { font-size: 1.4em; margin-bottom: .6em; }
+        .reveal .slides { text-align: left; }
+        .reveal .slides section#title-slide { text-align: center; }
+        .reveal table { font-size: .86em; width: 100%; }
+        .reveal table th { color: #234c43; border-bottom: 2px solid #234c43; }
+        .reveal table td { padding: .35em .45em; }
+        .reveal .footer { font-size: 18px; }
+        .reveal .aside { font-size: .65em; color: #6c655d; }
+        .reveal blockquote { background: transparent; box-shadow: none; border-left: 4px solid #b39164; padding-left: 1em; }
+        </style>
+    html-math-method: plain
+    width: 1600
+    height: 900
+    footer: "TBFI CEP · Simran Kaur"
+    transition: slide
+    incremental: false
+    toc: false
+    slide-number: true
+    scrollable: true
+    smaller: true
+    code-overflow: wrap
+    embed-resources: true
+editor: visual
+execute:
+  echo: false
+  warning: false
+  message: false
+  freeze: auto
+---
+
+```{r}
+#| label: setup
+#| include: false
+# Invented practice data, not actual CEP results.
+demo_ratings <- data.frame(
+  respondent_id = rep(sprintf("D%02d", 1:4), each = 3),
+  brand = rep(c("Brand A", "Brand B", "Brand C"), times = 4),
+  affordability = c(5, 3, 2, 4, 3, 1, 5, 4, 2, 4, 2, 1),
+  quality = c(2, 4, 5, 2, 4, 4, 3, 5, 5, 1, 3, 4)
+)
+```
+
+## Contents
+
+-   Project introduction
+-   My objective and why it matters
+-   Literature review
+-   Data and methods
+-   Reproducible example
+-   References and project links
+
+## Project Introduction
+
+Our TBFI CEP project explores an **AI consultant-training simulation and an industry insights dashboard**.
+
+-   We plan to compare AI survey responses with a human survey benchmark.
+-   The project focuses on four industries in the **San Gabriel Valley (SGV)**.
+-   The business problem is understanding how customers see brands and what different customers need.
+
+::: notes
+This is a proposal. I am explaining what we plan to do, rather than presenting final survey findings.
+:::
+
+## My Objective: AO2
+
+> How do customers see brands, and what customer groups can we identify?
+
+::::: columns
+::: {.column width="48%"}
+### Perceptual Maps
+
+Show which brands customers see as similar or different.
+:::
+
+::: {.column width="48%"}
+### Customer Segments
+
+Group customers who have similar preferences or needs.
+:::
+:::::
+
+**Why it matters:** These results can help business owners decide how to position their brands and whom to target.
+
+::: notes
+The map is about brands. Customer segments are about people. My role is to make both easier to understand visually.
+:::
+
+## Literature Review
+
+**Smith (1956): Market segmentation**
+
+This marketing framework helps explain why businesses should consider differences in customer needs.
+
+**Kruskal (1964): Multidimensional scaling**
+
+MDS is a method for showing similarities and differences as distances on a map.
+
+**What we still need to check:** Whether our survey includes useful brand ratings and whether AI responses reflect patterns in the human data.
+
+::: aside
+Full references appear on the final slide.
+:::
+
+## Data and Sampling
+
+| Data source | What we need to know |
+|:-----------------------------------|:-----------------------------------|
+| Human survey | How participants were recruited and the final respondent count |
+| AI responses | Which model and prompt generated each response |
+| Both sources | Whether the questions and rating scales are comparable |
+
+**Sample characteristics:** We will describe respondent counts and available demographics after reviewing the data.
+
+::: notes
+The final sample size and industry names need confirmation. We will distinguish generated AI records from real survey participants.
+:::
+
+## Data Preparation and Measures
+
+::: incremental
+-   Check respondent IDs and accidental duplicate records.
+-   Review missing answers and values outside the rating scale.
+-   Keep ratings numeric and ZIP codes as text.
+-   Choose relevant measures for each industry, such as affordability or quality.
+:::
+
+**Goal:** Prepare consistent data before creating maps or customer groups.
+
+::: notes
+A person may rate several brands, so a repeated ID is not always an error. We need to understand what each row represents.
+:::
+
+## Planned Analysis
+
+**Perceptual maps:** We plan to use **multidimensional scaling (MDS)** to show how customers see brands.
+
+**Customer segments:** We plan to use **clustering** to group customers with similar preferences.
+
+**Comparison:** We will examine similarities and differences between AI and human results.
+
+::: notes
+MDS creates a picture of brand relationships. Clustering identifies groups of similar customers. Our exact choices will depend on the available data.
+:::
+
+## Reproducible Example
+
+**Practice data:** `r length(unique(demo_ratings$respondent_id))` invented respondents each rate `r length(unique(demo_ratings$brand))` brands on a 1–5 scale.
+
+```{r}
+#| label: tbl-demo-ratings
+#| tbl-cap: "Average practice ratings by brand"
+# Calculate average ratings, then display them.
+brand_means <- aggregate(
+  cbind(affordability, quality) ~ brand,
+  data = demo_ratings,
+  FUN = mean
+)
+knitr::kable(
+  brand_means,
+  col.names = c("Brand", "Affordability", "Quality"),
+  digits = 1
+)
+```
+
+In this example, Brand A has the highest affordability rating, while Brand C has the highest quality rating.
+
+::: aside
+Higher affordability means more affordable. These invented ratings demonstrate the R workflow, not project findings or an MDS map.
+:::
+
+::: notes
+R calculates this table when I render the slides. This meets the reproducible-table requirement and shows a simple way to summarize brand ratings.
+:::
+
+## References and Appendix {.smaller}
+
+Smith, W. R. (1956). Product differentiation and market segmentation as alternative marketing strategies. *Journal of Marketing, 21*(1), 3–8. [Read source](https://doi.org/10.1177/002224295602100102)
+
+Kruskal, J. B. (1964). Multidimensional scaling by optimizing goodness of fit to a nonmetric hypothesis. *Psychometrika, 29*, 1–27. [Read source](https://doi.org/10.1007/BF02289565)
+
+### Appendix: Clickable Links
+
+-   [Group 8 CEP report](https://gabrielarq1.github.io/CEP--Group-8/CEP-F26/Group8-CEP-F26.html)
+
+-   [Group 8 repository](https://github.com/gabrielarq1/CEP--Group-8)
+
+-   [My M06 presentation files](https://github.com/Simrank-DM/IBM6500-F26/tree/main/MO6)

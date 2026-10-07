@@ -1,0 +1,174 @@
+---
+title: "M06 Reflection: Advanced Data Wrangling"
+author: "Simran Kaur"
+date: today
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-title: "Contents"
+    toc-depth: 3
+    toc-expand: 2
+    number-sections: true
+    code-link: true
+    code-tools: true
+    code-fold: false
+    code-overflow: wrap
+    embed-resources: true
+editor: visual
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+---
+
+::: {.callout-note title="Draft to personalize"}
+Replace the presentation placeholders and review the reflection against your actual experience before submitting. The coding examples use invented demonstration data, not CEP survey results.
+:::
+
+```{r}
+#| label: setup
+#| include: false
+library(dplyr)
+library(knitr)
+```
+
+# Revealjs Reflection
+
+**Prompt:** In Step 1, you learned how to design stunning presentation slides with Quarto. What's your impression of the Revealjs presentation? Describe its capabilities as you learned from the presentations. What are its strengths and weaknesses compared with PPT?
+
+My first impression of Revealjs was that it brings design and coding together. I like my projects to look good, but I also want them to be easy to read and navigate. Features such as themes, columns, incremental lists, and slide transitions give me ways to organize information and guide the audience through a presentation without showing everything at once. Speaker notes also allow me to keep extra explanation separate from what the audience sees.
+
+What interests me most is the ability to include R code and its output directly in the slides. For an analytics presentation, this makes it easier to connect the explanation with the analysis behind it. If the data changes, I can rerun the code and render the presentation again instead of manually replacing each chart.
+
+Compared with PowerPoint, Revealjs offers a useful workflow for presentations that include data and code. Publishing the slides online also makes them easy to share through a link. However, PowerPoint feels more straightforward for moving objects around and making quick visual adjustments. With Revealjs, I need to understand the YAML settings and sometimes use CSS to get the appearance I want. I see that learning curve as its main challenge, especially when I have a specific design in mind.
+
+| Area | Revealjs | PowerPoint |
+|:-----------------------|:-----------------------|:-----------------------|
+| Design workflow | Markdown, YAML, and optional CSS | Visual editing of slide objects |
+| R analysis | Code and results can be included in the source | Results are commonly imported from other tools |
+| Sharing | Published HTML link | Presentation file or an online sharing link |
+| My main challenge | Learning syntax and layout settings | Keeping imported analytical results updated |
+
+# My Presentation
+
+**Prompt:** In Step 2, you were asked to create a Revealjs presentation. Provide a link to the presentation you published on the web. Add at least one reproducible chart or table in the presentation. Briefly describe what the presentation is about. What did you learn from the experience of the Revealjs presentation?
+
+**Published presentation:** \[INSERT YOUR PUBLISHED REVEALJS PRESENTATION URL\]
+
+My presentation focuses on **\[insert your CEP project topic and analytics objective\]**. It explains the business problem, why the objective matters, the relevant literature, and the proposed methods. The reproducible **\[chart/table\]** shows **\[describe what it displays and identify whether it uses project data or demonstration data\]**.
+
+While working on the presentation, I learned that creating slides requires a different approach from writing a report. A report gives me room to explain details, but a slide needs a clear main point that the audience can understand quickly. This encouraged me to think more carefully about what belongs on the screen and what I should explain verbally or include in speaker notes.
+
+I also learned that visual design involves more than choosing colors or adding effects. The spacing, headings, and order of the content all affect how easily someone can follow the story. For me, the most valuable part of this exercise was connecting the analytical work with the way I communicate it.
+
+::: {.callout-important title="Presentation requirement"}
+The examples below belong to this reflection report. The published Revealjs presentation must also contain at least one reproducible chart or table of its own.
+:::
+
+# Data Wrangling
+
+**Prompt:** My advanced wrangling lecture in Step 3 introduced new concepts, including how to join relational databases. Pick three different functions, each from a different category. Describe when to use them and give one coding example along with an output for each function. To clarify, you are expected to do literate programming to weave your narratives with the code.
+
+## Joining: `left_join()`
+
+I chose `left_join()` because information for a project may be stored in separate tables. For example, one table could contain survey responses while another contains participant characteristics. A shared respondent ID allows me to connect the information while keeping all the rows from the first table.
+
+In this demonstration, I have four survey responses but demographic information for only three of those respondents. I join the tables using `respondent_id`.
+
+```{r}
+#| label: tbl-joined
+#| tbl-cap: "Survey responses joined with participant information"
+responses <- tibble(
+  respondent_id = c("R01", "R02", "R03", "R04"),
+  satisfaction = c(2, 3, 5, 4)
+)
+
+demographics <- tibble(
+  respondent_id = c("R01", "R02", "R03"),
+  age_group = c("18-24", "25-34", "35-44")
+)
+
+joined_data <- left_join(
+  responses, demographics, by = "respondent_id"
+)
+
+kable(joined_data)
+```
+
+As shown in @tbl-joined, all `r nrow(joined_data)` survey responses remain in the output. Respondent R04 has `NA` for age group because that ID does not appear in the demographic table. This missing value signals that the information was unavailable; it does not mean that the respondent had no age group.
+
+This helped me understand why checking IDs matters before joining data. A join can run successfully and still produce misleading results if the matching table contains duplicate IDs. I would need to check the keys and review the output before using the combined data for analysis.[^1]
+
+[^1]: A primary key identifies a row uniquely. A foreign key links a row to a record in another table. Duplicate or missing keys need attention before joining data.
+
+## Conditional Transformation: `case_when()`
+
+I chose `case_when()` because it makes conditional rules easier to read. For example, I can use it to classify survey scores into low, medium, and high groups. In this example, the rules are only for practice: scores of 1-2 are low, 3 is medium, and 4-5 are high.
+
+```{r}
+#| label: tbl-categories
+#| tbl-cap: "Demonstration satisfaction categories"
+categorized_data <- responses %>%
+  mutate(
+    satisfaction_group = case_when(
+      is.na(satisfaction) ~ "Missing",
+      satisfaction %in% 1:2 ~ "Low",
+      satisfaction == 3 ~ "Medium",
+      satisfaction %in% 4:5 ~ "High",
+      TRUE ~ "Check value"
+    )
+  )
+
+kable(categorized_data)
+```
+
+In @tbl-categories, R01 is placed in the low group, R02 in the medium group, and R03 and R04 in the high group. The original score remains available, so I can inspect both the numeric response and its category.
+
+My main takeaway is that creating categories requires judgment. The code applies the rules I give it, but I still need to explain why those cutoffs make sense. I would also consider whether grouping the scores removes information that could be useful in the analysis. These categories describe one satisfaction measure; they are not a complete customer segmentation analysis.
+
+## Column Operations: `across()`
+
+I chose `across()` because survey datasets often contain several columns that need the same calculation. Instead of writing a separate line for every variable, I can apply a function to selected columns together.
+
+Here, I calculate the mean of three demonstration rating variables. I name the columns explicitly so that the respondent ID cannot accidentally enter the calculation.
+
+```{r}
+#| label: tbl-means
+#| tbl-cap: "Average demonstration survey ratings"
+ratings <- tibble(
+  respondent_id = c("R01", "R02", "R03", "R04"),
+  quality = c(4, 3, 5, 4),
+  value = c(3, 4, 4, 5),
+  trust = c(4, 4, 5, 3)
+)
+
+rating_summary <- ratings %>%
+  summarise(
+    across(
+      c(quality, value, trust),
+      ~ mean(.x, na.rm = TRUE),
+      .names = "mean_{.col}"
+    )
+  )
+
+kable(rating_summary, digits = 2)
+```
+
+The output in @tbl-means shows a mean of 4 for quality, value, and trust. Although the averages are equal, the individual ratings differ. This reminds me that a summary can hide variation, so I would examine the distributions before drawing conclusions.
+
+This function showed me how to make my code more consistent and easier to maintain. However, I still need to select the columns carefully. A respondent ID might be numeric, but calculating its average would not provide a meaningful insight.
+
+## My Takeaway
+
+Overall, these functions helped me see data preparation as part of the reasoning behind an analysis. Combining tables, creating categories, and summarizing variables all influence the results. Running the code one step at a time would help me understand those changes and catch problems before moving forward.
+
+> My main takeaway is that clean-looking output is only useful when I understand how the code produced it.
+
+# Resources
+
+-   [Module advanced wrangling slides and code](https://jmjung.quarto.pub/m06-advanced-wrangling-with-dplyr/)
+-   [dplyr documentation: mutating joins](https://dplyr.tidyverse.org/reference/mutate-joins.html)
+-   [dplyr documentation: case_when()](https://dplyr.tidyverse.org/reference/case_when.html)
+-   [dplyr documentation: across()](https://dplyr.tidyverse.org/reference/across.html)
