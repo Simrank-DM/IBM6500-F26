@@ -1,0 +1,110 @@
+---
+title: "CEP G8 Questionnaire Design"
+author: "Alondra Rodriguez, Simran Kaur, Gabriela Raygoza Quintero, Yushan Huang, Veronica Vega"
+date: today
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 2
+    embed-resources: true
+    code-tools:
+      source: true
+---
+
+## Purpose
+
+Our group developed a draft for questionnaire and supporting measurement forms for **Simulated Market Research at Scale: An AI Consultant-Training Simulation and Emerging-Industry Insights Dashboard for TBFI**.
+
+## Questionnaire design
+
+The customer questionnaire moves from general, easy questions to specific questions using the funneling approach:
+
+1.  **Cover page and consent:** Purpose, survey duration, voluntary participation, risks and benefits, privacy, and researcher contacts.
+2.  **Screening:** Age, connection to the San Gabriel Valley, and industry experience.
+3.  **Past behavior:** Purchase frequency, recency, brand familiarity, and brands used.
+4.  **Main questions:** Brand attribute ratings and selection-factor importance for perceptual mapping and segmentation.
+5.  **Additional proposed items:** Brand attitude, future consideration, preferences, and information sources.
+6.  **Open-ended feedback:** Two questions about unmet needs and experiences influencing brand opinions.
+7.  **Demographic controls:** Age group, gender, employment, student status, household income, and location.
+
+Industry-specific attributes, brand lists, exact human benchmark wording, consent details, and survey duration still need confirmation. Additional proposed items and controls will be reviewed for relevance and respondent burden.
+
+### Alignment with Objectives
+
+| Objective and Owner | Analytics Objective | Measurement Approach |
+|:-----------------------|:-----------------------|:-----------------------|
+| **AO1 : Alondra Rodriguez** | Synthesize published evidence on LLM-simulated survey respondents and assemble a clean secondary data set describing customers and businesses in the four SGV industries. | Literature synthesis and secondary customer/business data; no new customer survey questions required. |
+| **AO2 : Simran Kaur** | Create perceptual maps and customer segments for the four industries. | Industry-specific brand ratings and selection-factor importance ratings for MDS perceptual mapping and latent class segmentation. |
+| **AO3 : Gabriela Raygoza Quintero** | Assess the validity of large language model panels by comparing their responses against the human benchmark. | Compare response distributions, rating averages, and patterns using the same survey questions and scales for human and LLM respondents. |
+| **AO4 : Yushan Huang** | Evaluate changes in consultant performance before and after completing the TBFI Do Tank Simulator using standardized skill-checkpoint scores. | Pre/post scores for client intake, research design, synthetic-panel fielding, perceptual mapping, and client readout. Performance change = post-score − pre-score. |
+| **AO5 : Veronica Vega** | Identify which digital marketing channels generate the highest rates of qualified sponsor inquiries and sponsor acquisitions throughout the marketing funnel. | Track channels, visitors or leads, qualified inquiries, and acquired sponsors. Qualified inquiry rate = qualified inquiries ÷ tracked visitors or leads × 100. Sponsor acquisition rate = acquired sponsors ÷ qualified inquiries × 100. |
+
+**Note:** Some POs and AOs are being revised and are awaiting Dr. Lin’s approval. Once approved, we will update the project report, C&M Table, and survey design accordingly.
+
+The customer questionnaire, consultant assessment, and funnel record form serve different audiences and will not all be presented to customer respondents.
+
+## Instructions and planned survey logic
+
+-   **Required:** Consent and eligibility questions. Other customer questions remain optional.
+-   **Exit paths:** Declined consent, age under 18, no qualifying SGV connection, or no selected industry end the survey under the proposed eligibility rules. Confirm these rules before implementation.
+-   **Industry assignment:** Assign one eligible industry using an agreed rule and pipe its name into later questions.
+-   **Brand logic:** Carry familiar brands forward; show brand ratings only for those brands. Skip the rating block when no named brands are familiar.
+-   **Response rules:** Mark single-choice and multiple-choice questions clearly; make “None of these” exclusive. Treat “Cannot judge” and other non-response options separately from numerical ratings.
+
+These are planned settings. Required labels and routing notes still need to be added to the Word draft, then implemented and tested in Qualtrics.
+
+## Measurement scales
+
+| Scale | Application |
+|:-----------------------------------|:-----------------------------------|
+| Nominal | Consent, industry, brand, gender, channel, human/LLM respondent type, and derived segment membership. |
+| Ordinal | Individual 1–5 ratings, age groups, and income brackets. Brand attributes use 1 = Very low to 5 = Very high, plus “Cannot judge.” Importance uses 1 = Not important to 5 = Extremely important. |
+| Interval if justified | Standardized AO4 performance scores, provided the approved rubric supports equal-interval interpretation. Standardization alone does not establish this. |
+| Ratio | Visitor/lead, inquiry, and acquisition counts and conversion rates. |
+
+Individual agreement items are Likert-type items; the other five-point items measure attributes or importance. Related items should only be combined into a scale with supporting measurement evidence (Stevens, 1946; Sullivan & Artino, 2013). These references explain measurement levels; they do not validate the proposed questionnaire items.
+
+## Review and Qualtrics Plan
+
+The group will review the draft against the C&M Table, human benchmark instrument, peer feedback, and instructor feedback. We will pretest it ourselves and with someone outside the group, record completion time, and revise unclear questions.
+
+The human benchmark data have already been collected from 600 respondents and will support comparisons with the LLM-generated responses.
+
+We have created a basic Qualtrics survey layout and added all team members as collaborators and Dr. Jung. The survey remains a draft while our revised POs, AOs, and questionnaire await approval. Once the Word/Google Doc questionnaire receives the green light, we will update the Qualtrics draft accordingly. Any new data collection will begin only after the required instructor, faculty project lead, and IRB approvals.
+
+## Submission links and evidence
+
+### Google Doc Questionnaire
+
+The draft questionnaire is accessible to anyone with the link. Dr. Jung should have edit access, and all teammates should be able to collaborate.
+
+[CEP-Group 8 Google Doc Questionnaire](https://docs.google.com/document/d/1JQZFPwiwyKLNt7RXEeyV0t4H9QAVUECy4x9OEGfGJAE/edit?tab=t.0)
+
+### Qualtrics Questionnaire
+
+We have not yet received approval for our revised POs and AOs or our questionnaire. However, we have set up the Qualtrics survey as a draft and shared with all team members for now and will update and finalize it after receiving the required approvals.
+
+[CEP-Group 8 Qualtrics Draft](https://cpp.pdx1.qualtrics.com/survey-builder/SV_2ujgUci31v9QF4W/edit)
+
+### Measurement Table
+
+[Group 8 C&M Table](https://docs.google.com/document/d/1ZI18GTDaXHCRTz3x4cXcZvnghRol7qQ8/edit?usp=sharing)
+
+### Project links
+
+[Group 8 Project Report](https://gabrielarq1.github.io/CEP--Group-8/CEP-F26/Group8-CEP-F26.html) · [Group Repository](https://github.com/gabrielarq1/CEP--Group-8)
+
+::: callout-warning
+## Note on Objective Revisions
+
+Some Project Objectives (POs) and Analytics Objectives (AOs) are being revised and are awaiting Dr. Lin’s approval. Once approved, we will update the project report, C&M Table, and survey design accordingly.
+:::
+
+## References
+
+Stevens, S. S. (1946). On the theory of scales of measurement. *Science, 103*(2684), 677–680. <https://doi.org/10.1126/science.103.2684.677>
+
+Sullivan, G. M., & Artino, A. R., Jr. (2013). Analyzing and interpreting data from Likert-type scales. *Journal of Graduate Medical Education, 5*(4), 541–542. <https://doi.org/10.4300/JGME-5-4-18>
+
+##

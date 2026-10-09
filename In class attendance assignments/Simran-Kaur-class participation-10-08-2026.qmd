@@ -1,0 +1,42 @@
+---
+title: "Class Notes"
+author: "Simran Kaur"
+date: "2026-10-08"
+format: html
+---
+
+# Feedback on class concerns
+
+Dr. Jung compared last year's CEP class with our current class to explain the workload and how the course is structured. Last year, some students could not meet the deadlines, and their projects continued into the summer or later. The different parts of the research paper took time, including methodology, IRB approval, study design, data collection, and data analysis.
+
+We discussed the importance of maintaining quality in professional work and providing quality service. We also talked about which assignments need to be prioritized. My understanding was that some deadlines could move slightly, while quality remained a priority.
+
+# Project management and CEP timeline
+
+-   explained the project timeline thoroughly and discussed project management. We looked at the bigger picture of the priorities and goals for our CEP projects.
+
+-   Data collection needs to be completed by Week 13. Before data collection begins, IRB approval is needed, and the approval process also takes time. This was an important timing point for me to keep in mind.
+
+-   explained that after Chapters 1, 2, and 3, he would be checking our projects less closely because we would be moving into data collection.
+
+# AI use in assignments
+
+We discussed AI use and how to use it in relation to assignments. Dr. Jung explained expectations around using AI for class work.
+
+# SEM, BigQuery, and data quality
+
+We talked about SEM and BigQuery, including checking data quality and quality assurance. These were part of the class discussion about working with data.
+
+# GitHub and publishing
+
+We discussed ways to publish through GitHub as few classmates are still having issues with it, including GitHub Pages and how to set up the Pages settings. We also covered pulling and pushing changes without using the terminal.
+
+# CEP template format
+
+We talked about the CEP template and its format for the project report, important parts and how it should be, suggestions, tips and tricks.
+
+# Survey design
+
+We discussed a bit about survey designs, whether a survey is actually needed by some groups or not (depending on the project type and requirements). My takeaway was that this depends on the project rather than being the same decision for every project.
+
+We also talked about survey budgets for businesses and few questions about survey design, including the example of a short survey in a restaurant. Later, we learned about scales and variables a bit

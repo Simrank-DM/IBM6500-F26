@@ -1,0 +1,75 @@
+---
+title: "Qualtrics M01-1: Designing a Survey"
+subtitle: "Survey of Educational Needs of Market Research Professionals"
+author: "Simran Kaur"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-expand: 2
+    number-sections: true
+    embed-resources: true
+---
+
+# Overview
+
+For this assignment, I created a rough draft of the Survey of Educational Needs of Market Research Professionals in Qualtrics. I organized the questionnaire into separate blocks and began transferring the questions from the provided Word document into the online survey.
+
+The project is titled **Kaur, Simran - Survey of Educational Needs of MR Professionals**. I created a class folder IBM6500 for the project and used different question formats based on the type of information being collected. I also added skip logic to the screening questions so that participants who do not consent or do not have relevant market research experience are directed to the end of the survey.
+
+![](images/qualtrics-share-3.png)
+
+# Project Sharing
+
+I shared the Qualtrics project with Professor Jae Jung using the Bronco user ID **jmjung**. I granted the permissions needed to edit the survey and view its responses and results.
+
+![Proof that the Qualtrics project was shared with Professor Jae Jung.](images/qualtrics-share2.png){fig-align="center" width="100%"}
+
+# Beginning of the Survey
+
+The beginning of the survey contains the **Cover Page** block. It includes the study introduction, consent question, and market research experience screening question. I formatted the introductory information to improve readability and added skip logic to both screening questions.
+
+If a participant selects **No, I do not want to participate in this research**, the survey ends. The survey also ends if a participant answers **No** to the question asking whether they have worked in a market research-related profession.
+
+![Beginning of the Qualtrics survey, including the Cover Page and screening questions.](images/qualtrics-beginning.png){fig-align="center" width="100%"}
+
+# Middle of the Survey
+
+For the middle portion of the survey, I created Q3.2 under the **Educational Needs** block. I used the Side by Side question format so participants can rate the usefulness of the same research methods separately for researchers and salespersons.
+
+Both column groups include the response options **Very much**, **Somewhat**, **Not at all**, and **Don’t know**. The rows include qualitative research, survey methods, observation, experimental design, questionnaire design, sampling, data preparation, communication, and project management. This format makes it easier to compare the educational needs of the two professional roles.
+
+![Middle portion of the Qualtrics survey.](images/qualtrics-middle.png){alt="Middle portion of the Qualtrics survey." fig-align="center" width="100%"}
+
+![](images/qualtrics-middle2.png)
+
+# Reflection
+
+Creating this rough draft gave me practical experience with several Qualtrics features. I learned how to organize a long survey into blocks, select different question formats, create dropdown and text-entry questions, and add skip logic to screening questions.
+
+Creating Q3.2 was especially helpful because I had not previously worked with the Side by Side format. I learned how to create two column groups for researchers and salespersons while using the same response scale for both. This made the question easier to compare and more organized than using separate questions.
+
+The survey is still a rough draft, but this activity helped me understand how much attention is required when transferring a questionnaire into Qualtrics. Question type, layout, logic, and response options all affect how participants experience and complete the survey.
+
+# Ending of the Survey
+
+The lower portion of the survey shows the later blocks: **Educational Needs**, **GCMR Program**, and **Demographics**. These blocks will contain questions about the educational needs of market research professionals, opinions about the proposed graduate certificate program, and participant background information.
+
+This submission documents the rough-draft stage of the survey. Additional questions, display logic, response coding, validation, and formatting will be completed for the final Qualtrics assignment.
+
+![Ending portion of the Qualtrics survey showing the later survey blocks.](images/qualtrics-ending.png){fig-align="center" width="100%"}
+
+![](images/qualtrics-ending2.png)
+
+# Reflection
+
+Creating this rough draft helped me understand how a long questionnaire can be divided into manageable blocks. I practiced creating and moving questions, selecting appropriate question formats, adding skip logic, organizing a survey within a project folder, and sharing a project with a collaborator.
+
+I also learned that survey design requires careful attention to both appearance and functionality. Small details, such as choosing the correct response format or sending an ineligible participant to the end of the survey, can affect the participant experience and the quality of the collected data. The rough draft gives me a clear structure that I can continue improving for the completed assignment.
+
+# Appendix
+
+-   **GitHub Repository:** <https://github.com/Simrank-DM/Qualtrics-M01-1>
+
+-   **GitHub Pages:** <https://simrank-dm.github.io/Qualtrics-M01-1/>
