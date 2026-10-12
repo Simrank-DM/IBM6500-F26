@@ -83,7 +83,7 @@ The most useful parts were learning `UNNEST` and breaking queries into smaller s
 
 For CEP, I could use these skills to organize survey responses and prepare brand-rating summaries for my AO2 analysis. BigQuery could help with data preparation before creating perceptual maps. I would still refer to my notes when working with nested data, dates, and window functions.
 
-# Appendix: Publication Links
+# Appendix: 
 
 -   [GitHub Repository](https://github.com/Simrank-DM/IBM6500-F26/tree/main/IBM6500-SQL)
--   [Published Introduction to BigQuery Report](https://simrank-dm.github.io/IBM6500-F26/IBM6500-SQL/introduction-to-bigquery.html)
+-   [Published Introduction to BigQuery Report](https://simrank-dm.github.io/IBM6500-F26/IBM6500-SQL/BigQuery/introduction-to-bigquery.html)
