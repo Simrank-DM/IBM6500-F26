@@ -1,0 +1,78 @@
+---
+title: "Class Notes"
+author: "Simran Kaur"
+date: "2026-10-15"
+format:
+  html:
+    toc: true
+    toc-location: right
+    embed-resources: true
+---
+
+# GitHub and publishing
+
+-   We learned about publishing websites through GitHub. Dr. Jung explained different publishing methods and when to use them for a single page, multiple pages, or a Quarto website.
+
+-   He showed how to allow GitHub Pages through the repository settings, including selecting the branch and folder for publishing.
+
+-   We also went over the QMD setup in Positron, including the title, author, date, table of contents, and embedding resources. He showed how to add headings, tables, and links.
+
+# Netlify
+
+We talked about Netlify, and Dr. Jung showed an example of how it looks and works. Seeing the dashboard helped me get a general idea of another website publishing option.
+
+# Conceptual model and research examples
+
+-   We discussed conceptual models, hypotheses, variables, mediators, and moderators. Dr. Jung gave research examples to explain how they are different and how they can be tested.
+
+-   He showed a conceptual model with different variables and hypotheses connecting them. We also looked at an example involving civic consciousness as a moderator.
+
+-   The examples helped me follow the differences between these ideas. We will also learn how to do this analysis in R.
+
+# Marketing Scales Handbook
+
+We talked about the Marketing Scales Handbook and how to access it through CPP’s library. Dr. Jung showed examples of constructs and scale questions. This was useful for understanding where to look for survey measures.
+
+# Survey design and Qualtrics
+
+-   Dr. Jung used a survey project to explain survey design. We looked at examples involving realistic and idealistic advertisements, brand perceptions, psychographics, and social media questions.
+
+-   We discussed seven-point scales and saw questions with opposite descriptions, such as good and bad or favorable and unfavorable.
+
+-   Some examples asked which type of ad respondents preferred and why. We also saw questions about how realistically women were portrayed in advertisements.
+
+-   He explained some Qualtrics questions and showed how earlier responses can determine which questions appear later. For social media questions, there is no need to present irrelevant platforms that the respondent does not use.
+
+-   an silly attention-check question asking (to test no bots), “What is six plus six?” He explained giving respondents the benefit of the doubt for one wrong answer. In the survey example, a warning explained what would happen after two failed checks.
+
+-   We also looked at Survey Flow, consent-related branches, participant IDs, and the end-of-survey settings, including redirecting respondents to Prolific.
+
+# Constructs and measurement
+
+-   We discussed the two-language concept of empirical research, including theory and observation, and how they connect.
+
+-   Dr. Jung also explained formative and reflective measurement models. He used the example involving beer, wine, drunkenness, vision, and reaction to explain the difference.
+
+# IRB application and consent
+
+-   Dr. Jung used a survey project to explain the IRB application and consent process. The consent page covered the study’s purpose, duration, voluntary participation, anonymity, compensation, and contact information.
+
+-   He said missing required components can lead to an application being returned for revision. This was a point for me to keep in mind when preparing our work.
+
+-   He showed an example in Cayuse Human Ethics, including the study title, team members, investigator roles, and study status.
+
+-   We also went through starting a new study, entering the project or survey title, and adding team members and their roles. Seeing an actual example made the application process easier to follow.
+
+# Initial presentation
+
+We reviewed the initial proposal presentation schedule and the shared presentation coordination document. Our Group 8 presentation is listed for October 22, from 7:30 to 7:58 p.m., with Dr. Lin for TBFI.
+
+# Resources shared in class
+
+-   [Canvas course modules](https://canvas.cpp.edu/courses/143274/modules)
+
+-   [GitHub Pages publishing methods](https://jaejungca.github.io/gh-pages/gh-pages-publishing-methods.html)
+
+-   [Marketing Scales Handbook](https://ebookcentral.proquest.com/lib/csupomona/detail.action?docID=5731640)
+
+-   [CPP IRB protocol information](https://www.cpp.edu/research/research-compliance/irb/protocol.shtml)
