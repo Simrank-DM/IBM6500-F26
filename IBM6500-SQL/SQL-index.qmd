@@ -1,0 +1,76 @@
+---
+title: "SQL Learning Portfolio"
+author: "Simran Kaur"
+format:
+  html:
+    theme: cosmo
+    toc: false
+    embed-resources: true
+    smooth-scroll: true
+    link-external-newwindow: true
+---
+
+```{=html}
+<style>
+:root { --portfolio-green: #155b4f; }
+#title-block-header { border-bottom: 3px solid var(--portfolio-green); padding-bottom: 1.3rem; margin-bottom: 2rem; }
+h1, h2, h3 { color: var(--portfolio-green); }
+.portfolio-card { border: 1px solid #d9e6e0; border-radius: 12px; padding: 1.4rem; background: #f7faf8; height: 100%; }
+.portfolio-card h3 { margin-top: 0; font-size: 1.25rem; }
+.portfolio-card .btn { background: var(--portfolio-green); border-color: var(--portfolio-green); color: white; margin-top: .4rem; }
+.portfolio-card .btn:hover { background: #103f37; }
+.portfolio-card a:focus-visible { outline: 3px solid #b07822; outline-offset: 4px; }
+.grid { row-gap: 1rem; }
+</style>
+```
+
+This learning portfolio brings together my SQL learning for **IBM 6500**. It follows my progress from understanding databases to filtering, summarizing, and working with data in BigQuery.
+
+## My Learning Reports
+
+::::::::: grid
+:::: {.g-col-12 .g-col-md-4}
+::: portfolio-card
+### Introduction to SQL
+
+My foundation in database structure, tables, keys, data types, and basic queries using `SELECT`, `DISTINCT`, and aliases.
+
+[Read Report](Kaur-Simran-Introduction-to-SQL.html){.btn .btn-primary aria-label="Read Introduction to SQL report"}
+
+[QMD](Kaur-Simran-Introduction-to-SQL.qmd)
+:::
+::::
+
+:::: {.g-col-12 .g-col-md-4}
+::: portfolio-card
+### Intermediate SQL
+
+Chapter notes on filtering records, aggregate functions, sorting, and grouping, including the difference between `WHERE` and `HAVING`.
+
+[Read Report](Intermediate-SQL/intermediate-sql.html){.btn .btn-primary aria-label="Read Introduction to SQL report"}
+
+[QMD](Intermediate-SQL/intermediate-sql.qmd)
+:::
+::::
+
+:::: {.g-col-12 .g-col-md-4}
+::: portfolio-card
+### Introduction to BigQuery
+
+My learning notes and reflection on using SQL in Google's cloud analytics environment and its connection to marketing data.
+
+[Read Report](BigQuery/introduction-to-bigquery.html){.btn .btn-primary aria-label="Read Introduction to BigQuery report"}
+
+[QMD](BigQuery/introduction-to-bigquery.qmd)
+:::
+::::
+:::::::::
+
+## What I Am Learning
+
+I am learning to turn a broad question into a clear query: identify the relevant tables, select the fields, filter the records, and summarize the results. My next step is to become more confident combining these skills and checking that the output answers the original question.
+
+## Connection to Marketing Analytics and the CEP
+
+SQL can help organize marketing data and compare results across channels, dates, or customer groups before analysis in R. For our TBFI project on CALIPER-assisted meta-analysis, these skills could support checks for missing coding values, unique study IDs, and record counts across outcome constructs. They could also help me verify the counts and filters used in my AO4 dashboard walkthrough.
+
