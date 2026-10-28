@@ -136,9 +136,7 @@ I still need more practice with SQL syntax, especially remembering when PostgreS
 
 # Appendix: Publication Links
 
--   **GitHub Repository:** <https://github.com/Simrank-DM/IBM6500-SQL>
--   **Published Introduction to SQL Report:** <https://simrank-dm.github.io/IBM6500-SQL/Kaur-Simran-Introduction-to-SQL.html>
-
-## Source
-
-DataCamp, *Introduction to SQL* course materials.
+- [GitHub Repository](https://github.com/Simrank-DM/IBM6500-F26/tree/main/IBM6500-SQL)
+- [Intermediate SQL Report](https://simrank-dm.github.io/IBM6500-F26/IBM6500-SQL/Intermediate-SQL/intermediate-sql.html)
+- [Introduction to BigQuery Report](https://simrank-dm.github.io/IBM6500-F26/IBM6500-SQL/BigQuery/introduction-to-bigquery.html)
+- [SQL Learning Portfolio Landing Page](https://simrank-dm.github.io/IBM6500-F26/IBM6500-SQL/SQL-index.html)

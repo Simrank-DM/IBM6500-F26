@@ -76,5 +76,5 @@ This assignment helped me understand a little more about the complex survey desi
 # Appendix: Links
 
 -   [GitHub Repository](https://github.com/Simrank-DM/IBM6500-F26)
--   [Published HTML Report](https://simrank-dm.github.io/IBM6500-F26/Qualtrics-M02/Qualtrics-M02-Experimental-Design.html)
+-   [Published HTML Report](https://simrank-dm.github.io/IBM6500-F26/Qualtrics-M01-1/Qualtrics-M02-Experimental-Design.html)
 -   [Qualtrics Survey](https://cpp.az1.qualtrics.com/jfe/form/SV_88nu9SxxkFubxOu)

@@ -1,0 +1,36 @@
+---
+title: "Group Member Evaluation Form"
+subtitle: "IC09 | Group 8 | Confidential"
+author: "Simran Kaur"
+date: "October 27, 2026"
+format:
+  html:
+    toc: false
+    theme: cosmo
+    embed-resources: true
+---
+
+**Name:** Simran Kaur\
+**CEP project:** Group 8 : Tarkington Business Futures Institute (TBFI)\
+**Evaluation period:** Week 01 through the October 22, 2026 proposal presentation
+
+I evaluated each person's work during this period. A score of 100% means the member met the responsibilities I expected. The MVP selection reflects my view of work above regular responsibilities. This is my confidential, independent assessment.
+
+| Member                    | Grade | MVP |
+|:--------------------------|------:|:---:|
+| Simran Kaur (self)        |  100% | Yes |
+| Yushan Huang              |  100% | No  |
+| Gabriela Raygoza Quintero |   45% | No  |
+| Alondra Rodriguez         |   10% | No  |
+
+## Comments on contributions
+
+I understand that Gabriela and Alondra are balancing full-time jobs while in their first semester of an accelerated one-year program. They are also learning new research concepts and tools while managing a demanding workload for IBM 6500 and their other classes. Gabriela has been trying to contribute despite these challenges. However, Alondra’s participation has been limited, and she has repeatedly given excuses for being unable to contribute. It has felt as though she is not taking the project or her responsibilities seriously enough.
+
+While I understand that everyone has personal and professional commitments, graduate students are expected to take responsibility for their assigned work. Other members have had to take on additional responsibilities to keep the project moving, and it is not fair for the same people to repeatedly carry the extra work.
+
+I hope individual grades will fairly reflect each member’s contributions and effort. Yushan and I have discussed our concerns with Gabriela and Alondra, and both said they would be more active going forward. We did not mind taking on extra work at the beginning while everyone was adjusting, but with the semester nearly over, we need the work to be shared more evenly. At the same time, because this is a longer-term group project, I would appreciate this **feedback being handled confidentially** so the team can continue working together constructively **to avoid potential disagreements** within the team.
+
+I also believe it's not entirely their fault, and this reflects a broader program concern. First-semester students are being asked to complete complex research projects while learning many of the concepts for the first time, with limited time to learn and no dedicated in-class group work time. This can create additional pressure on more experienced students, who may need to spend time explaining concepts and completing work that others are unable to finish. It can also affect the pace and quality of the group’s work, as well as our ability to meet deadlines.
+
+One possible solution for future could be to group first-year students together, provide more structured support and dedicated class time for teams with different levels of experience, or reduce workload so they actually have time to learn. Students invest significant time and money in this program and should have a fair opportunity to learn and produce quality work without consistently carrying responsibilities that belong to other group members.
