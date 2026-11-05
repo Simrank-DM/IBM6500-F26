@@ -1,0 +1,40 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - dashboard.qmd
+    - styling.qmd
+    - listings.qmd
+    - submission.qmd
+website:
+  title: "Simran Kaur"
+  site-url: https://Simrank-DM.github.io/SimranK-DM-Portfolio/
+  navbar:
+    background: "#800020"
+    foreground: "#ffffff"
+    left:
+      - href: index.qmd
+        text: Home
+      - href: dashboard.qmd
+        text: CEP Dashboard
+      - href: styling.qmd
+        text: Website Styling
+      - href: listings.qmd
+        text: Portfolio Listings
+    right:
+      - icon: linkedin
+        href: https://www.linkedin.com/in/simrank09/
+        aria-label: LinkedIn
+      - icon: github
+        href: https://github.com/Simrank-DM/SimranK-DM-Portfolio
+        aria-label: GitHub
+  page-footer:
+    center: "Simran Kaur | Digital Marketing & Analytics"
+format:
+  html:
+    theme: [cosmo, custom.scss]
+    css: styles.css
+    toc: false
+    page-layout: full
+    lang: en

@@ -1,0 +1,76 @@
+---
+title: "Explore My Portfolio"
+subtitle: "Organizing work with Quarto Listings"
+listing:
+  id: portfolio-work
+  contents: portfolio-items.yml
+  type: table
+  fields: [title, categories, description]
+  field-display-names:
+    title: "Explore"
+    categories: "Topic"
+    description: "What you will find"
+  sort: title
+  categories: true
+  filter-ui: true
+  sort-ui: true
+---
+
+::: portfolio-section
+## What are Quarto Listings?
+
+A listing creates an organized collection of content from source documents or a metadata file. Instead of manually rebuilding a table of links, I can maintain the content information and let Quarto generate its display.
+
+## Browse the work
+
+Use the categories to choose a topic, the search box to filter entries, or the sorting controls to change their order. These entries link to existing pages in this portfolio.
+:::
+
+::: {#portfolio-work}
+:::
+
+::: portfolio-section
+## How can listings support a professional portfolio?
+
+Listings can organize dashboards, case studies, reports, design projects, and presentations. Categories help a recruiter find relevant work, while short descriptions explain what each item demonstrates.
+
+For this portfolio, I use a separate YAML file to describe the homepage, CEP dashboard, and styling demonstration. These are learning artifacts on this site, not claims of additional completed client projects.
+
+## How is this listing configured?
+
+``` yaml
+listing:
+  id: portfolio-work
+  contents: portfolio-items.yml
+  type: table
+  fields: [title, categories, description]
+  sort: title
+  categories: true
+  filter-ui: true
+  sort-ui: true
+```
+
+An entry in `portfolio-items.yml` looks like this:
+
+``` yaml
+- title: "CEP: AI-Assisted Meta-Analysis"
+  path: dashboard.qmd
+  categories: [Analytics, Research]
+  description: "Project purpose, planned workflow, and evidence status."
+```
+
+The page uses a div with the matching ID to position the listing:
+
+``` markdown
+::: {#portfolio-work}
+:::
+```
+
+## How will I add future work?
+
+I can add another item with a title, path, category, and description, then render the website again. The file path should point to a real page. Quarto also supports grid and default listing layouts when a more visual presentation is useful.
+
+## Reference
+
+[Quarto: Document Listings](https://quarto.org/docs/websites/website-listings.html)
+:::

@@ -1,0 +1,22 @@
+---
+title: "M10 Hands-on Practice: Sharing Outputs with the Audience"
+author: "Simran Kaur"
+format: html
+---
+
+## Portfolio Website
+
+[Open my portfolio website](https://Simrank-DM.github.io/SimranK-DM-Portfolio/)
+
+**Publication status:** This is the intended GitHub Pages URL. Confirm it opens successfully after publishing before submitting this report.
+
+## Source Repository
+
+[View all website source files on GitHub](https://github.com/Simrank-DM/SimranK-DM-Portfolio)
+
+## Website Contents
+
+- **Home:** Bio, photo, career aspirations, skills, education, and experience.
+- **CEP Dashboard:** TBFI project purpose, research approach, planned workflow, and evidence status. Verified numerical results remain to be added.
+- **Website Styling:** CSS, SCSS, and HTML explanations with working examples.
+- **Portfolio Listings:** A working categorized, searchable table of portfolio content.

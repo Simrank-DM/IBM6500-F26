@@ -1,0 +1,66 @@
+---
+title: "IBM 6500 - In-Class Notes"
+author: "Simran Kaur"
+date: "2026-10-29"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 1
+    number-sections: false
+    embed-resources: true
+    code-copy: true
+    smooth-scroll: true
+lang: en
+---
+
+## Guest Speaker: Travis Miller (PureSpectrum)
+
+**Contact:** [travis\@purespectrum.com](mailto:travis@purespectrum.com)\
+**LinkedIn:** [Travis Miller](https://www.linkedin.com/in/travismiller09/)
+
+-   Travis talked about working in market research and how understanding people is a big part of the job. It is important to understand why consumers buy something, along with being able to analyze the data.
+-   He used Nike shoes as an example when talking about consumer trends. Keeping up with what people are buying and how their preferences change can help us make better sense of the numbers.
+-   A simple way he explained research was to find a problem that needs answers, collect the data, and use it to answer the question. He also encouraged us to follow current events, technology, and human behavior outside of class.
+-   An internship with a market research agency is a good starting point. It gives students practical experience and a chance to learn how research works outside the classroom.
+-   When discussing candidates, he mentioned experience, being open to learning, and being willing to go above and beyond after graduation. A lot of learning also happens on the job.
+-   He emphasized the value of in-person jobs, especially when starting a career. Being around coworkers can help us learn faster, build connections, and find more opportunities.
+-   Statistics, economics, business, writing, critical thinking, analytics, and consumer behavior are all useful areas to build on for this field.
+-   Technology is used for survey programming, programmatic sampling, data analysis, and report building. He also mentioned Qualtrics and discussed how participants can be screened based on their responses and the survey approach.
+-   Synthetic data is a hot topic in the industry. Travis mentioned that it has worked well in some industries. His slide also included automated fieldwork, large datasets, and AI-moderated interviews as developments in research.
+-   He recommended the Insights Association for networking, events, internships, job opportunities, and conferences. His slide noted that membership is complimentary for full-time university students.
+-   The West chapter includes San Diego, Orange County, Los Angeles, Ventura, San Francisco, Portland, and Seattle, so there are opportunities to connect with people in the industry locally.
+
+## Assignment Changes and CEP Project
+
+-   Dr. Jung explained that some group project assignments were taken out of his course assessment because they would be assessed by the faculty lead. The discussion mainly covered GA4 assignments and data/IRB-related work.
+-   For the CEP, we need to confirm both our analytics objectives and our methods with the faculty lead. Each objective should explain what we plan to do, which variables or features we will use, and why the method makes sense for that objective.
+-   The instructions asked for enough explanation under each objective, around one or two paragraphs depending on what needs to be explained. The reader should be able to understand the plan without having to guess what we mean.
+-   We should have our write-up ready before asking for feedback. It is easier for the faculty lead to give useful suggestions when there is something specific to review.
+-   The scope shown in class covered Chapters 1, 2, and 3 of the MSDM Culminating Experience Project Report.
+-   Deliverables included a task list with the responsible members' names, confirmation that the analytics objective was approved, and confirmation that the analytical method was approved. A link to the shared task list could be submitted.
+-   Post-proposal work can continue over several weeks. Some parts will be submitted individually, while other work may be collected as a group.
+-   Dr. Jung also reviewed the data analysis table for Case 31: Federal Credit Union. It connected each research question to the constructs, their roles, the questions used to measure them, and the measurement scales.
+-   For example, reasons for joining the credit union were linked to Q7, and attitudes toward employee proficiencies were linked to Q3–Q6. This helped show how a research question connects to the actual information collected in a survey.
+
+## BigQuery \| Data Preparation \| Other Notes
+
+-   Dr. Jung went over material from Analytics Academy on Skillshop about exporting Google Analytics data to BigQuery.
+-   Connecting the two gives access to raw event-level data, which allows more detailed analysis of user activity.
+-   The overview explained that we can use SQL to answer questions and combine analytics data with other datasets. One example was finding the total number of users for a particular day.
+-   The setup overview included choosing a Google Cloud project, configuring the connection and dataset location, and selecting the export frequency.
+-   Dr. Jung went through the Case 31 data preparation QMD in Positron. He showed how to import an SPSS `.sav` file using `read_sav()` and check the dataset dimensions and variable names.
+-   We looked at checking missing values by counting them for each variable and displaying only the variables with missing observations. This made it easier to identify which columns needed attention.
+-   He also showed how to create a data dictionary with variable names, labels, classes, distinct-value counts, and value labels. SPSS files store some of this information as attributes, so it may not be visible directly in the data frame.
+-   We reviewed the `labelled` package for reading, adding, changing, and removing labels. Variable labels describe a column, while value labels explain response codes, such as 0 = “No” and 1 = “Yes”.
+-   `var_label(x)` reads a variable label. For example, `var_label(data_raw$q7)` returned “savings rates”, making Q7 easier to understand. `set_variable_labels()` changes variable labels, and `remove_var_label()` removes them.
+-   `val_labels(x)` displays value labels, `set_value_labels()` replaces them, and `add_value_labels()` adds to the existing labels. We also saw how to remove them using `remove_val_labels()`.
+-   Finally, `as.numeric(x)` converts labelled data to plain numbers, while `haven::as_factor(x)` uses the labels as factor levels for display. This helped clarify the difference between the stored codes and their meanings.
+-   Overall, these steps help us understand the variables and check the data before starting the analysis.
+
+## Personal Reflection
+
+-   The point about consumer behavior stood out to me because of my interest in fashion marketing. The Nike example was a reminder that understanding trends and why people buy matters alongside technical skills.
+-   Travis's advice about internships and in-person work made the career discussion feel practical. Getting experience and learning from people in the industry seems like a useful next step for building my skills.
+-   The synthetic data discussion connected with the broader topic that originally motivated our CEP, that we also need to explain our current objectives and methods clearly and confirm them with our faculty lead.
+-   The data analysis table helped me see how research questions connect to measurable variables. The BigQuery and R examples were also useful reminders to understand the structure and meaning of the data before starting the analysis.

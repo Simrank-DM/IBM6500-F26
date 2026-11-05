@@ -1,0 +1,35 @@
+/* Pastel background, black text, burgundy navigation */
+:root { --burgundy:#000000; --burgundy-dark:hsl(0, 0%, 0%); }
+body { color:#000; font-family:Arial,Helvetica,sans-serif; line-height:1.75; min-height:100vh; background-color:#e9d8e9; background-image:radial-gradient(ellipse at 69% 77%,#fff0a3 0%,transparent 49%),radial-gradient(ellipse at 100% 100%,#ffdaad 0%,transparent 58%),radial-gradient(ellipse at 80% 5%,#e8bfdf 0%,transparent 53%),radial-gradient(ellipse at 36% 10%,#cdc9ed 0%,transparent 48%),linear-gradient(110deg,#aae7df 0%,#b2d9d1 38%,#edcce2 100%); background-attachment:fixed; }
+#quarto-content {padding-left:24px;padding-right:24px;}
+main.content {max-width:1100px;margin:0 auto;padding-top:56px;padding-bottom:48px;}
+.navbar {background:var(--burgundy)!important;padding-top:16px;padding-bottom:16px;}
+.navbar-brand,.navbar .nav-link,.navbar .navbar-title,.navbar .bi {color:white!important;}
+.navbar-brand {font-weight:700;letter-spacing:.4px;}
+.navbar .nav-link:hover {text-decoration:underline;text-underline-offset:5px;}
+h1,h2,h3,h4,p,li,strong,.hero-subtitle,.eyebrow {color:#000;}
+h1 {font-family:Georgia,serif;font-size:clamp(2.8rem,6vw,4.8rem);font-weight:700;line-height:1.12;margin-bottom:20px;}
+h2 {font-family:Georgia,serif;font-size:2rem;font-weight:700;border-bottom:none;margin-top:0;margin-bottom:22px;}
+h3 {font-size:1.15rem;font-weight:700;margin-top:26px;margin-bottom:8px;}
+a {color:#000;text-underline-offset:4px;} a:hover {color:var(--burgundy-dark);}
+.portfolio-hero {display:grid;grid-template-columns:300px minmax(0,1fr);align-items:center;gap:48px;padding:30px 0 56px;}
+.hero-photo {width:100%;max-width:300px;margin:0 auto;} .hero-photo p {margin:0;}
+.profile-photo {display:block;width:100%;max-width:300px;height:auto;aspect-ratio:1;object-fit:cover;object-position:center;border:none;border-radius:0;box-shadow:none;
+-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 18 C20 -10 -10 20 18 50 C-10 80 20 110 50 82 C80 110 110 80 82 50 C110 20 80 -10 50 18Z' fill='black'/%3E%3C/svg%3E");
+mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 18 C20 -10 -10 20 18 50 C-10 80 20 110 50 82 C80 110 110 80 82 50 C110 20 80 -10 50 18Z' fill='black'/%3E%3C/svg%3E");
+-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;}
+.eyebrow {font-size:.75rem;font-weight:700;letter-spacing:2px;margin-bottom:18px;}
+.hero-subtitle {font-size:1.25rem;font-weight:600;line-height:1.5;margin-bottom:22px;}
+.portfolio-section {background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.85);border-radius:20px;padding:36px;margin-bottom:26px;}
+.portfolio-section>:last-child {margin-bottom:0;}
+.skills-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;}
+.skill-card {background:rgba(255,255,255,.6);border-top:4px solid var(--burgundy);border-radius:12px;padding:22px;}
+.skill-card h3 {margin-top:0;} .skill-card ul {padding-left:20px;margin-bottom:0;}
+.btn {border-radius:8px;padding:10px 20px;font-size:.95rem;font-weight:600;margin:8px 8px 8px 0;text-decoration:none;}
+.btn-primary {color:white!important;background:var(--burgundy);border:2px solid var(--burgundy);}
+.btn-primary:hover {color:white!important;background:var(--burgundy-dark);border-color:var(--burgundy-dark);}
+.btn-outline-primary {color:#000!important;background:transparent;border:2px solid var(--burgundy);}
+.btn-outline-primary:hover {color:#000!important;background:rgba(255,255,255,.7);border-color:var(--burgundy-dark);}
+a:focus-visible,button:focus-visible {outline:3px solid #000;outline-offset:4px;}
+.contact-section {text-align:center;} .nav-footer {background:rgba(255,255,255,.55);} .nav-footer,.nav-footer a,.nav-footer p {color:#000!important;}
+@media(max-width:768px) {main.content{padding-top:24px;}.portfolio-hero{grid-template-columns:1fr;gap:28px;padding-bottom:30px;}.hero-photo{max-width:270px;}.hero-intro{text-align:center;}.skills-grid{grid-template-columns:1fr;}.portfolio-section{padding:24px;}#quarto-content{padding-left:16px;padding-right:16px;}}
