@@ -1,0 +1,43 @@
+---
+title: "IBM 6500 – In-Class Participation Notes"
+author: "Simran Kaur"
+date: "2026-11-05"
+format:
+  html:
+    toc: false
+    embed-resources: true
+---
+
+## Class Notes
+
+### Case 31 and Chapter 15
+
+-   Dr. Jung started by reviewing Case 31 and showing a sample presentation. We looked at how the presentation moves from data collection and coding to data preparation, analysis, and findings.
+-   Data Preparation and Analysis Preparation process: check questionnaires → edit → code → transcribe → clean → statistically adjust → select analysis strategy.
+-   We went over Chapter 15, including checking and cleaning data, handling missing responses, and choosing an analysis method.
+-   He also discussed descriptive statistics, which help us summarize the data before testing hypotheses.
+-   Dr. Jung walked through the classification chart: for suitable **metric data**, follow **parametric tests → one sample → one-sample t-test** when comparing a sample mean with a reference value.
+-   When writing findings, we should explain what the results mean, include the important statistics, and refer to the related table or figure instead of just listing numbers.
+
+### Dr. Jung's Research Example
+
+-   Dr. Jung shared an example from his NDSU research about attitudes toward agricultural products associated with North Dakota and Ohio.
+-   We discussed independent and dependent variables and how to identify nominal and ordinal data.
+-   He showed **2 × 2** and **2 × 3** tables and explained how a chi-square test can be used to compare patterns in categorical responses.
+-   The example helped show how to describe favorable, neutral, and unfavorable responses in the findings.
+
+### Quarto Notes for the Case 31 Presentation
+
+-   `---` is used to start a new slide in a Revealjs presentation.
+-   `#|` is used for options inside a code chunk.
+-   `echo: false` hides the code in the output; `echo: true` displays it.
+-   `label:` gives a figure or table a name so we can refer to it later.
+-   `fig-cap:` adds a caption to a figure, and `fig-cap-location:` controls where the caption appears.
+-   We also looked at putting two tables on the same slide and adding clear captions.
+-   Three dots (`...`) were mentioned during the demonstration; I need to review their exact use.
+
+### Class Reminders and My Takeaway
+
+-   We discussed individual analytical objectives (AOs) and what to work on during Weeks 10–11.
+-   Dr. Jung reminded us to watch both **Chapter 16 videos (Ch16-1 and Ch16-2)** along with the slides and textbook.
+-   The Case 31 examples helped me understand how to choose a test and then explain the results in simple words. The Quarto tips were also useful for organizing our presentations.
