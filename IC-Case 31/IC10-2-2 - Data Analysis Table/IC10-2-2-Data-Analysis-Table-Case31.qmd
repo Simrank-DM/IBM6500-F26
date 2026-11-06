@@ -1,0 +1,58 @@
+---
+title: "IC10-2-2 Data Analysis Table"
+subtitle: "Research Questions · Case 31: Employees Federal Credit Union"
+author: "Simran Kaur"
+date: "2026-11-02"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    embed-resources: true
+    theme: cosmo
+---
+
+```{=html}
+<style>body{background:#fff;color:#233c38;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.65}main{background:transparent;padding:0;box-shadow:none;border-radius:0}#title-block-header{background:#f5f9f7;border:1px solid #d6e5df;border-top:6px solid #245e52;border-radius:12px;padding:30px 32px;margin-bottom:38px;color:#233c38}#title-block-header .title{color:#245e52;font-weight:700;font-size:2rem}#title-block-header .subtitle{color:#426b61;font-size:1.05rem}.quarto-title-meta,.quarto-title-meta-contents{color:#233c38}.quarto-title-meta-heading{color:#61756e}h1,h2,h3{color:#245e52;font-weight:600}h1{font-size:1.65rem;border-bottom:1px solid #d6e5df;padding-bottom:10px;margin-top:36px}h2{font-size:1.3rem}h3{font-size:1.1rem}a{color:#245e52}table{font-size:.9rem;width:100%}thead{background:#245e52;color:white}tbody tr:nth-child(even){background:#eef5f1}td,th{padding:10px 12px!important;border-color:#d6e5df!important}pre{background:#f5f8f6;border:0;border-radius:4px}code{color:#245e52}details{margin:12px 0}summary{color:#245e52;font-size:.9rem;font-weight:600}.callout{background:transparent!important;box-shadow:none!important;border:0!important;border-left:2px solid #d6e5df!important;border-radius:0!important}.callout-header{background:transparent!important}.callout-icon{display:none}#TOC{font-size:.87rem}#TOC a{color:#36584e}#TOC .active{color:#245e52;border-color:#245e52}@media(max-width:760px){#title-block-header{padding:22px}.title{font-size:1.7rem!important}} .table-wrap{overflow-x:auto}table{min-width:850px}th{vertical-align:top}td{vertical-align:top}body .page-columns{--quarto-body-content-width:min(1200px,85vw)}#title-block-header{max-width:760px} @media(max-width:760px){body .page-columns{--quarto-body-content-width:calc(100vw - 40px)}}</style>
+```
+
+# Overview
+
+This table connects the Case 31 research questions to the survey items, measurement scales and suitable analysis methods. It is an analysis plan, rather than a report of completed hypothesis tests.
+
+# Data Analysis Table
+
+| Question / hypothesis | Variables and roles | Survey items | Measurement | Planned analysis |
+|---|---|---|---|---|
+| **R1: Why do members join the CU?** | Reasons for joining; descriptive | Q2; Q7 provides context on savings rates | Reasons: categorical; Q7: ordinal rating | Frequencies of joining reasons when available. Summarize Q7 separately; it cannot directly explain why members joined. |
+| **R2: Why do members borrow elsewhere?** | Borrowing elsewhere and reasons; descriptive | Q28 screening; Q29 reasons | Nominal; multiple response | Frequencies for Q28 and percentages for each Q29 reason among eligible respondents. |
+| **R3: How do members view employee proficiency?** | Employee ratings and employee index; descriptive | Q3–Q6; `employee_proficiency_index` | Individual Likert items: ordinal; index treated as approximately interval | Item frequencies; index mean and SD. One-sample t-test only if a meaningful benchmark is specified. |
+| **R4a: Do employee ratings differ by residence?** | IV: headquarters-area residence. DV: employee index | Q38; employee index | Nominal grouping; approximately interval outcome | Group means and SDs; Welch independent-samples t-test. |
+| **R4b: Does service awareness differ by residence?** | Grouping: residence. Outcomes: awareness categories for each service | Q38; Q13–Q26 | Nominal grouping; ordered familiarity categories if that ordering is assumed | Cross-tabulations and chi-square tests of independence for each service; exact methods if expected counts are too small. |
+| **R4c: Do operational ratings differ by residence?** | Grouping: residence. Outcomes: separate operational items | Q38; Q9–Q12, Q31–Q34, Q37 | Q9: ordinal frequency; Q11–Q12: nominal; other items: ordinal ratings | Compare response distributions. Chi-square or exact tests for categories; rank-based tests for ratings, or Welch t-tests under an explicit interval assumption. |
+| **R5: How aware are members of CU services?** | Awareness and use of each service; descriptive | Q13–Q26 | Three categories: used, aware but unused, unaware | Frequencies and percentages for each service. Keep awareness and use distinctions visible. |
+| **R6: How effectively is the CU operated?** | Separate operational ratings; descriptive | Q9–Q12, Q31–Q34, Q37 | Ordinal ratings and nominal yes/no items | Frequencies and percentages. Means and SDs only for ratings treated as interval. Hypothesis tests require a stated benchmark or expected distribution. |
+| **H1: Does regular-share-account awareness relate to whether services meet members’ needs?** | IV: awareness group. DV: agreement that services meet needs | Q13; Q33 | Three-group categorical predictor; Likert outcome treated as interval | One-way ANOVA; Welch ANOVA if variances differ. Follow with suitable post-hoc comparisons when needed. |
+| **H2: Do members give different ratings of CU loan rates and rates relative to competitors?** | Two paired ratings from the same members | Q8r; Q30 | Rating items treated as interval | Proposed paired-samples t-test, subject to the comparability limitation below. |
+
+# Key Decisions
+
+**Available data.** Q2, Q28 and Q29 are absent from the supplied data file, so R1 and R2 cannot be fully answered from it. Q7 can describe perceived savings rates, but it is not a substitute for a reason-for-joining response.
+
+**Use the cleaned variables.** The employee index from Part 1 is supported by reliability analysis (α = .87). The Q30–Q34 operations set had lower reliability (α = .54), so I would keep its items separate. That result does not establish the reliability of a different subset such as Q31–Q34. In my cleaned file, Q12 already has “No answer” recoded as missing; Q13–Q26 retain their original categories.
+
+**Match the test to the question.** Q9 has “about right” in the middle, so reversing it does not create a satisfaction score. I would report its categories or use the `q9_right` flag. For R4, I would also account for multiple comparisons when testing several items.
+
+**Interpret H1 and H2 carefully.** H1 can show an association, but this survey cannot establish that awareness causes a change in attitudes. For H2, high Q8r means higher perceived borrowing rates, while high Q30 means greater agreement that rates are lower than competitors. Aligning directions helps readability, but the questions still measure different ideas. A paired t-test would compare coded responses, not demonstrate that the two beliefs are equivalent. A nonsignificant result would not prove “no difference.”
+
+# Reflection
+
+The most useful part for me was working backward from each research question to the variables it actually needs. It made me realize that having a related question in the dataset is not always enough to answer the original question.
+
+Choosing the test took more thought than I expected. I had to check the response scale, whether the same members answered both questions, and whether I was describing results or testing a specific claim. This table gives me a clearer plan before running the analysis.
+
+# Appendix: Links
+
+- [GitHub Pages report](https://simrank-dm.github.io/IBM6500-F26/IC-Case%2031/IC10-2-2%20-%20Data%20Analysis%20Table/IC10-2-2-Data-Analysis-Table-Case31.html)
+- [GitHub source folder](https://github.com/Simrank-DM/IBM6500-F26/tree/main/IC-Case%2031/IC10-2-2%20-%20Data%20Analysis%20Table)
+- [Part 1: Data Preparation](https://simrank-dm.github.io/IBM6500-F26/IC-Case%2031/IC10-2-1%20-%20Data%20Preparation/IC-M08-Data-Preparation-Case-31-R.html)
