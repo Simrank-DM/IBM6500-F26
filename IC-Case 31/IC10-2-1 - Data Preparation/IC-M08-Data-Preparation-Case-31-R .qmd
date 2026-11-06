@@ -1,0 +1,489 @@
+---
+title: "IC10-2-1 Data Preparation with Case 31"
+subtitle: "Employees Federal Credit Union (EFCU) Member Opinion Survey"
+author: "Simran Kaur"
+date: "2026-11-01"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    embed-resources: true
+    theme: cosmo
+    code-fold: true
+    code-summary: "Show R code"
+execute:
+  echo: true
+  results: hide
+  warning: false
+  message: false
+---
+
+```{=html}
+<style>body{background:#fff;color:#233c38;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.65}main{background:transparent;padding:0;box-shadow:none;border-radius:0}#title-block-header{background:#f5f9f7;border:1px solid #d6e5df;border-top:6px solid #245e52;border-radius:12px;padding:30px 32px;margin-bottom:38px;color:#233c38}#title-block-header .title{color:#245e52;font-weight:700;font-size:2rem}#title-block-header .subtitle{color:#426b61;font-size:1.05rem}.quarto-title-meta,.quarto-title-meta-contents{color:#233c38}.quarto-title-meta-heading{color:#61756e}h1,h2,h3{color:#245e52;font-weight:600}h1{font-size:1.65rem;border-bottom:1px solid #d6e5df;padding-bottom:10px;margin-top:36px}h2{font-size:1.3rem}h3{font-size:1.1rem}a{color:#245e52}table{font-size:.9rem;width:100%}thead{background:#245e52;color:white}tbody tr:nth-child(even){background:#eef5f1}td,th{padding:10px 12px!important;border-color:#d6e5df!important}pre{background:#f5f8f6;border:0;border-radius:4px}code{color:#245e52}details{margin:12px 0}summary{color:#245e52;font-size:.9rem;font-weight:600}.callout{background:transparent!important;box-shadow:none!important;border:0!important;border-left:2px solid #d6e5df!important;border-radius:0!important}.callout-header{background:transparent!important}.callout-icon{display:none}#TOC{font-size:.87rem}#TOC a{color:#36584e}#TOC .active{color:#245e52;border-color:#245e52}@media(max-width:760px){#title-block-header{padding:22px}.title{font-size:1.7rem!important}}</style>
+```
+
+# Overview
+
+I prepared the Employees Federal Credit Union (EFCU) member survey for analysis by checking the labels, response codes and missing values. The raw file contained **128 respondents and 34 variables**. The main goal was to make the data easier to interpret and decide which items could be combined into an index.
+
+# Data Preparation Process
+
+## 1. Review the file and create an analysis copy
+
+I checked the variable names, labels and response options against the questionnaire and coding guide. I kept the original data unchanged, added a respondent ID (`Res`), and removed two duplicate precomputed employee scores. This left the 32 survey items and an ID before adding the new variables.
+
+## 2. Correct variable and value labels
+
+Q8 was incorrectly labeled “statement frequency,” even though it asks about borrowing rates. I corrected that label and clarified other vague labels. I also completed missing response labels, including the middle points of the agreement scales and the “Unaware” category for service awareness.
+
+## 3. Check response patterns and missing values
+
+All observed response codes were within the allowed ranges. Eight respondents selected the same answer across the nine agreement items. I flagged and retained them because that pattern alone was not enough to establish careless responding.
+
+“No opinion” and “No answer” were treated as missing rather than numerical ratings. Q7 had **10 missing responses**, Q8 had **21**, and Q37 had **7**. Recoding “No answer” on Q12 added **22 missing responses** for that item.
+
+## 4. Recode items for clearer interpretation
+
+I created reversed versions of Q7, Q8, Q10 and Q37 while keeping the originals. Higher scores then represent higher perceived rates, better statement accuracy or better overall management ratings, depending on the item. For Q8, a higher score means higher borrowing rates, which is not necessarily favorable.
+
+I checked that the original and reversed values matched correctly. Q9 was handled separately with an “about right” flag because its preferred response sits in the middle of the scale. I kept the service-awareness categories separate rather than averaging their codes.
+
+## 5. Test whether items belong in a composite
+
+I used Cronbach’s alpha and a one-factor analysis to assess two candidate measures, alongside the meaning of the questions.
+
+| Candidate measure | Key finding | Decision |
+|---|---|---|
+| Employee proficiency: Q3–Q6 | Alpha = **.87**, with all factor loadings at least **.72** | Combine into an employee index. |
+| Operational effectiveness: Q30–Q34 | Alpha = **.54**, with weak support for one common factor | Keep the five items separate. |
+
+The employee items describe related staff qualities. The operations items cover several topics, including rates, privacy and loan processing, so a single score would be harder to interpret.
+
+## 6. Create the employee index and save the data
+
+I calculated `employee_proficiency_index` as the mean of Q3–Q6. The average score was approximately **4.21 out of 5**, suggesting generally positive staff ratings. The rebuilt index matched the precomputed employee score in the original file.
+
+The cleaned dataset was saved as `Case 31 Data_efcu_1_cleaned_SS.sav`, preserving the corrected labels, recoded variables and employee index.
+
+# R Code
+
+Each tab includes the R code and a compact summary of its main results.
+
+::: {.panel-tabset}
+
+## Import and inspect
+
+```{r}
+#| label: setup
+library(tidyverse)
+library(haven)
+library(labelled)
+library(psych)
+library(knitr)
+
+theme_set(theme_minimal())
+```
+
+```{r}
+#| label: import
+data_raw <- read_sav("Case 31 Data_efcu_1.sav")
+
+dim(data_raw)
+names(data_raw)
+```
+
+```{r}
+#| label: types
+glimpse(data_raw)
+```
+
+```{r}
+#| label: missing-count
+data_raw |>
+  summarise(across(everything(), ~ sum(is.na(.x)))) |>
+  pivot_longer(everything(), names_to = "variable", values_to = "n_missing") |>
+  filter(n_missing > 0) |>
+  kable()
+```
+
+```{r}
+#| label: check-precomputed
+data_raw |>
+  mutate(mean_q3_q6 = rowMeans(across(q3:q6))) |>
+  summarise(
+    same_as_overall  = all.equal(mean_q3_q6, as.numeric(OverallEmployeePerformace)),
+    two_cols_identical = identical(as.numeric(OverallEmployeePerformace),
+                                   as.numeric(employeeperformance))
+  )
+```
+
+```{r}
+#| label: dictionary-fn
+make_dictionary <- function(df) {
+  tibble(
+    variable       = names(df),
+    variable_label = map_chr(df, ~ var_label(.x) %||% NA_character_),
+    class          = map_chr(df, ~ class(.x)[1]),
+    n_distinct     = map_int(df, ~ n_distinct(.x, na.rm = TRUE)),
+    n_missing      = map_int(df, ~ sum(is.na(.x))),
+    value_labels   = map_chr(df, function(x) {
+      lab <- val_labels(x)
+      if (is.null(lab)) NA_character_ else paste0(lab, " = ", names(lab), collapse = "; ")
+    })
+  )
+}
+
+data_dictionary <- make_dictionary(data_raw)
+kable(data_dictionary)
+```
+
+### Results summary
+
+```{r}
+#| label: compact-summary-1
+#| results: markup
+#| echo: false
+tibble(Respondents = nrow(data_raw), Variables = ncol(data_raw)) |> kable()
+```
+
+## Labels and IDs
+
+```{r}
+#| label: label-gaps
+val_labels(data_raw[c("q3", "q13", "q11", "q12", "q37")])
+```
+
+```{r}
+#| label: repair-labels
+data_labelled <- data_raw   # data_raw stays untouched as the reference copy
+
+likert5 <- c("Strongly Disagree" = 1, "Disagree" = 2, "Uncertain" = 3,
+             "Agree" = 4, "Strongly Agree" = 5)
+aware3  <- c("Aware and Have Used" = 1, "Aware but Have Not Used" = 2, "Unaware" = 3)
+yesno3  <- c("Yes" = 1, "No" = 2, "No answer" = 3)
+
+data_labelled <- data_labelled |>
+  set_value_labels(
+    q3 = likert5, q4 = likert5, q5 = likert5, q6 = likert5,
+    q30 = likert5, q31 = likert5, q32 = likert5, q33 = likert5, q34 = likert5,
+    q37 = c("Excellent" = 1, "Good" = 2, "Average" = 3,
+            "Poor" = 4, "Very Poor" = 5, "No answer" = 6)
+  ) |>
+  mutate(
+    across(q13:q26, ~ labelled(as.numeric(.x), aware3, label = var_label(.x))),
+    across(c(q11, q12, q27, q38), ~ labelled(as.numeric(.x), yesno3, label = var_label(.x)))
+  )
+```
+
+```{r}
+#| label: fix-var-labels
+data_labelled <- data_labelled |>
+  set_variable_labels(
+    q7  = "Rates CU pays on share (savings) accounts",
+    q8  = "Rates CU charges to borrow funds",
+    q9  = "Frequency of account statements",
+    q37 = "Overall rating of how the CU is managed and operated",
+    q38 = "Lives in the headquarters area",
+    OverallEmployeePerformace = "Precomputed mean of q3-q6 (from file)",
+    employeeperformance       = "Precomputed mean of q3-q6 (duplicate, from file)"
+  )
+
+var_label(data_labelled$q8)
+```
+
+```{r}
+#| label: analysis-copy
+data <- data_labelled |>
+  mutate(Res = row_number(), .before = 1) |>
+  set_variable_labels(Res = "Respondent ID") |>
+  select(Res, matches("^q[0-9]+$"))
+
+dim(data)
+```
+
+### Results summary
+
+```{r}
+#| label: compact-summary-2
+#| results: markup
+#| echo: false
+tibble(Respondents = nrow(data), Survey_items = ncol(data) - 1,
+       Respondent_ID = "Res", Duplicate_scores_removed = 2) |> kable()
+```
+
+## Quality checks
+
+```{r}
+#| label: quality-check
+data |>
+  pivot_longer(-Res, names_to = "item", values_to = "value") |>
+  group_by(item) |>
+  summarise(
+    observed = paste(sort(unique(na.omit(as.numeric(value)))), collapse = ", "),
+    n_missing = sum(is.na(value)),
+    .groups = "drop"
+  ) |>
+  arrange(parse_number(item)) |>
+  kable()
+```
+
+```{r}
+#| label: straightline
+agree_items <- c(paste0("q", 3:6), paste0("q", 30:34))
+
+straightliners <- data |>
+  mutate(n_unique = apply(zap_labels(across(all_of(agree_items))), 1,
+                          \(r) n_distinct(r, na.rm = TRUE))) |>
+  filter(n_unique == 1) |>
+  select(Res, all_of(agree_items))
+
+nrow(straightliners)
+kable(straightliners)
+```
+
+```{r}
+#| label: frequencies
+freq_table <- function(df, item) {
+  x    <- df[[item]]
+  labs <- val_labels(x)
+  tibble(code = as.numeric(x)) |>
+    count(code) |>
+    mutate(
+      item  = item,
+      label = if (is.null(labs)) NA_character_ else names(labs)[match(code, labs)],
+      label = if_else(is.na(code), "(missing)", label),
+      pct   = round(100 * n / sum(n), 1)
+    ) |>
+    select(item, code, label, n, pct)
+}
+
+freqs <- map(names(data)[-1], \(v) freq_table(data, v)) |> list_rbind()
+```
+
+```{r}
+#| label: undefined-check
+data |>
+  summarise(across(everything(), ~ sum(is.nan(as.numeric(.x)) | is.infinite(as.numeric(.x))))) |>
+  pivot_longer(everything()) |>
+  summarise(total_undefined = sum(value))
+```
+
+### Results summary
+
+```{r}
+#| label: compact-summary-3
+#| results: markup
+#| echo: false
+tibble(Check = c("Straight-lined agreement items", "Action"),
+       Result = c(as.character(nrow(straightliners)), "Flagged and retained")) |> kable()
+```
+
+## Recoding
+
+```{r}
+#| label: special-missing
+data <- data |>
+  mutate(across(c(q7, q8, q37), ~ na_if(as.numeric(.x), 6) |>
+                  labelled(labels = val_labels(.x), label = var_label(.x))))
+
+data |> summarise(across(c(q7, q8, q37), ~ sum(.x == 6, na.rm = TRUE)))
+```
+
+```{r}
+#| label: noanswer-missing
+data |> summarise(across(c(q11, q12, q27, q38), ~ sum(.x == 3, na.rm = TRUE)))
+
+data <- data |>
+  mutate(across(c(q11, q12, q27, q38), ~ na_if(as.numeric(.x), 3) |>
+                  labelled(labels = val_labels(.x), label = var_label(.x))))
+
+data |> summarise(across(c(q11, q12, q27, q38), ~ sum(is.na(.x))))
+```
+
+```{r}
+#| label: reverse
+data <- data |>
+  mutate(
+    q7r  = 6 - as.numeric(q7),
+    q8r  = 6 - as.numeric(q8),
+    q37r = 6 - as.numeric(q37),
+    q10r = 5 - as.numeric(q10)
+  ) |>
+  set_value_labels(
+    q7r  = c("Very Low" = 1, "Low" = 2, "Average" = 3, "High" = 4, "Very High" = 5),
+    q8r  = c("Very Low" = 1, "Low" = 2, "Average" = 3, "High" = 4, "Very High" = 5),
+    q10r = c("Poor" = 1, "Fair" = 2, "Good" = 3, "Excellent" = 4),
+    q37r = c("Very Poor" = 1, "Poor" = 2, "Average" = 3, "Good" = 4, "Excellent" = 5)
+  ) |>
+  set_variable_labels(
+    q7r  = "Rates CU pays on share accounts (reversed: 5 = Very High)",
+    q8r  = "Rates CU charges to borrow (reversed: 5 = Very High)",
+    q10r = "Statement accuracy (reversed: 4 = Excellent)",
+    q37r = "Overall rating of CU management (reversed: 5 = Excellent)"
+  )
+```
+
+```{r}
+#| label: q9-recode
+data <- data |>
+  mutate(q9_right = case_when(
+    q9 == 3 ~ 1,
+    q9 %in% c(1, 2, 4, 5) ~ 0
+  )) |>
+  set_value_labels(q9_right = c("Not about right" = 0, "About right" = 1)) |>
+  set_variable_labels(q9_right = "Statement frequency is about right (1 = yes)")
+
+count(data, q9, q9_right)
+```
+
+```{r}
+#| label: awareness-demo
+awareness_demo <- data |>
+  select(q13:q26) |>
+  mutate(across(everything(), ~ 4 - as.numeric(.x), .names = "{.col}r")) |>
+  set_value_labels(.labels = c("Unaware" = 1, "Aware but Have Not Used" = 2,
+                               "Aware and Have Used" = 3),
+                   .strict = FALSE)
+
+count(awareness_demo, q13, q13r)
+```
+
+```{r}
+#| label: verify
+list(
+  q7  = count(data, q7,  q7r),
+  q8  = count(data, q8,  q8r),
+  q10 = count(data, q10, q10r),
+  q37 = count(data, q37, q37r)
+)
+```
+
+### Results summary
+
+```{r}
+#| label: compact-summary-4
+#| results: markup
+#| echo: false
+tibble(Item = c("Q7", "Q8", "Q12", "Q37"),
+       Missing = c(sum(is.na(data$q7)), sum(is.na(data$q8)),
+                   sum(is.na(data$q12)), sum(is.na(data$q37)))) |> kable()
+cat("Reversed: Q7, Q8, Q10, Q37. Q9: about-right flag. Originals retained.")
+```
+
+## Reliability
+
+```{r}
+#| label: item-sets
+employee_items   <- c("q3", "q4", "q5", "q6")
+operations_items <- c("q30", "q31", "q32", "q33", "q34")
+
+as_num <- function(df, items) df |> select(all_of(items)) |> zap_labels() |> as.data.frame()
+```
+
+```{r}
+#| label: employee-alpha
+employee_alpha <- alpha(as_num(data, employee_items))
+employee_alpha$total |> kable(digits = 3)
+employee_alpha$item.stats[, c("r.drop", "mean", "sd")] |> kable(digits = 3)
+employee_alpha$alpha.drop[, "raw_alpha", drop = FALSE] |> kable(digits = 3)
+```
+
+```{r}
+#| label: employee-fa
+employee_fa <- fa(as_num(data, employee_items), nfactors = 1, fm = "minres")
+print(employee_fa$loadings, cutoff = 0)
+```
+
+```{r}
+#| label: operations-alpha
+operations_alpha <- alpha(as_num(data, operations_items))
+operations_alpha$total |> kable(digits = 3)
+operations_alpha$item.stats[, c("r.drop", "mean", "sd")] |> kable(digits = 3)
+operations_alpha$alpha.drop[, "raw_alpha", drop = FALSE] |> kable(digits = 3)
+```
+
+```{r}
+#| label: operations-fa
+operations_fa <- fa(as_num(data, operations_items), nfactors = 1, fm = "minres")
+print(operations_fa$loadings, cutoff = 0)
+cor(as_num(data, operations_items)) |> round(2) |> kable()
+```
+
+### Results summary
+
+```{r}
+#| label: compact-summary-5
+#| results: markup
+#| echo: false
+tibble(Measure = c("Employee proficiency", "Operational effectiveness"),
+       Alpha = round(c(employee_alpha$total$raw_alpha,
+                       operations_alpha$total$raw_alpha), 2),
+       Decision = c("Create index", "Keep items separate")) |> kable()
+```
+
+## Index and export
+
+```{r}
+#| label: indexes
+data <- data |>
+  mutate(
+    employee_proficiency_index = rowMeans(across(all_of(employee_items), as.numeric), na.rm = TRUE),
+    employee_proficiency_index = if_else(is.nan(employee_proficiency_index), NA_real_,
+                                         employee_proficiency_index),
+    operational_effectiveness_index = rowMeans(across(all_of(operations_items), as.numeric), na.rm = TRUE),
+    operational_effectiveness_index = if_else(is.nan(operational_effectiveness_index), NA_real_,
+                                              operational_effectiveness_index)
+  ) |>
+  set_variable_labels(
+    employee_proficiency_index = "Employee proficiency index: mean of q3-q6 (alpha = .87)"
+  )
+
+data |>
+  summarise(across(ends_with("_index"),
+                   list(min = ~ min(.x, na.rm = TRUE), mean = ~ mean(.x, na.rm = TRUE),
+                        max = ~ max(.x, na.rm = TRUE), n_na = ~ sum(is.na(.x))))) |>
+  pivot_longer(everything()) |>
+  kable(digits = 3)
+
+# matches the precomputed column, which confirms it was the same mean of q3-q6
+all.equal(data$employee_proficiency_index, as.numeric(data_raw$employeeperformance))
+
+# drop the index the evidence doesn't support
+data <- data |> select(-operational_effectiveness_index)
+```
+
+```{r}
+#| label: save
+write_sav(data, "Case 31 Data_efcu_1_cleaned_SS.sav")
+
+# round-trip check
+check <- read_sav("Case 31 Data_efcu_1_cleaned_SS.sav")
+dim(check)
+```
+
+### Results summary
+
+```{r}
+#| label: compact-summary-6
+#| results: markup
+#| echo: false
+tibble(Index = "Employee proficiency",
+       Mean = round(mean(data$employee_proficiency_index, na.rm = TRUE), 2),
+       Respondents = nrow(check), Variables_saved = ncol(check)) |> kable()
+cat("Saved: Case 31 Data_efcu_1_cleaned_SS.sav")
+```
+
+:::
+
+# Reflection
+
+The most useful part for me was learning to check what each code means before starting the analysis. Q8 had the wrong label, and “no answer” on Q12 needed to become missing. These are small details, but they can change how the results are interpreted.
+
+Reliability made me think more carefully about combining questions. Q30–Q34 appear together and use the same response scale, but that does not automatically make them one measure. For future projects, I would set up the coding sheet and respondent IDs before entering data to reduce avoidable errors.
+
+# Appendix: Links
+
+- [Case 31 report - GitHub Pages](https://simrank-dm.github.io/IBM-case31-data-prep/IC-M08-Data-Preparation-Case-31-R.html)
+- [Case 31 repository](https://github.com/Simrank-DM/IBM-case31-data-prep)
+
