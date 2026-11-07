@@ -1,0 +1,392 @@
+---
+title: "Updating the Evidence on Personalization"
+subtitle: "Reflection on Labelled Data in R"
+author: "Simran Kaur"
+institute: "MSDM Culminating Experience Project, Cal Poly Pomona"
+date: today
+format:
+  revealjs:
+    theme: [simple, custom.scss]
+    width: 1600
+    height: 900
+    footer: "Simran Kaur · Group 8 CEP · AO4 Evidence Update"
+    logo: logo.svg
+    transition: slide
+    transition-speed: default
+    incremental: false
+    toc: true
+    toc-depth: 1
+    toc-title: "Roadmap"
+    slide-number: true
+    scrollable: true
+    smaller: false
+    code-fold: false
+    code-overflow: wrap
+    number-sections: false
+    number-depth: 5
+    embed-resources: true
+    css: styles.css
+    chalkboard: false
+    preview-links: auto
+bibliography: references.bib
+csl-hanging-indent: true
+editor: visual
+execute:
+  echo: true
+  freeze: auto
+---
+
+# Why This Reflection Matters {background-color="#ffffff"}
+
+## Who this is for
+
+::::::: columns
+:::: {.column width="55%"}
+This deck walks through what I learned about **labelled data** and **survey data cleaning** in R, and how each idea carries over to my piece of our capstone.
+
+::: incremental
+-   **The project:** Group 8's CEP for the Tarkington Business Futures Institute, an AI-assisted meta-analysis of personalization in marketing
+-   **My part:** Analytics Objective 4, updating the evidence base and building a decision dashboard
+-   **The question I kept asking:** what in Case 31 and the Covid study actually applies when my "respondents" are studies, not people?
+:::
+::::
+
+:::: {.column width="45%"}
+::: takeaway
+**Reading guide**
+
+Each section opens with the original prompt in a teal box, so you don't need the assignment sheet to follow along. Green-accented boxes hold my key takeaways.
+:::
+::::
+:::::::
+
+::: notes
+Open by framing the audience: someone who has never seen the assignment. Emphasize that AO4 data is study-level, which is the thread that ties every section together.
+:::
+
+# Part 1: Labelled Data {background-color="#ffffff"}
+
+## What is labelled data?
+
+::: prompt-box
+**Prompt:** In Step 1, you learned how to read SPSS data into RStudio and conduct EDA and hypothesis testing. What is labelled data?
+:::
+
+. . .
+
+Labelled data is data that carries its own dictionary. A column stores a number, but it also stores **what that column means** (a variable label) and **what each number means** (value labels).
+
+. . .
+
+::::: columns
+::: {.column width="50%"}
+**Without labels**
+
+| q3  |
+|-----|
+| 4   |
+| 5   |
+| 2   |
+
+Is 4 good or bad? You'd need the questionnaire to know.
+:::
+
+::: {.column width="50%"}
+**With labels**
+
+| q3: Employees are courteous |
+|-----------------------------|
+| 4 = Agree                   |
+| 5 = Strongly Agree          |
+| 2 = Disagree                |
+
+The meaning travels with the data.
+:::
+:::::
+
+. . .
+
+SPSS, SAS and Stata files store this metadata natively. In R, `haven::read_sav()` brings it in as the `haven_labelled` class, and the `labelled` and `sjlabelled` packages let you read and edit it.[^1]
+
+[^1]: `haven_labelled` keeps the numeric code as the underlying value, so math still works, while the labels ride along as attributes.
+
+## Working with labels in R
+
+The pattern from Case 31 [@jung_case31], which I'll reuse:
+
+``` r
+library(haven); library(labelled); library(janitor); library(sjPlot)
+
+data <- read_sav("Case 31 Data_efcu_1.sav") |> clean_names()
+data |> view_df()                                # instant data dictionary
+
+five_pt_likert <- c("Strongly Disagree" = 1, "Disagree" = 2,
+                    "Uncertain" = 3, "Agree" = 4, "Strongly Agree" = 5)
+
+data_clean <- data |>
+  set_variable_labels(q3 = "Employees are Courteous") |>
+  set_value_labels(q3 = five_pt_likert)
+
+data_clean |> count(q3)                          # confirm before moving on
+data_clean |> write_sav("Case 31 Data_efcu_Prepped.sav")   # labels survive the round trip
+```
+
+::: aside
+`count()` before and after every recode is the habit I took most seriously from the demo. It turns "I think it worked" into "I checked."
+:::
+
+## Does my CEP involve labelled data?
+
+::: prompt-box
+**Prompt:** Does your MSDM CEP involve labelled data? Explain why or why not.
+:::
+
+::::::: columns
+:::: {.column width="50%"}
+::: fragment
+**Not in the SPSS sense.**
+
+AO4's data isn't a survey file. Each row is one **effect size** pulled from a published study on personalization, coded with our CALIPER protocol. It comes in as a spreadsheet, so there's no `.sav` metadata to import.
+:::
+::::
+
+:::: {.column width="50%"}
+::: fragment
+**But conceptually, yes.**
+
+Our coding sheet is full of numeric codes that mean something: personalization channel, outcome type, study design, sample type. A `3` in the channel column is meaningless unless the codebook says it's "email."
+
+Attaching value labels in R puts the codebook *inside* the dataset, which matters when four teammates and an AI coder touch the same file.
+:::
+::::
+:::::::
+
+. . .
+
+::: takeaway
+**Takeaway:** labelled data is less about SPSS and more about a principle: the meaning of a code should never live in someone's head or a separate PDF.
+:::
+
+# Part 2: Techniques for My AO {background-color="#ffffff"}
+
+## Which techniques carry over to AO4?
+
+::: prompt-box
+**Prompt:** What techniques are relevant for your MSDM CEP? Elaborate on how these approaches might help you address your AO.
+:::
+
+::: panel-tabset
+### Data prep
+
+| Case 31 technique | How I'll use it in AO4 |
+|------------------------------------|------------------------------------|
+| `clean_names()` + `view_df()` | Standardize the coding sheet and auto-generate a codebook for the team |
+| `set_value_labels()` | Label moderator codes (channel, outcome, design) so charts show words, not numbers |
+| `case_when()` recodes | Collapse sparse categories and bin publication year into periods |
+| Custom recode function | Like Jae's `aware_recode()`, one function to apply the same label scheme across many moderators |
+| `write_xlsx()` export | Hand a clean, labelled file to the dashboard |
+
+### Psychometrics → coder agreement
+
+Case 31 used **Cronbach's alpha** and **EFA** to check that four items measured one construct.
+
+My parallel problem is agreement between coders. CALIPER uses AI-assisted coding, so I need to show the AI and a human coder agree on each moderator. Cohen's kappa does for coders what alpha does for scale items, and @landis1977 give the benchmarks for interpreting it.
+
+``` r
+library(irr)
+kappa2(coding[, c("channel_ai", "channel_human")])
+```
+
+The composite-index idea also carries over: several study-quality items (random assignment, sample size, preregistration) can roll up into one **quality score** with `rowMeans()`, just like `at_emp`.
+
+### Hypothesis tests
+
+| Test from the workshop | AO4 question it answers |
+|------------------------------------|------------------------------------|
+| t-test | Is the mean effect in new studies different from the Eisend et al. baseline? |
+| Chi-square | Has the mix of channels shifted (more social and app studies, fewer email)? |
+| One-way ANOVA | Do effects differ across outcome types (attitude, intention, behavior)? |
+| Multiple regression | Which moderators predict effect size, i.e., meta-regression |
+
+Formal meta-analytic versions (weighted by precision) come in GP09. The plain versions are my descriptive first look.
+:::
+
+::: notes
+Stress the alpha-to-kappa analogy. It shows I adapted the workshop instead of copying it.
+:::
+
+# Part 3: Initial Data Cleaning {background-color="#ffffff"}
+
+## The study behind the data
+
+:::::::: columns
+:::: {.column width="50%"}
+The Covid-19 project surveyed people about **coffee-shop visits after the pandemic**, recruited through Prolific and run in Qualtrics.
+
+::: incremental
+-   Fielded in **two waves** (Nov–Dec 2023), with about two-thirds of the data in wave 1
+-   A short (\~2 min) **screener** came first: 18+, and had visited a coffee shop and stayed at least 15 minutes
+-   Only about **1 in 4** screener takers qualified for the main survey
+:::
+::::
+
+::::: {.column width="50%"}
+:::: fragment
+::: takeaway
+**Why two waves?** Wave 1 worked as a checkpoint. The team could inspect quality before paying for more respondents, instead of discovering a problem after the whole budget was spent.
+:::
+::::
+:::::
+::::::::
+
+## The first pass: who belongs in the data?
+
+::: prompt-box
+**Prompt:** In Step 2, you saw the initial data cleaning process. Describe it and what lessons you got from it.
+:::
+
+The first pass works on **whole respondents**. Each step decides whether a row stays or goes.
+
+::: incremental
+1.  **Merge sources:** Prolific's submission CSVs were joined to the Qualtrics `.sav` on Prolific ID, giving 1,185 rows and 209 variables.
+2.  **Check payment status:** approved and paid submissions stayed. Returned or timed-out ones were kept only when they were actually usable.
+3.  **Re-verify eligibility:** the qualifying question was asked again inside the main survey, and anyone whose answer contradicted the screener was dropped.
+4.  **Handle duplicates with judgment:** one Prolific ID turned out to belong to two genuine respondents, so both were kept rather than auto-deleted.
+:::
+
+. . .
+
+::: takeaway
+**Lessons:** quality control starts *before* fielding, with screeners, repeat questions and attention checks designed in. Platform metadata (approval status, IDs) is part of the dataset, not an afterthought. And a "duplicate" rule still needs a human look.
+:::
+
+::: aside
+This pass took the data from 1,185 rows to roughly 800 respondents.
+:::
+
+# Part 4: Further Data Cleaning {background-color="#ffffff"}
+
+## The second pass: are the values right?
+
+::: prompt-box
+**Prompt:** In Step 3, you saw the next phase of data cleaning. Describe it and what the key takeaways are.
+:::
+
+:::: panel-tabset
+### Fixing codes
+
+Qualtrics had silently renumbered some 7-point items, so they were stored as **1, 7, 8, 9, 10, 11, 12** instead of 1–7. Analyzed as-is, the means would be nonsense.
+
+``` r
+data <- data |>
+  mutate(item = case_match(item,
+                           1 ~ 1, 7 ~ 2, 8 ~ 3, 9 ~ 4,
+                           10 ~ 5, 11 ~ 6, 12 ~ 7))
+data |> count(item)                         # confirm the fix
+```
+
+Reverse-worded items were flipped with `8 - x` so higher always means more of the construct.
+
+### Attention checks
+
+| Failed attention checks | Respondents |
+|-------------------------|-------------|
+| None                    | 648         |
+| One                     | 112         |
+| Two                     | 31          |
+
+Instead of dropping everyone who missed one check, the rule was **combined**: remove someone only if they failed two or more checks *and* finished in under 10 or over 30 minutes. That rule removed just **9 people**.
+
+### Takeaways
+
+::: incremental
+-   **Look at distributions before trusting them.** The renumbering bug was invisible until `count()` showed codes that shouldn't exist.
+-   **Combine flags.** One missed check isn't proof of carelessness, but two misses plus an odd completion time is a much stronger signal [@curran2016].
+-   **Don't over-clean.** Careless responses do bias results [@meade2012], but a strict single-flag rule would have thrown out over 140 people who were mostly fine.
+:::
+::::
+
+::: notes
+Point at the 648/112/31 table: this is where the trade-off between strictness and sample size becomes concrete.
+:::
+
+# Part 5: Comparing the Two Passes {background-color="#ffffff"}
+
+## Big differences and their impact
+
+::: prompt-box
+**Prompt:** What are the big differences between the two approaches and the impact on the final sample size and response quality?
+:::
+
+|   | Initial cleaning | Further cleaning |
+|------------------------|------------------------|------------------------|
+| **Question it answers** | Does this person belong in the study? | Are the values in the data correct? |
+| **Works on** | Whole respondents (rows) | Individual variables and codes (cells) |
+| **Main tools** | Joins, eligibility re-checks, approval status, ID checks | `case_match()`, reverse-coding, attention and timing flags |
+| **Effect on sample size** | Large: about 1,185 → \~800 | Small: \~800 → **736** final |
+| **Effect on quality** | Right *population* | Right *measurements* |
+| **Risk if skipped** | Ineligible or unpaid responses inflate n | Wrong codes and careless answers distort every mean and test |
+
+. . .
+
+::: takeaway
+The first pass removes the most rows; the second protects the most meaning. Of the two, the code fix may matter more for the findings, even though it removed nobody.
+:::
+
+## The cleaning funnel
+
+```{mermaid}
+%%| fig-width: 12
+flowchart LR
+  A["Merged raw data<br/>1,185 rows"] --> B["Payment status<br/>&amp; eligibility re-check"]
+  B --> C["~800<br/>respondents"]
+  C --> D["Fix Qualtrics codes,<br/>reverse-code items"]
+  D --> E["Attention + timing<br/>rule"]
+  E --> F["Final sample<br/>736"]
+  style A fill:#F0FDFA,stroke:#0D9488
+  style C fill:#F0FDFA,stroke:#0D9488
+  style F fill:#22C55E,stroke:#0D9488
+```
+
+::::: columns
+::: {.column width="50%"}
+[Initial cleaning:]{.highlight-blue} who belongs (rows)
+:::
+
+::: {.column width="50%"}
+[Further cleaning:]{.highlight-gold} whether the values are right (cells)
+:::
+:::::
+
+## What this means for AO4 {transition="zoom"}
+
+My data has the same two-pass logic, just at the study level:
+
+::::::: r-stack
+::: {.fragment .fade-in-then-out}
+**Pass 1, eligibility:** drop duplicates, studies outside the date window, and effects that can't be converted to a common metric. Like screeners, these are objective.
+:::
+
+::: {.fragment .fade-in-then-out}
+**Pass 2, values:** check that moderator codes are valid (the Qualtrics renumbering lesson), flag implausible effect sizes, and review low coder agreement. Like the combined attention rule, I'll use more than one flag before excluding anything.
+:::
+
+:::: fragment
+::: takeaway
+**My plan:** report a PRISMA-style count at every step, so a reader can see exactly how many studies and effects entered, how many were removed, and why. It's the same discipline Jae showed with `count()`, applied to the whole pipeline.
+:::
+::::
+:::::::
+
+::: notes
+Close by linking back to the DWV assignment: the M08 file already has the dedup and missingness checks. The next step is adding the exclusion counts.
+:::
+
+# References {background-color="#ffffff"}
+
+## References
+
+::: {#refs}
+:::
+
+Built with Quarto revealjs and the tidyverse ecosystem [@wickham2019].

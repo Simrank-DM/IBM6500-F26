@@ -1,0 +1,39 @@
+
+:root { --r-background-color:#ffffff; --r-main-color:#052E2B; --r-heading-color:#052E2B; --r-link-color:#0D9488; --r-link-color-hover:#052E2B; --r-selection-background-color:#7DD3FC; }
+body, .reveal, .reveal-viewport { background:#ffffff !important; }
+.reveal { color:#052E2B; }
+.reveal h1,.reveal h2,.reveal h3,.reveal h4 { color:#052E2B !important; }
+.reveal h1 { border-bottom:6px solid #0D9488; padding-bottom:20px; }
+.reveal h2 { border-bottom:3px solid #22C55E; padding-bottom:8px; }
+.reveal a { color:#0D9488; text-decoration:underline; text-underline-offset:4px; }
+.reveal a:hover { color:#052E2B; }
+.reveal .prompt-box { background:#F0FDFA; color:#052E2B; border-left:6px solid #0D9488; padding:14px 20px; border-radius:6px; font-style:italic; }
+.reveal .takeaway { background:#F0FDFA; color:#052E2B; border-left:6px solid #22C55E; border-top:2px solid #7DD3FC; padding:12px 18px; border-radius:6px; }
+.reveal .highlight-gold { color:#052E2B; font-weight:700; background:linear-gradient(transparent 70%,#7DD3FC 70%); }
+.reveal .highlight-blue { color:#0D9488; font-weight:700; }
+.reveal table { font-size:.75em; }
+.reveal table th { background:#052E2B; color:white; border-bottom:3px solid #22C55E; }
+.reveal table tbody tr:nth-child(even) { background:#F0FDFA; }
+.reveal table td { border-bottom:1px solid #7DD3FC; }
+.reveal pre { background:#F0FDFA; border-left:3px solid #7DD3FC; }
+.reveal .slide-logo { max-height:70px !important; }
+.reveal .footer,.reveal .slide-number,.reveal .controls { color:#0D9488; }
+.reveal .footer { font-size:.55em; }
+.reveal .progress { color:#22C55E; }
+::selection { background:#7DD3FC; color:#052E2B; }
+
+/* Large, clear sans-serif typography */
+:root { --r-main-font: Arial, Helvetica, sans-serif; --r-heading-font: Arial, Helvetica, sans-serif; --r-main-font-size:40px; }
+.reveal { font-family:Arial,Helvetica,sans-serif !important; font-size:40px; font-weight:500; line-height:1.35; }
+.reveal h1,.reveal h2,.reveal h3,.reveal h4 { font-family:Arial,Helvetica,sans-serif !important; font-weight:800 !important; text-transform:none; }
+.reveal h1 { font-size:1.9em; }
+.reveal h2 { font-size:1.35em; }
+.reveal h3 { font-size:1.12em; }
+.reveal p,.reveal li,.reveal td { font-weight:500; }
+.reveal strong,.reveal b { font-weight:800; }
+.reveal .prompt-box { font-style:normal; font-weight:650; }
+.reveal .takeaway { font-weight:650; }
+.reveal table { font-size:.82em; line-height:1.3; }
+.reveal table th { font-weight:800; }
+.reveal pre,.reveal code { font-size:.82em; }
+.reveal .footer { font-family:Arial,Helvetica,sans-serif; font-weight:600; }
