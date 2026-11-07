@@ -1,0 +1,716 @@
+---
+title: "Summary Tables with gtsummary"
+subtitle: "Revealjs Presentation · M08 Reflection"
+author: "Simran Kaur"
+institute: "IBM 6400, Cal Poly Pomona"
+date: "`r Sys.Date()`"
+title-slide-attributes:
+  data-background-color: "#f0fdfa"
+format:
+  revealjs:
+    theme: [serif, custom.scss]
+    width: 1600
+    height: 900
+    footer: "Simran Kaur · M08 Reflection · gtsummary for the Group 8 CEP"
+    logo: logo.svg
+    transition: slide
+    transition-speed: default
+    incremental: false
+    toc: true
+    toc-depth: 1
+    toc-title: "Roadmap"
+    slide-number: true
+    scrollable: true
+    smaller: true
+    code-fold: false
+    code-overflow: wrap
+    number-sections: false
+    number-depth: 5
+    embed-resources: true
+    css: styles.css
+    preview-links: auto
+bibliography: references.bib
+csl-hanging-indent: true
+editor: visual
+execute:
+  echo: true
+  freeze: auto
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
+library(gt)
+library(gtsummary)
+library(gtExtras)
+theme_gtsummary_compact()
+```
+
+# Before We Start {background-color="#134e4a"}
+
+## Who this deck is for
+
+::::::: columns
+:::: {.column width="55%"}
+This deck reflects on **Module 8**, where I learned to turn statistical output into **tables that are ready for a report or a journal**. Every section opens with the original prompt, so you can follow along without the assignment sheet.
+
+::: incremental
+-   **Parts 1 and 2** cover what I learned from Dr. Jung's lecture and from Dr. Sjoberg's talk.
+-   **Parts 3 and 4** apply it to my piece of our capstone, the Group 8 CEP for the Tarkington Business Futures Institute.
+-   **The thread through all of it:** a table is only useful if a reader can trust it and act on it.
+:::
+::::
+
+:::: {.column width="45%"}
+::: takeaway
+**Reading guide**
+
+**Teal boxes** hold the prompt. **Green boxes** hold my main takeaway. A red **SIMULATED** label marks any slide that uses pilot data instead of real CEP data.
+:::
+::::
+:::::::
+
+::: notes
+Frame the audience first: someone who has never seen the assignment. Point out the box colors so the reader knows what is a prompt and what is my answer.
+:::
+
+## A note on the data, up front {transition="fade"}
+
+My part of the CEP is **AO4: Evidence Update and Decision Dashboard**. It tests whether an **AI screener** finds new personalization studies **as completely as two human screeners** do [@eisend2026; @khraisha2024].
+
+. . .
+
+**The real screening data doesn't exist yet.** The database searches run in **week 10**, so I can't analyze actual records for this assignment.
+
+. . .
+
+So Parts 3 and 4 use a **simulated pilot file** built from the AO4 design:
+
+-   **same variables, roles, and coding** as the plan
+-   generated in R with a **fixed seed**, so anyone can reproduce it
+-   **the code is on the slide**, nothing is hidden
+
+. . .
+
+::: takeaway
+The tables, tests, and code are real and will run unchanged on the real file. **The numbers are not findings.** They show the workflow I'll use, and what the output will look like when the real data arrives.
+:::
+
+# Part 1: What gtsummary Can Do {background-color="#134e4a"}
+
+## The prompt
+
+::: prompt-box
+**Prompt 1.** In Step 1, you have seen how to create a summary table and modify it for various statistical analyses. Summarize the package's capabilities as explained by the speaker. How may the {gtsummary} benefit you for your school work or career?
+:::
+
+. . .
+
+My short answer: **gtsummary turns "run the test, then copy the numbers into Word" into a single pipeline.** The table *is* the analysis, so nothing gets retyped, and nothing goes out of sync.
+
+. . .
+
+Dr. Jung's lecture [@jung2026m08] walked through **four families of tables**, all built on **the same pattern**:
+
+> **start with a sensible default → pipe on what you need → style it for the audience**
+
+## Four families of tables
+
+::: panel-tabset
+### 1. Describe
+
+`tbl_summary()` gives a **"Table 1" of descriptive statistics**. It **detects each variable's type** and picks the right summary on its own: median (Q1, Q3) for continuous, n (%) for categorical.
+
+```{r}
+#| output-location: column
+trial |>
+  select(trt, age, grade) |>
+  tbl_summary(by = trt)
+```
+
+### 2. Compare
+
+`add_p()` adds a group comparison: **Wilcoxon** for continuous, **chi-square** for categorical. `add_difference()` gives a **Welch t-test** with the **mean difference and 95% CI**, and with `adj.vars` it becomes an **ANCOVA**.
+
+```{r}
+#| output-location: column
+trial |>
+  select(trt, age, marker) |>
+  tbl_summary(
+    by = trt,
+    statistic = all_continuous() ~ "{mean} ({sd})",
+    missing = "no"
+  ) |>
+  add_difference()
+```
+
+### 3. Cross-tab
+
+`tbl_cross()` builds a **two-way table** with row or column percentages. `add_p()` adds a chi-square test.
+
+```{r}
+#| output-location: column
+trial |>
+  tbl_cross(row = trt, col = stage,
+            percent = "column") |>
+  add_p() |>
+  bold_labels()
+```
+
+### 4. Model
+
+`tbl_regression()` turns a fitted model into a **clean coefficient table**. It **recognizes logistic models** and labels the column "OR" when you set `exponentiate = TRUE`.
+
+```{r}
+#| output-location: column
+glm(response ~ age + stage, data = trial,
+    family = binomial) |>
+  tbl_regression(exponentiate = TRUE) |>
+  add_global_p() |>
+  bold_p(t = 0.10)
+```
+:::
+
+::: notes
+Click through the tabs. The point is that all four use the same grammar: build, add, modify.
+:::
+
+## The details that matter
+
+::::::: columns
+:::: {.column width="50%"}
+**Customizing what's inside**
+
+::: incremental
+-   `statistic`, `digits`, `label`, `missing`, `type = "continuous2"`
+-   `add_overall()`, `add_n()`, `add_q()` for multiple-comparison control
+-   `tbl_uvregression()` runs one model per predictor
+-   `tbl_merge()` puts tables side by side, `tbl_stack()` stacks them
+:::
+::::
+
+:::: {.column width="50%"}
+**Customizing how it looks**
+
+::: incremental
+-   `modify_header()`, `modify_spanning_header()`, `modify_caption()`
+-   `bold_labels()`, `bold_p()`
+-   `as_gt()` hands the table to gt for full styling
+-   journal themes like `theme_gtsummary_journal("jama")`
+:::
+::::
+:::::::
+
+. . .
+
+::: {.fragment .highlight-red}
+The trap I'll remember: changing the statistic to `{mean} ({sd})` does **not** change `add_p()`'s test. It still runs Wilcoxon. You need `add_difference()` for a t-test.
+:::
+
+## How it helps me
+
+::::: columns
+::: {.column width="50%"}
+**In school**
+
+-   The CEP report and our planned paper need **publication-style tables**. gtsummary makes them in a few lines, in the same Quarto file as the analysis.
+-   If a teammate fixes a coding error, **every table updates on the next render**. That's what reproducible actually means in practice.
+-   Dr. Jung grades the CEP report, and these are the tables he's teaching us to make.
+:::
+
+::: {.column width="50%"}
+**In my career**
+
+-   My goal is a **marketing analyst role in fashion**. Most of that job is comparing groups: campaign A vs. B, new vs. returning customers, channel vs. channel.
+-   `tbl_summary(by = ...) |> add_difference()` is that comparison, with the test and CI included.
+-   Clean tables mean **stakeholders read the result** instead of decoding raw R output.
+:::
+:::::
+
+. . .
+
+::: takeaway
+gtsummary moves my time from formatting tables to interpreting them, which is the part a client actually pays for.
+:::
+
+# Part 2: Learning from the Creator {background-color="#134e4a" transition="convex"}
+
+## 2.1 How gtsummary differs from gt and gtExtras
+
+::: prompt-box
+**Prompt 2.1.** In Step 2, you watched the extended presentation of the {gtsummary} package by Dr. Daniel Sjoberg, the very creator of the package. How does it differ from gt and gtExtras?
+:::
+
+The three packages split the work. **gtsummary decides what goes in the table. gt and gtExtras decide how it looks.**
+
+| Package | Starts from | Its job | Does it compute statistics? |
+|:-----------------|:-----------------|:-----------------|:-----------------|
+| **gt** [@iannone_gt] | any data frame | a "grammar of tables": headers, spanners, footnotes, formatting, styling | No. It displays what you give it. |
+| **gtExtras** [@mock_gtextras] | a gt table | extra styling for gt: themes, color tiles, inline bar charts and sparklines, images | No. It decorates a gt table. |
+| **gtsummary** [@sjoberg2021] | raw data or a fitted model | computes descriptives, tests, CIs, and model estimates, then lays them out | **Yes.** It runs the analysis. |
+
+: How the three table packages divide the work {#tbl-pkgs}
+
+. . .
+
+gtsummary was built as **a companion to gt** [@sjoberg2020blog]. It **renders through gt by default**, so `as_gt()` hands its output to gt, and from there gtExtras can style it further.
+
+## The same data, three ways {.smaller}
+
+::: panel-tabset
+### gt
+
+gt **shows the numbers I already calculated**. I had to **compute the means myself** with `summarise()`.
+
+```{r}
+trial |>
+  group_by(trt) |>
+  summarise(n = n(), mean_age = mean(age, na.rm = TRUE)) |>
+  gt() |>
+  fmt_number(mean_age, decimals = 1) |>
+  tab_header(title = "Mean age by treatment")
+```
+
+### gtExtras
+
+gtExtras **adds visuals** to that same gt table, here a theme and an inline bar.
+
+```{r}
+trial |>
+  group_by(trt) |>
+  summarise(n = n(), mean_age = mean(age, na.rm = TRUE)) |>
+  gt() |>
+  fmt_number(mean_age, decimals = 1) |>
+  gt_plt_bar(column = n, keep_column = TRUE, color = "#134e4a") |>
+  gt_theme_538()
+```
+
+### gtsummary
+
+gtsummary **starts from the raw data**, then **computes the summary *and* the test**.
+
+```{r}
+trial |>
+  select(trt, age) |>
+  tbl_summary(by = trt, statistic = age ~ "{mean} ({sd})",
+              missing = "no") |>
+  add_difference() |>
+  as_gt() |>
+  tab_header(title = "Mean age by treatment")
+```
+:::
+
+::: aside
+Notice the last tab ends with `as_gt() |> tab_header()`. That's the handoff: gtsummary does the stats, then gt takes over the styling.
+:::
+
+## 2.2 Three things I learned from the talk
+
+::: prompt-box
+**Prompt 2.2.** Give three things you learned newly that were not explained in the lecture in Step 1.
+:::
+
+::: {.fragment .fade-in}
+**1. `inline_text()` puts table numbers into sentences.** Any statistic in a gtsummary table can be **pulled straight into the text** of a report [@sjoberg2020blog]. I write "the difference was `inline_text(...)`," and the number fills itself in. If the data changes, the sentence changes with it, so **my write-up can never disagree with my table**.
+:::
+
+::: {.fragment .fade-in}
+**2. gtsummary can print through other engines.** gt is the default, but **it doesn't support every output format**. `as_flex_table()` works better for Word and PowerPoint, and `as_kable()` gives plain markdown. That matters for deliverables that leave Quarto, like a Word report for a client.
+:::
+
+::: {.fragment .fade-in}
+**3. `add_ci()` adds confidence intervals to a summary table.** The lecture showed CIs for *differences* through `add_difference()`. `add_ci()` gives a CI for each group's own mean or percentage, which is what I need when I **report a single accuracy rate**.
+:::
+
+::: notes
+Dr. Sjoberg's framing stuck with me: short code, beautiful tables, fully reproducible reports. Each of these three features serves the "reproducible" part.
+:::
+
+## Trying all three
+
+:::::: columns
+::: {.column width="50%"}
+```{r}
+#| code-line-numbers: "|5|7-8"
+t_resp <- trial |>
+  select(trt, response) |>
+  tbl_summary(by = trt, missing = "no",
+              statistic = response ~ "{p}%") |>
+  add_ci() |>
+  add_difference()
+t_resp
+```
+:::
+
+:::: {.column width="50%"}
+The response rate was `r inline_text(t_resp, variable = response, column = "stat_1")` for Drug A and `r inline_text(t_resp, variable = response, column = "stat_2")` for Drug B. The difference was not significant (`r inline_text(t_resp, variable = response, pattern = "{estimate}; 95% CI {conf.low}, {conf.high}; {p.value}")`).
+
+::: takeaway
+I didn't type a single number in that paragraph. `inline_text()` pulled every one of them from the table on the left.
+:::
+
+```{r}
+#| eval: false
+# For a Word deliverable instead of HTML:
+t_resp |> as_flex_table()
+```
+::::
+::::::
+
+# Part 3: Cross-Tabulation on My CEP Data {background-color="#134e4a"}
+
+## The prompt and my plan
+
+::: prompt-box
+**Prompt 3.** Apply what you learned to your MSDM CEP data. Choose two appropriate variables for cross-tabulation and show if the two variables are associated or not. Use appropriate statistics to test if the two variables are associated. Code, produce the table, and interpret the result.
+:::
+
+:::::: columns
+::: {.column width="55%"}
+**The AO4 question.** Our team reruns the original search in three databases. Each record gets screened by an AI screener and by two human screeners, whose consensus is the benchmark.
+
+**My cross-tab:** *Does the AI screener's error rate depend on which database a record came from?*
+
+-   **Variable 1:** `database` (EBSCO, ScienceDirect, ProQuest)
+-   **Variable 2:** `ai_result` (Correct or Error, versus the human consensus)
+:::
+
+:::: {.column width="45%"}
+::: takeaway
+**Why this pair matters.** ProQuest is mostly dissertations, which often have missing or messy abstracts. If the AI struggles there, TBFI would need a human double-check on that database before trusting the update.
+:::
+::::
+::::::
+
+## The variables in the AO4 design
+
+```{r}
+#| label: tbl-ao4-vars
+#| tbl-cap: "AO4 screening variables and their roles"
+tribble(
+  ~Variable,            ~Role,                ~Type,                    ~Description,
+  "ai_result",          "DV (Part 3 & 4)",    "Binary",                 "AI decision matches the human consensus (Correct) or not (Error)",
+  "database",           "IV",                 "Nominal (3 levels)",     "Source database: EBSCO, ScienceDirect, ProQuest",
+  "abstract_available", "IV",                 "Binary",                 "Whether the record has an abstract",
+  "unclear_items",      "IV",                 "Count (0 to 4)",         "Screening items coded 'unclear' out of the four eligibility checks",
+  "human_decision",     "IV / control",       "Binary",                 "Human consensus: Include or Exclude",
+  "pub_year",           "Descriptive only",   "Year (2024 to 2026)",    "Publication year inside the update window",
+  "ai_decision",        "Descriptive only",   "Binary",                 "The AI screener's own Include or Exclude call"
+) |>
+  gt() |>
+  tab_style(style = cell_text(weight = "bold"), locations = cells_body(columns = Variable)) |>
+  tab_options(table.font.size = px(20))
+```
+
+::: notes
+These come straight from my AO4 analytics methods section. The four eligibility checks are: personalized vs. non-personalized comparison, a consumer response measure, statistics convertible to r, and inside the update window.
+:::
+
+## The simulated pilot file [SIMULATED]{.sim-flag}
+
+```{r}
+#| label: simulate
+#| code-line-numbers: "|2|5-10|12-18"
+#| output: false
+set.seed(6400)   # fixed seed, so the file is reproducible
+n <- 320         # records left after removing duplicates
+
+ao4 <- tibble(
+  record_id = sprintf("R%03d", 1:n),
+  database  = sample(c("EBSCO", "ScienceDirect", "ProQuest"), n, TRUE, prob = c(.45, .35, .20)),
+  pub_year  = sample(2024:2026, n, TRUE, prob = c(.40, .40, .20)),
+  abstract_available = if_else(runif(n) < if_else(database == "ProQuest", .70, .93), "Yes", "No"),
+  unclear_items  = rbinom(n, 4, if_else(abstract_available == "No", .35, .12)),
+  human_decision = if_else(runif(n) < .22, "Include", "Exclude")
+) |>
+  mutate(
+    lp = 2.9 - 0.9 * (database == "ProQuest") - 0.2 * (database == "ScienceDirect") -
+         1.0 * (abstract_available == "No") - 0.55 * unclear_items - 0.6 * (human_decision == "Include"),
+    ai_correct  = rbinom(n, 1, plogis(lp)),
+    ai_decision = if_else(ai_correct == 1, human_decision,
+                          if_else(human_decision == "Include", "Exclude", "Include"))
+  ) |>
+  select(-lp) |>
+  mutate(
+    database  = factor(database, levels = c("EBSCO", "ScienceDirect", "ProQuest")),
+    abstract_available = factor(abstract_available, levels = c("Yes", "No")),
+    human_decision = factor(human_decision, levels = c("Exclude", "Include")),
+    ai_decision    = factor(ai_decision, levels = c("Exclude", "Include")),
+    ai_result = factor(if_else(ai_correct == 1, "Correct", "Error"), levels = c("Correct", "Error"))
+  )
+
+# Variable labels, so gtsummary prints readable names
+attr(ao4$database, "label")           <- "Source database"
+attr(ao4$abstract_available, "label") <- "Abstract available"
+attr(ao4$unclear_items, "label")      <- "Unclear screening items (0-4)"
+attr(ao4$human_decision, "label")     <- "Human consensus decision"
+attr(ao4$ai_decision, "label")        <- "AI screener decision"
+attr(ao4$ai_result, "label")          <- "AI screening result"
+attr(ao4$ai_correct, "label")         <- "AI correct"
+attr(ao4$pub_year, "label")           <- "Publication year"
+```
+
+The code builds in **a few plausible patterns**: ProQuest records are less likely to have an abstract, and missing abstracts lead to more "unclear" items. **Whether those patterns show up as significant** in a sample this size is exactly what the tests check.
+
+## First, describe the sample [SIMULATED]{.sim-flag}
+
+```{r}
+#| label: tbl-ao4-desc
+#| tbl-cap: "Pilot records by human consensus decision"
+ao4 |>
+  select(database, pub_year, abstract_available, unclear_items, human_decision, ai_result) |>
+  mutate(pub_year = factor(pub_year)) |>
+  tbl_summary(by = human_decision,
+              type = unclear_items ~ "continuous",
+              statistic = unclear_items ~ "{mean} ({sd})",
+              digits = unclear_items ~ 2,
+              label = pub_year ~ "Publication year") |>
+  add_overall() |>
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Human consensus**") |>
+  bold_labels()
+```
+
+## The cross-tab and chi-square test [SIMULATED]{.sim-flag}
+
+::::: columns
+::: {.column width="55%"}
+```{r}
+#| label: crosstab
+x_db <- ao4 |>
+  tbl_cross(
+    row = database,
+    col = ai_result,
+    percent = "row",
+    margin = "column"
+  ) |>
+  add_p(test = "chisq.test") |>
+  bold_labels() |>
+  modify_caption("**AI screening result by source database**")
+x_db
+```
+:::
+
+::: {.column width="45%"}
+**Why chi-square?** Both variables are categorical, and the question is whether they're independent. Pearson's chi-square test of independence is the standard test for that [@agresti2018].[^1]
+
+**Why row percentages?** The question is "out of each database's records, what share did the AI get wrong?" So each row should add to 100%.
+
+```{r}
+#| echo: false
+exp_min <- min(chisq.test(table(ao4$database, ao4$ai_result))$expected)
+```
+
+The smallest expected count is **`r round(exp_min, 1)`**, so **the chi-square approximation holds**.
+:::
+:::::
+
+[^1]: The test assumes every expected cell count is at least 5. With small samples, use `add_p(test = "fisher.test")` instead. That's why my AO4 plan lists Fisher's exact test for the real data.
+
+## Interpreting the cross-tab [SIMULATED]{.sim-flag}
+
+```{r}
+#| echo: false
+err <- ao4 |> count(database, ai_result) |> group_by(database) |>
+  mutate(pct = round(100 * n / sum(n))) |> filter(ai_result == "Error")
+pct_err <- setNames(err$pct, err$database)
+```
+
+::: incremental
+-   **What the table shows:** The AI's error rate was `r pct_err["EBSCO"]`% for EBSCO records, `r pct_err["ScienceDirect"]`% for ScienceDirect, and `r pct_err["ProQuest"]`% for ProQuest. ProQuest has the highest error rate, as expected for dissertation records.
+-   **What the test says:** The difference is **not statistically significant** (`r inline_text(x_db, col_level = "p.value")`). With this sample, we can't rule out that the gap is just chance.
+-   **What I'd conclude:** There's no evidence the AI screener's accuracy depends on the database. TBFI wouldn't need a database-specific check *on this evidence alone*.
+-   **What I'd do next:** ProQuest's error rate is about 7 points higher than the others, and that gap might matter in practice, even if it isn't significant. With only 75 ProQuest records, the test has limited power. On the real data, I'd report the error rate per database with confidence intervals, not just the p-value.
+:::
+
+. . .
+
+::: takeaway
+"Not significant" doesn't mean "no difference." It means this sample can't tell the difference apart from chance. That's an important distinction to make clear to a client.
+:::
+
+## Bonus: the AI vs. human confusion matrix [SIMULATED]{.sim-flag}
+
+::::: columns
+::: {.column width="55%"}
+```{r}
+x_conf <- ao4 |>
+  tbl_cross(row = human_decision, col = ai_decision,
+            percent = "row", margin = "column") |>
+  bold_labels() |>
+  modify_caption("**Human consensus vs. AI screener**")
+x_conf
+```
+:::
+
+::: {.column width="45%"}
+```{r}
+#| echo: false
+tp <- sum(ao4$human_decision == "Include" & ao4$ai_decision == "Include")
+fn <- sum(ao4$human_decision == "Include" & ao4$ai_decision == "Exclude")
+fp <- sum(ao4$human_decision == "Exclude" & ao4$ai_decision == "Include")
+recall <- round(100 * tp / (tp + fn))
+mcn <- mcnemar.test(table(ao4$human_decision, ao4$ai_decision))
+```
+
+This is the same `tbl_cross()`, used as a **confusion matrix**. AO4's main metric is **recall**: of the studies the humans included, how many did the AI also include?
+
+Recall here is **`r recall`%**. The AI missed `r fn` of `r tp + fn` included studies.
+
+These are **paired decisions** on the same records, so **chi-square isn't the right test here**. McNemar's test compares the two kinds of disagreement (`r fn` misses vs. `r fp` false includes) and gives p = `r format.pval(mcn$p.value, digits = 2)`.
+:::
+:::::
+
+::: aside
+**For a screener, a miss is worse than a false include.** A false include just costs a human a few seconds to reject, but a missed study never reaches the evidence base.
+:::
+
+# Part 4: Multiple Regression on My CEP Data {background-color="#134e4a" transition="zoom"}
+
+## The prompt and my model
+
+::: prompt-box
+**Prompt 4.** Using the MSDM CEP data, run multiple regression. The dependent variable can be continuous or dichotomous. Regress a dependent variable on a set of independent variables. Code, produce the table, and interpret the result.
+:::
+
+**DV:** `ai_correct` (1 = the AI matched the human consensus, 0 = error). It's dichotomous, so I use **multiple logistic regression**.
+
+. . .
+
+**IVs:** the record features that should make screening harder:
+
+::: incremental
+-   `database`: does the source still matter once the other features are controlled for?
+-   `abstract_available`: can the AI judge a study from its title alone?
+-   `unclear_items`: does ambiguity on the eligibility checks predict mistakes?
+-   `human_decision`: are true includes harder than true excludes?
+:::
+
+. . .
+
+$$
+\text{logit}\,P(\text{correct}) = \beta_0 + \beta_1\,\text{ScienceDirect} + \beta_2\,\text{ProQuest} + \beta_3\,\text{NoAbstract} + \beta_4\,\text{Unclear} + \beta_5\,\text{Include}
+$$
+
+## Univariate vs. multiple, side by side [SIMULATED]{.sim-flag}
+
+```{r}
+#| label: tbl-ao4-reg
+#| tbl-cap: "Predictors of a correct AI screening decision (odds ratios)"
+#| code-line-numbers: "|1-6|8-12|14-16"
+uv <- ao4 |>
+  tbl_uvregression(
+    method = glm, y = ai_correct, method.args = list(family = binomial),
+    include = c(database, abstract_available, unclear_items, human_decision),
+    exponentiate = TRUE
+  )
+
+m4 <- glm(ai_correct ~ database + abstract_available + unclear_items + human_decision,
+          data = ao4, family = binomial)
+mv <- m4 |>
+  tbl_regression(exponentiate = TRUE) |>
+  add_global_p() |> bold_p(t = 0.05) |> bold_labels()
+
+tbl_merge(list(uv, mv),
+          tab_spanner = c("**One predictor at a time**", "**Multiple logistic regression**")) |>
+  modify_caption("**AO4 pilot: what predicts a correct AI screening call?**")
+```
+
+## Interpreting the model [SIMULATED]{.sim-flag}
+
+An odds ratio **above 1** means higher odds of a correct call. **Below 1** means lower odds, so more mistakes.
+
+::: incremental
+-   **Human consensus is the only significant predictor in the full model.** Holding the other features constant, the odds of a correct AI call are about 63% lower for studies the humans *included* (OR `r inline_text(mv, variable = human_decision, level = "Include", pattern = "{estimate}; 95% CI {conf.low}, {conf.high}")`; `r inline_text(mv, variable = human_decision, pattern = "{p.value}")`). The AI is worse at recognizing the studies that matter most, which is exactly the recall risk AO4 is designed to catch.
+-   **Missing abstracts and unclear items matter on their own, but not together.** In the one-predictor models, both are significant: a missing abstract (OR `r inline_text(uv, variable = abstract_available, level = "No", pattern = "{estimate}; {p.value}")`) and each extra unclear item (OR `r inline_text(uv, variable = unclear_items, pattern = "{estimate}; {p.value}")`) lower the odds of a correct call. In the full model, neither is significant. Records without an abstract are the same ones with more unclear items, so the two variables carry overlapping information, and the model can't separate them. Only `r sum(ao4$abstract_available == "No")` records (`r round(100 * mean(ao4$abstract_available == "No"))`%) lack an abstract, which also keeps the CI wide.
+-   **Database doesn't matter once the record features are controlled for.** ProQuest's odds ratio moves from `r inline_text(uv, variable = database, level = "ProQuest", pattern = "{estimate}")` to `r inline_text(mv, variable = database, level = "ProQuest", pattern = "{estimate}")`, closer to 1. That suggests ProQuest's raw disadvantage comes mostly from its missing abstracts, not from the database itself.
+:::
+
+. . .
+
+::: takeaway
+**The business reading for TBFI:** if the real data looks like this, the AI screener should be used to *rule studies out* and get a human second look on anything it flags as a possible include, plus every record without an abstract.
+:::
+
+::: notes
+Point to the merged table: comparing the univariate and multiple columns is how you spot confounding. ProQuest's odds ratio moving toward 1 is the example.
+:::
+
+## Checking the model is sound [SIMULATED]{.sim-flag}
+
+:::::: columns
+::: {.column width="50%"}
+```{r}
+m4 |>
+  tbl_regression(exponentiate = TRUE) |>
+  add_vif() |>
+  add_glance_table(include = c(nobs, AIC, BIC)) |>
+  bold_labels()
+```
+:::
+
+:::: {.column width="50%"}
+::: incremental
+-   **Multicollinearity:** Every adjusted GVIF is close to 1, well under the usual cutoffs, so the predictors aren't stepping on each other.
+-   **Events per predictor:** The model has 5 coefficients and only `r sum(ao4$ai_correct == 0)` errors. That's under the common 10-events-per-parameter rule of thumb, so these estimates are shaky. For the real study, I need at least 50 errors, or fewer predictors.
+-   **What AIC/BIC are for:** comparing this model against simpler ones once the real data is in.
+:::
+::::
+::::::
+
+## The real-data table shell
+
+When the real screening data arrives, **this is the table I'll fill in**. Writing the shell first **locks in the analysis before I see any results**.
+
+| Predictor                                 |  n  |  OR  |   95% CI   | p-value |
+|:------------------------------------------|:---:|:----:|:----------:|:-------:|
+| **Source database**                       |     |      |            |  x.xx   |
+| EBSCO (ref.)                              | xxx |  —   |     —      |         |
+| ScienceDirect                             | xxx | x.xx | x.xx, x.xx |         |
+| ProQuest                                  | xxx | x.xx | x.xx, x.xx |         |
+| **Abstract available** (No vs. Yes)       | xxx | x.xx | x.xx, x.xx |  x.xx   |
+| **Unclear screening items** (per item)    | xxx | x.xx | x.xx, x.xx |  x.xx   |
+| **Human consensus** (Include vs. Exclude) | xxx | x.xx | x.xx, x.xx |  x.xx   |
+
+: Planned Table: predictors of a correct AI screening decision (real AO4 data) {#tbl-shell}
+
+::: aside
+The same `tbl_regression()` code from the previous slides will produce this table. I just swap the simulated `ao4` for the real screening file.
+:::
+
+# Wrapping Up {background-color="#134e4a"}
+
+## What I'm taking away
+
+::::::: columns
+:::: {.column width="50%"}
+::: incremental
+1.  **Tables are part of the analysis, not decoration.** gtsummary computes the statistics and lays them out in the same step, so they can't drift apart.
+2.  **Pick the test for the question.** I used chi-square for independence, McNemar for paired decisions, and logistic regression for a binary outcome with several predictors.
+3.  **Let the code write the numbers.** `inline_text()` means my interpretation always matches my table.
+4.  **Be honest about the data.** Simulated data is fine for building a workflow, as long as nobody mistakes it for a finding.
+:::
+::::
+
+:::: {.column width="50%"}
+::: takeaway
+**Next step for AO4**
+
+Once the week-10 search is done, I'll replace the simulation chunk with `read_csv()` on the real screening file and re-render. Every table and every sentence that uses `inline_text()` will update on its own.
+:::
+::::
+:::::::
+
+## References
+
+::: {#refs}
+:::
+
+## Appendix
+
+-   **GitHub repository:** \[ADD REPO LINK\]
+-   **GitHub Pages (this deck):** \[ADD PAGES LINK\]
+-   **Reproducibility:** R `r getRversion()`, gtsummary `r packageVersion("gtsummary")`, gt `r packageVersion("gt")`. The pilot data is generated with `set.seed(6400)`.
+-   **Data disclosure:** All AO4 tables in Parts 3 and 4 use simulated pilot data built from the approved AO4 design. No real screening records were analyzed.

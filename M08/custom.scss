@@ -1,0 +1,65 @@
+/*-- scss:defaults --*/
+// Sass variables: teal and green palette, clean sans-serif type
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+$cep-teal: #0d9488;
+$cep-teal-dark: #134e4a;
+$cep-green: #22c55e;
+$cep-mint: #f0fdfa;
+
+$font-family-sans-serif: "Inter", "Helvetica Neue", Arial, sans-serif;
+$font-family-monospace: "JetBrains Mono", Menlo, monospace;
+$presentation-heading-font: "Inter", "Helvetica Neue", Arial, sans-serif;
+$presentation-heading-color: $cep-teal-dark;
+$presentation-heading-font-weight: 800;
+$presentation-font-size-root: 42px;
+$presentation-h2-font-size: 1.7em;
+$presentation-line-height: 1.4;
+
+$body-bg: #ffffff;
+$body-color: #1f2933;
+$link-color: $cep-teal;
+$code-block-bg: #f4f7f6;
+
+/*-- scss:rules --*/
+.reveal {
+  font-weight: 500;
+}
+
+.reveal strong,
+.reveal b {
+  font-weight: 800;
+  color: $cep-teal-dark;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3 {
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
+
+.reveal h2 {
+  border-bottom: 4px solid $cep-teal;
+  padding-bottom: 0.2em;
+}
+
+.reveal .slide-number {
+  color: $cep-teal-dark;
+  font-weight: 700;
+}
+
+.reveal .progress span {
+  background: $cep-teal;
+}
+
+// Section divider slides: white bold headings on dark teal
+.reveal section.has-dark-background h1,
+.reveal section.has-dark-background h2,
+.reveal section.has-dark-background strong {
+  color: #ffffff;
+}
+
+.reveal .panel-tabset [role="tab"] {
+  font-weight: 700;
+}
