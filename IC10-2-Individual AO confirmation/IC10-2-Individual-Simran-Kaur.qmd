@@ -1,0 +1,120 @@
+---
+title: "IC10-2: Individual Analytics Objective and Method Confirmation"
+subtitle: "AI-Assisted Evidence Synthesis for Marketing Decisions: <br> A CALIPER Meta-Analysis of Personalization for TBFI"
+author:
+  - "Simran Kaur"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    toc-title: "Table of contents"
+    toc-location: right
+    number-sections: false
+    number-depth: 2
+    theme: cosmo
+    fontsize: 12pt
+    embed-resources: true
+    smooth-scroll: true
+    tbl-cap-location: top
+    include-in-header:
+      text: |
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+        :root { --cep-green: #1E4D2B; --cep-gold: #E0B12B; --cep-gray: #5f6368; }
+        body, h1, h2, h3, .title, .subtitle, caption, table, #TOC, #toc-title {
+          font-family: "Source Sans 3", "Source Sans Pro", "Segoe UI", Helvetica, Arial, sans-serif !important; }
+        h1:not(.title) { color: var(--cep-green); text-align: center; text-transform: uppercase; font-weight: 700; margin-top: 3rem; }
+        h1:not(.title)::after { content: ""; display: block; width: 50px; height: 3px; background: var(--cep-gold); margin: .5rem auto 0; }
+        .header-section-number { color: var(--cep-gray); }
+        #title-block-header { background: var(--cep-green); border-bottom: 4px solid var(--cep-gold); border-radius: 4px; padding: 2rem 2.25rem 1.5rem; margin-bottom: 2.5rem; }
+        #title-block-header .title { color: #fff; font-weight: 700; text-align: center; font-size: 2.4rem; }
+        #title-block-header .subtitle { color: var(--cep-gold); text-align: center; font-weight: 700; font-size: 1.2rem; }
+        #title-block-header .quarto-title-meta-heading { color: var(--cep-gold); text-transform: uppercase; }
+        #title-block-header .quarto-title-meta-contents, #title-block-header .quarto-title-meta-contents p { color: #fff; }
+        #TOC > ul > li > a { text-transform: uppercase; font-weight: 700; color: #222; }
+        #TOC a.active { color: var(--cep-green); border-left-color: var(--cep-green); }
+        caption { font-weight: 700; color: inherit; }
+        table { font-size: 11pt; }
+        thead th { background: var(--cep-green) !important; color: #fff !important; }
+        td { vertical-align: top; }
+        td:first-child { width: 27%; font-weight: 700; color: var(--cep-green); background: #F4F8F3; }
+                #title-block-header .quarto-title-meta { display: grid !important; grid-template-columns: 3fr 1fr !important; column-gap: 2rem; }
+        #tbl-tasks td:first-child { width: 34%; }
+        @media (max-width: 991.98px) {
+          #quarto-margin-sidebar { display: block !important; position: fixed !important; top: 0; right: 0; width: 200px !important; height: 100vh; overflow-y: auto; padding: 1rem .75rem; background: #fff; z-index: 10; }
+          #quarto-margin-sidebar #TOC { display: block !important; }
+          #quarto-toc-toggle, .quarto-title-block .quarto-title-banner + #TOC, #quarto-content > #TOC { display: none !important; }
+          #quarto-content { display: block !important; padding-right: 215px !important; padding-left: 16px !important; }
+          main.content { max-width: 100% !important; width: 100% !important; margin: 0 !important; padding: 0 !important; }
+          #title-block-header .title { font-size: 1.8rem; }
+        }
+        </style>
+---
+
+# Task List After Feedback
+
+Our group's task list for Chapters 1 to 3, based on faculty and peer feedback and the project timeline, with the member responsible for each task. All Group 8 members share the same list.
+
+| Task | Source | Owner | Due |
+|:-----|:-------|:------|:----|
+| Get Dr. Lin's approval of AO4 and its method (this document) | IC10-2 | Simran Kaur | Before Nov 13 |
+| Confirm the two human screeners, the search window start (1 Jan 2024), and Google Scholar for citation searching only | Open questions to Dr. Lin on the AO4 plan | Simran Kaur | Before Nov 13 |
+| Write the AO4 screening codebook and calibrate the AI screener on records from the original search | Ch. 3 method | Simran Kaur | Nov 13 |
+| Run the logged database search and export records for screening | Ch. 3 method | Simran Kaur | Nov 13 |
+| Agree on who extracts effects from newly eligible AO4 studies | AO3 depends on them | Simran Kaur, Yushan Huang | Nov 13 |
+| Get Dr. Lin's approval of AO1 and its method | IC10-2 | Alondra Rodriguez | Before Nov 13 |
+| Get Dr. Lin's approval of AO2 and its method | IC10-2 | Gabriela Raygoza Quintero | Before Nov 13 |
+| Get Dr. Lin's approval of AO3 and its method | IC10-2 | Yushan Huang | Before Nov 13 |
+| Define the AO2 independent variable by naming the four coding conditions in Ch. 1 and Ch. 3 | CEP 12 table review | Gabriela Raygoza Quintero | Nov 20 |
+| Review the AO2 test and rationale rows added to the CEP 12 table | CEP 12 table review | Gabriela Raygoza Quintero | Nov 20 |
+| Confirm field-level tolerance rules beyond \|Δr\| ≤ .01 for AO1 | AO1 rationale | Alondra Rodriguez | Nov 20 |
+| Reconcile Dataverse row counts with the published counts before AO3 reproduction | Week 10 data-integrity check | Yushan Huang | Nov 20 |
+| Hand-code the same 5 development articles with codebook v0 | Project timeline | All four members | Nov 13 |
+| One result table per AO on the development set | Project timeline | Each AO owner | Nov 20 |
+| Fill in Chapter 2 client sections (2.1 to 2.6) | Ch. 2 placeholders | Split across all four members | Nov 20 |
+| Fill in Sample Characteristics and Data Dictionary after the development and test sets are drawn | Ch. 3 placeholders | Each AO owner, merged by Gabriela Raygoza Quintero | Nov 20 |
+| Keep one font, references in references.bib, no icons, AO/PO spelled out in tables | Dr. Jung's earlier report feedback | Gabriela Raygoza Quintero (repo), all members check | Ongoing |
+| Revise Chapters 1 to 3 and push to the shared repo | GP01 to GP08 | All four members | Nov 20 |
+| Final proposal defense | Program schedule | All four members | Week of Nov 30 |
+
+: Post-Proposal Task List {#tbl-tasks}
+
+# Analytics Methods to Employ
+
+### AO4. Evidence Update and Decision Dashboard (Simran Kaur)
+
+AO4 has two parts, so it uses two sets of methods. The first part asks whether an AI screener can find personalization studies published after the anchor meta-analysis as completely as two human screeners. I treat this as a binary classification problem. Each database record is one case, and each screener labels it include or exclude based on the eligibility rules in Eisend, Niewiadomska, and van Noort (2026). I rerun the authors' keyword search in EBSCO, ScienceDirect, and ProQuest Dissertations and Theses for work published from 1 January 2024 on, log every query, date, and hit count, and remove duplicates and studies already in the Dataverse file. Google Scholar is used only for citation searching because its results cannot be reproduced exactly. Two human screeners code each title and abstract independently, and their agreement is measured with Cohen's kappa (Cohen 1960). Their consensus becomes the benchmark. The AI screener is first calibrated on records from the original search, scored against the authors' own include and exclude decisions, and then frozen before it sees any new record. This keeps the development and test logic the same as in AO1 and AO2.
+
+The main metric is recall, the share of human-included studies that the AI also includes, because a study the screener misses never reaches the evidence base. I also report precision, F1, and the share of records a person would no longer need to read, each with a Wilson 95% confidence interval. McNemar's test compares the AI's paired decisions with the human consensus, and Fisher's exact test checks whether AI misses cluster by database or record type. The features are the record fields (title, abstract, publication year, record type, source database, abstract availability, DOI, and duplicate flag) and four screening items coded yes, no, or unclear: whether the study compares personalized with nonpersonalized communication or measures perceived personalization, whether it measures a consumer response, whether it reports statistics convertible to r, and whether it falls inside the update window. These are the same criteria the human screeners use, so any difference in decisions comes from the screener, not the rules. Machine-assisted screening is well established for reducing reading load (O'Mara-Eves et al. 2015; van de Schoot et al. 2021), but LLM screening has rarely been tested on a real update in marketing (Khraisha et al. 2024), which is the gap AO4 fills. Included studies are reported in a PRISMA 2020 flow diagram (Page et al. 2021).
+
+The second part asks whether TBFI consultants can use the dashboard to answer client questions correctly. The dashboard (Looker Studio or Streamlit) shows the validated pooled effects by outcome, the main moderators such as data type and channel, the AO3 robustness flags, and the newly found studies. A dashboard is useful only if it leads the user to the right decision (Pauwels et al. 2009), so I test it with a task-based walkthrough rather than a satisfaction survey. Before the walkthrough, I write an answer key of realistic client questions from the AO3 results, for example whether using a customer's first name in an email raises click-through. TBFI staff answer each question with the dashboard, and each answer is scored correct or incorrect. The independent variables are the AO3 robustness flag behind each question (robust vs. caution) and question type (a single pooled effect vs. a "for whom or which channel" moderator question); the dependent variables are task accuracy and time on task; consultant and task order are controls. Because only a few staff will take part, I report the proportion correct with a Wilson 95% confidence interval, use Fisher's exact test for accuracy by flag and question type, and use a Mann-Whitney U test for time on task. A mixed-effects logistic regression with consultant as a random effect is added only if there are enough tasks. Questions answered incorrectly guide dashboard revisions before it is used in the PO3 campaign.
+
+# Approval Statements
+
+Approval requests have been shared with Dr. Lin and will be confirmed at our next meeting. This document will be updated with the approval dates once he approves.
+
+**Analytics objective.** My faculty lead, Dr. Yufan Lin, approved my analytics objective, AO4: Evidence Update and Decision Dashboard, on [DATE].
+
+**Analytics method.** My faculty lead, Dr. Yufan Lin, approved the methods I will use to address AO4 (AI vs. human title-and-abstract screening scored by Cohen's kappa, recall, precision, and McNemar's test, and a task-based dashboard walkthrough scored against an AO3 answer key), on [DATE].
+
+# Appendix {.unnumbered}
+
+- **GitHub repository:** <https://github.com/gabrielarq1/CEP--Group-8>
+- **Full CEP report:** <https://gabrielarq1.github.io/CEP--Group-8/CEP-F26/Group8-CEP-F26.html>
+
+**References**
+
+Cohen, Jacob (1960), "A Coefficient of Agreement for Nominal Scales," *Educational and Psychological Measurement*, 20 (1), 37–46.
+
+Eisend, Martin, Dominika Niewiadomska, and Guda van Noort (2026), "Personalization in Marketing Communication: A Meta-Analysis," *Journal of Marketing*.
+
+Khraisha, Qusai, Sophie Put, Johanna Kappenberg, Azza Warraitch, and Kristin Hadfield (2024), "Can Large Language Models Replace Humans in Systematic Reviews?" *Research Synthesis Methods*, 15 (4), 616–26.
+
+O'Mara-Eves, Alison, James Thomas, John McNaught, Makoto Miwa, and Sophia Ananiadou (2015), "Using Text Mining for Study Identification in Systematic Reviews," *Systematic Reviews*, 4, 5.
+
+Page, Matthew J., et al. (2021), "The PRISMA 2020 Statement: An Updated Guideline for Reporting Systematic Reviews," *BMJ*, 372, n71.
+
+Pauwels, Koen, et al. (2009), "Dashboards as a Service: Why, What, How, and What Research Is Needed?" *Journal of Service Research*, 12 (2), 175–89.
+
+van de Schoot, Rens, et al. (2021), "An Open Source Machine Learning Framework for Efficient and Transparent Systematic Reviews," *Nature Machine Intelligence*, 3 (2), 125–33.
