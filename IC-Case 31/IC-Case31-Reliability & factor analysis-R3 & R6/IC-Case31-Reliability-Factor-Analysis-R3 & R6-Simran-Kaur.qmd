@@ -1,0 +1,243 @@
+---
+title: "Case 31: Reliability and Factor Analysis"
+subtitle: "Employee proficiency and operational effectiveness"
+author: "Simran Kaur"
+date: "2026-11-8"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+    theme: cosmo
+    css: report.css
+execute:
+  results: hide
+  fig-show: hide
+  warning: false
+  message: false
+---
+
+# Overview
+
+Before combining survey items, I checked whether they measure one underlying idea and whether they are internally consistent. This report reviews **employee proficiency (Q3–Q6)** and **operational effectiveness (Q31–Q34)** using the results saved in the original report.
+
+# Process and Key Findings
+
+## 1. Check whether the items belong together
+
+I reviewed the correlations, KMO and Bartlett’s test. The employee items showed stronger shared relationships, with **KMO = .78**. The operations items had **KMO = .50**, suggesting weak support for factor analysis. Bartlett’s test was significant for both sets, but significance alone does not establish a useful scale.
+
+## 2. Examine the factor structure
+
+The employee items supported one factor. Their loadings ranged from **.73 to .93**, and the factor explained approximately **63% of the variance**. Some fit statistics were less reassuring, so I would interpret the structure alongside the loadings and item wording rather than describe the fit as uniformly good.
+
+For operations, the one-factor model was dominated by Q32. The remaining loadings were only **.23–.39**, while Q32 loaded near **1.00** with very low uniqueness. That boundary estimate calls for caution, even though the overall fit indices looked acceptable.
+
+The saved parallel-analysis output suggested **two factors for operations**, contrary to the original explanation. However, an unrestricted two-factor EFA with only four items is not adequately identified, so I would not use that model to justify separate subscales. Parallel analysis also uses simulation; setting a seed makes future runs reproducible.
+
+## 3. Check reliability and choose the measure
+
+| Measure | KMO | Cronbach’s alpha | Decision |
+|---|---|---|---|
+| Employee proficiency: Q3–Q6 | .78 | **.87** | Combine into an employee index. |
+| Operational effectiveness: Q31–Q34 | .50 | **.47** | Analyze the four items separately. |
+
+Dropping an employee item lowered alpha. Dropping an operations item did not bring reliability close to .70. The wording supports the same decision: courtesy, helpfulness, professionalism and availability describe staff proficiency, while privacy, speed, service fit and application simplicity are different operational judgments.
+
+# Implications for the Next Analysis
+
+I will use the mean of Q3–Q6 for **R3** and the residence comparison in **R4a**. For **R6 and R4c**, I will keep Q31–Q34 separate. This four-item operations result (α = .47) differs from the earlier five-item Q30–Q34 analysis (α ≈ .54); they are different item sets.
+
+Any one-sample t-test needs a stated comparison value. Residence comparisons involve independent groups, and testing several operations items requires attention to multiple comparisons.
+
+# R Code
+
+Code is grouped below; lengthy output and plots are hidden. The summaries above describe the supplied report’s saved results. Seeded parallel-analysis reruns may differ from its original unseeded run.
+
+::: {.panel-tabset}
+
+## Setup and checks
+
+```{r}
+#| label: setup
+library(tidyverse)
+library(haven)
+library(psych)
+library(GPArotation)
+library(knitr)
+options(knitr.kable.NA = "")
+
+if (!file.exists("Case 31 Data_efcu_4.sav")) {
+  stop("Place Case 31 Data_efcu_4.sav beside this QMD before rendering.")
+}
+efcu <- read_sav("Case 31 Data_efcu_4.sav")
+d    <- zap_labels(efcu)
+
+r3_items <- c("q3", "q4", "q5", "q6")
+r6_items <- c("q31", "q32", "q33", "q34")
+
+r3 <- as.data.frame(d[, r3_items])
+r6 <- as.data.frame(d[, r6_items])
+
+item_labels <- c(
+  q3  = "Q3: Employees are courteous",
+  q4  = "Q4: Employees are helpful",
+  q5  = "Q5: Employees are professional",
+  q6  = "Q6: Employees are available",
+  q31 = "Q31: Personnel keep info confidential",
+  q32 = "Q32: Prompt in processing loans",
+  q33 = "Q33: Services meet members' needs",
+  q34 = "Q34: Loan applications simple"
+)
+```
+
+```{r}
+#| label: helpers
+# Screening summary: KMO + Bartlett + eigenvalues
+screen_scale <- function(x) {
+  k  <- KMO(x)
+  b  <- cortest.bartlett(cor(x), n = nrow(x))
+  ev <- eigen(cor(x))$values
+  list(kmo = k, bartlett = b, eigen = ev)
+}
+
+# Loadings table from a one-factor ML solution
+loading_table <- function(f, x) {
+  tibble(
+    Item        = item_labels[colnames(x)],
+    Loading     = f$loadings[, 1],
+    Communality = f$communality,
+    Uniqueness  = f$uniquenesses
+  )
+}
+
+# Alpha item table
+alpha_table <- function(a, x) {
+  tibble(
+    Item             = item_labels[colnames(x)],
+    Mean             = a$item.stats$mean,
+    SD               = a$item.stats$sd,
+    `r.drop`         = a$item.stats$r.drop,
+    `Alpha if dropped` = a$alpha.drop$raw_alpha
+  )
+}
+```
+
+## Employee proficiency
+
+```{r}
+#| label: tbl-r3-cor
+#| tbl-cap: "R3 inter-item correlations"
+cor(r3) |> round(2) |> kable()
+```
+
+```{r}
+#| label: r3-screen
+r3_screen <- screen_scale(r3)
+r3_screen$kmo
+r3_screen$bartlett
+```
+
+```{r}
+#| label: fig-r3-scree
+#| fig-cap: "R3 parallel analysis and scree plot"
+#| fig-height: 4.5
+set.seed(3103)
+r3_pa <- fa.parallel(r3, fm = "ml", fa = "fa", main = "R3 (Q3–Q6): parallel analysis")
+```
+
+```{r}
+#| label: r3-efa
+r3_fa <- fa(r3, nfactors = 1, fm = "ml", rotate = "none")
+print(r3_fa, digits = 3)
+```
+
+```{r}
+#| label: tbl-r3-load
+#| tbl-cap: "R3 one-factor ML solution"
+loading_table(r3_fa, r3) |> kable(digits = 3)
+```
+
+```{r}
+#| label: r3-alpha
+r3_alpha <- alpha(r3)
+r3_alpha$total |> kable(digits = 3)
+```
+
+```{r}
+#| label: tbl-r3-alpha
+#| tbl-cap: "R3 item-total statistics"
+alpha_table(r3_alpha, r3) |> kable(digits = 3)
+```
+
+```{r}
+#| label: r3-composite-check
+employee_index <- rowMeans(r3, na.rm = TRUE)
+employee_index[is.nan(employee_index)] <- NA_real_
+if ("Att_employee" %in% names(d)) {
+  all.equal(employee_index, as.numeric(d$Att_employee))
+}
+```
+
+## Operational effectiveness
+
+```{r}
+#| label: tbl-r6-cor
+#| tbl-cap: "R6 inter-item correlations"
+cor(r6) |> round(2) |> kable()
+```
+
+```{r}
+#| label: r6-screen
+r6_screen <- screen_scale(r6)
+r6_screen$kmo
+r6_screen$bartlett
+```
+
+```{r}
+#| label: fig-r6-scree
+#| fig-cap: "R6 parallel analysis and scree plot"
+#| fig-height: 4.5
+set.seed(3106)
+r6_pa <- fa.parallel(r6, fm = "ml", fa = "fa", main = "R6 (Q31–Q34): parallel analysis")
+```
+
+```{r}
+#| label: r6-efa
+r6_fa <- fa(r6, nfactors = 1, fm = "ml", rotate = "none")
+print(r6_fa, digits = 3)
+```
+
+```{r}
+#| label: tbl-r6-load
+#| tbl-cap: "R6 one-factor ML solution"
+loading_table(r6_fa, r6) |> kable(digits = 3)
+```
+
+```{r}
+#| label: r6-alpha
+r6_alpha <- alpha(r6)
+r6_alpha$total |> kable(digits = 3)
+```
+
+```{r}
+#| label: tbl-r6-alpha
+#| tbl-cap: "R6 item-total statistics"
+alpha_table(r6_alpha, r6) |> kable(digits = 3)
+```
+
+:::
+
+# Reflection
+
+The most useful part for me was seeing why a group of questions should not automatically become one score. Both sets use agreement scales, but only the employee items showed enough consistency to support combining them.
+
+The operations results also reminded me to check the output against my explanation. A significant test or a good fit statistic is not enough on its own. I need to consider the loadings, reliability and what the questions actually ask before deciding how to use them.
+
+# Appendix: Links
+
+- [GitHub Pages report](https://simrank-dm.github.io/IBM6500-F26/IC-Case31-Reliability-Factor-Analysis/IC-Case31-Reliability-Factor-Analysis-Simran-Kaur.html)
+- [GitHub repository](https://github.com/Simrank-DM/IBM6500-F26)
