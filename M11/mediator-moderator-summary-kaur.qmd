@@ -1,0 +1,90 @@
+---
+title: "Mediator and Moderator: Article Reading Summary"
+subtitle: "M11 · Baron and Kenny (1986)"
+author: "Simran Kaur"
+date: "2026-11-10"
+format:
+  html:
+    toc: true
+    toc-title: "On this page"
+    number-sections: true
+    embed-resources: true
+    theme: cosmo
+    include-in-header:
+      text: |
+        <style>
+        body {font-family: Arial, sans-serif; color:#24352f; background:#f7f9f8; line-height:1.7;}
+        main {max-width:920px; margin:auto;}
+        #title-block-header {background:#173e35; color:white; padding:2rem; border-radius:12px; margin-bottom:2rem;}
+        #title-block-header * {color:white;}
+        h1,h2,h3 {color:#173e35;}
+        h1 {border-bottom:2px solid #d4e1da; padding-bottom:.4rem;}
+        a {color:#24634f;} table {background:white;}
+        </style>
+---
+
+# Article Overview
+
+Baron and Kenny (1986) distinguish two roles a third variable can play in research. Their main contribution is linking that distinction to theory, study design, and statistical analysis (pp. 1173–1174).
+
+# Learning Notes and Key Takeaways
+
+| Concept      | Question                          | Statistical focus           |
+|------------------------|------------------------|------------------------|
+| Mediator, M  | How does X influence Y?           | Indirect pathway through M  |
+| Moderator, Z | When does X's effect on Y change? | Interaction between X and Z |
+
+A moderator can change an effect's strength or direction. For a linear model, test the interaction while retaining both main effects (pp. 1174–1176):
+
+$$Y = b_0 + b_1X + b_2Z + b_3XZ + e$$
+
+The original mediation approach estimates three regressions: M on X, Y on X, and Y on both X and M. It examines the relevant paths and whether X's coefficient decreases after including M. The paper also discusses the Sobel indirect-effect test, measurement error, and reverse causation (pp. 1176–1177).
+
+The authors combine mediation and moderation within a broader framework: an interaction may operate through a mediator, and a mediating process may depend on conditions (pp. 1179–1180).
+
+# Marketing Example: My Application
+
+*This is my hypothetical example, not a finding reported in the article.*
+
+Suppose a fashion retailer compares a personalized message with a general message. **X** is the message type, **M** is perceived relevance, and **Y** is purchase intention. My mediation hypothesis would be that personalization increases perceived relevance, which then increases purchase intention.
+
+For moderation, I would use **privacy concern (Z)**. My hypothesis would be that personalization has a weaker effect on purchase intention among customers with higher privacy concern. This would help me distinguish the reason a message may work from the conditions under which it works better.
+
+| Proposed role | Example hypothesis | What I would measure |
+|------------------------|------------------------|------------------------|
+| Mediator | Personalization increases purchase intention through perceived relevance. | Relevance after message exposure, followed by purchase intention. |
+| Moderator | Personalization's effect differs by privacy concern. | Privacy concern before exposure and its interaction with message type. |
+
+These are research proposals. They would need data and an appropriate design before drawing conclusions.
+
+# Note for Future Analysis
+
+Kenny's later guidance emphasizes estimating the **indirect effect, ab**, rather than requiring a significant total effect first. Bootstrap confidence intervals can assess uncertainty in the indirect effect. A nonsignificant direct effect alone does not establish complete mediation. Causal interpretation also requires defensible assumptions about direction, measurement, and confounding (Kenny, 2025).
+
+For a simple linear mediation model without interaction, **a** links X to M, **b** links M to Y controlling for X, **c′** is the direct effect, and **c** is the total effect. Using the same cases and covariates in ordinary regression:
+
+$$c = c' + ab$$
+
+This is supplementary guidance for future use, separate from the assigned article's original procedure.
+
+# Overall Reflection and Future Reference
+
+**Most useful idea.** The most useful part for me was having a clear way to separate a mediator from a moderator. In marketing, I could use mediation to study why a campaign influences customers and moderation to understand which customers respond differently.
+
+**Most challenging concept.** I need to be careful about assigning a variable's role based only on its name. For my example, I would first explain where relevance and privacy concern belong in the proposed model, then choose the analysis.
+
+**Future use.** I would keep this distinction in mind when building research questions and conceptual models. Writing the proposed relationships before analyzing data would help me keep the hypotheses and interpretation consistent.
+
+# References {.unnumbered}
+
+Baron, R. M., & Kenny, D. A. (1986). The moderator–mediator variable distinction in social psychological research: Conceptual, strategic, and statistical considerations. *Journal of Personality and Social Psychology, 51*(6), 1173–1182. <https://doi.org/10.1037/0022-3514.51.6.1173>
+
+Kenny, D. A. (2025, March 7). *Mediation*. <https://davidakenny.net/cm/mediate.htm>
+
+# Appendix {.unnumbered}
+
+- **GitHub repository:** <https://github.com/Simrank-DM/IBM6500-F26>
+- **GitHub Pages website:** <https://Simrank-DM.github.io/IBM6500-F26/M11/mediator-moderator-summary-kaur.html>
+-   **Assigned article DOI:** <https://doi.org/10.1037/0022-3514.51.6.1173>
+-   **Full article PDF:** <https://www2.psych.ubc.ca/~schaller/528Readings/BaronKenny1986.pdf>
+-   **Supplementary mediation guidance:** <https://davidakenny.net/cm/mediate.htm>
