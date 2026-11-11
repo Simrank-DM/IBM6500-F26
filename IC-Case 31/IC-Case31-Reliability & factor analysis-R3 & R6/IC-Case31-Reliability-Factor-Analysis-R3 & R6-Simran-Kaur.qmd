@@ -239,5 +239,5 @@ The operations results also reminded me to check the output against my explanati
 
 # Appendix: Links
 
-- [GitHub Pages report](https://simrank-dm.github.io/IBM6500-F26/IC-Case31-Reliability-Factor-Analysis/IC-Case31-Reliability-Factor-Analysis-Simran-Kaur.html)
-- [GitHub repository](https://github.com/Simrank-DM/IBM6500-F26)
+- [GitHub Pages report](https://simrank-dm.github.io/IBM6500-F26/IC-Case%2031/IC-Case31-Reliability%20%26%20factor%20analysis-R3%20%26%20R6/IC-Case31-Reliability-Factor-Analysis-R3%20%26%20R6-Simran-Kaur.html)
+- [GitHub source folder](https://github.com/Simrank-DM/IBM6500-F26/tree/main/IC-Case%2031/IC-Case31-Reliability%20%26%20factor%20analysis-R3%20%26%20R6)
