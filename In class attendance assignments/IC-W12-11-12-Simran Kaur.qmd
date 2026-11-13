@@ -1,0 +1,84 @@
+---
+title: "Class notes for Week 12"
+subtitle: "IBM 6500 · IC-W12-1 (11/12) · Class Participation"
+author: "Simran Kaur"
+date: "November 12, 2026"
+execute:
+  freeze: auto
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    embed-resources: true
+---
+
+## Introduction
+
+-   Dr. Jung walked through the credit union survey in Case 31.
+-   The data had 54 variables. We used `view_df()` to check what the survey codes meant.
+
+## Testing Hypothesis (Cont’d)
+
+-   First ask: what am I comparing?
+-   At the .05 cutoff:
+    -   *p* ≤ .05 → reject the null hypothesis.
+    -   *p* \> .05 → fail to reject the null hypothesis.
+-   [Dr. Jung’s Case 31 slides](https://jaejungca.github.io/case31/Jung_Jae_case31_analysis_present-all.html#/12/3)
+
+## EFA & PCA
+
+### W12-1 · Checking survey questions
+
+-   EFA helps me see which questions fit together. PCA helps summarize several variables in fewer scores.
+-   Before averaging questions, check two things:
+    -   Do they measure one idea? This is **unidimensionality**.
+    -   Do the answers line up consistently? Check **reliability** with Cronbach’s alpha.
+-   R3: average Q3–Q6 for one employee proficiency score per member. The mean was **4.21 out of 5**.
+-   A bar graph shows how many people picked each answer. A histogram shows how the average scores spread out.
+-   **A histogram is better for average scores like `at_emp`** because it groups numeric values into intervals. It helps me see the distribution, spread, and skewness. Use a bar graph for separate answer categories.
+-   R6: check which questions about operational efficiency fit together before averaging them.
+
+### W12-2 · Hypothesis testing
+
+-   **R1 - Savings rate.** Use a one-sample t-test to compare the mean with 3 (“average”).
+    -   65% picked “average.” The mean was 3.07, close to 3 (*p* \> .10).
+-   **R4a - Employee ratings.** Use an independent-samples t-test to compare two groups.
+    -   Group by where members live (`q38`). Compare their employee ratings (`at_emp`).
+    -   Near headquarters: 57 members, mean 4.28, SD 0.57.
+    -   Elsewhere: 71 members, mean 4.14, SD 0.61.
+    -   SD tells me how spread out the ratings were. The boxplots showed a lot of overlap.
+    -   Dr. Jung showed the equal-variance test with `var.equal = TRUE`. The summary table used Welch’s test.
+    -   Difference = 0.14 points. The 95% confidence interval went from −0.07 to 0.34. With *p* = .20, we had too little evidence to say the groups differed.
+-   **R4b - Account awareness.** Count the answers for each residence group. Use a mosaic plot to compare the percentages.
+    -   Regular share account: *p* = .53. Special subaccounts: *p* ≈ .67. Both used chi-square tests.
+    -   Christmas Club account: Fisher’s exact test, *p* ≈ .60.
+    -   All three were above .05. We had too little evidence to say awareness differed by residence.
+-   Paired t-test: compare two ratings from the same people. ANOVA: compare means across groups.
+
+### W12-3 · Regression
+
+-   Step 1: review Chapter 18.
+-   Step 2: review regression assumptions from IBM 6510.
+-   Case 31 example: keep the same outcome and change the predictors.
+
+## CFA preview
+
+-   Next topics: confirmatory factor analysis (CFA) and Dr. Jung’s example of structural equation modeling (SEM).
+-   Review convergent and discriminant validity. Take notes on the common method bias article.
+
+## R and Quarto tips
+
+-   `tbl_summary(by = q38)` puts the two residence groups side by side.
+    -   `"{mean} ({sd})"` shows the mean with SD in parentheses.
+    -   `add_overall()` adds everyone together. `add_difference()` shows the gap between groups.
+-   Dr. Jung wrote one function to repeat the chi-square test for different services.
+    -   Remove missing answers. Use `droplevels()` to remove unused categories.
+    -   Make the table, calculate percentages, draw the mosaic plot, then run the test.
+-   For submission: set `embed-resources: true` and render again so the images and formatting stay in the HTML.
+-   `freeze: auto` lets Quarto reuse earlier results when I render the whole project.
+-   For slides: use color to highlight a heading. Put `...` on its own line to show the next point on click.
+-   Type `$\chi^2$` to show χ². Use tabs to keep the table, plot, and test on one slide.
+
+## My reflection
+
+-   R4a and R4b helped me remember which test to use. The groups stayed the same, but the question changed. For ratings, I compared means. For awareness, I compared the percentage in each category.
