@@ -1,0 +1,26 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+    - "projects/*.qmd"
+website:
+  title: "Simran Kaur | Marketing & Analytics"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: dashboard.qmd
+        text: CEP Dashboard
+      - href: styling.qmd
+        text: CSS/SCSS
+      - href: listings.qmd
+        text: Listings
+  page-footer: "Simran Kaur · IBM 6500 · M10"
+format:
+  html:
+    theme: [cosmo, styles.scss]
+    toc: true
+    embed-resources: true
+execute:
+  freeze: auto

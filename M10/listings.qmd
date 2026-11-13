@@ -1,0 +1,42 @@
+---
+title: "Browse My Learning Projects"
+listing:
+  id: portfolio-projects
+  contents: projects
+  type: grid
+  fields: [title, description, categories]
+  categories: true
+  filter-ui: true
+  sort: title
+---
+
+## Organizing a growing portfolio
+
+A Quarto listing collects pages and displays their metadata in one place. Rather than adding every project card by hand, I can add another QMD file to the projects folder and render the website again.
+
+The examples below introduce areas of my learning. They are short summaries, rather than full analysis reports.
+
+::: {#portfolio-projects}
+:::
+
+## How this page works
+
+```yaml
+listing:
+  contents: projects
+  type: grid
+  fields: [title, description, categories]
+  categories: true
+  filter-ui: true
+  sort: title
+```
+
+Each project provides a title, description, and categories in its YAML header. The listing reads those fields and creates the cards. Category controls help visitors browse by topic; the filter helps them find a specific entry.
+
+## How I would use listings
+
+For my portfolio, I could organize marketing analytics, AI research, and creative projects in one place. This would help an employer explore work that matches the role they are hiring for.
+
+## Reference
+
+[Quarto document listings](https://quarto.org/docs/websites/website-listings.html)

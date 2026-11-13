@@ -1,0 +1,7 @@
+---
+title: "AI-Assisted Research Coding"
+description: "An overview of my TBFI culminating experience project."
+categories: ["AI Research"]
+---
+
+My CEP examines AI-assisted research coding with CALIPER. The focus is on comparing coding decisions against human-reviewed evidence. See the [CEP dashboard](../dashboard.qmd) for the workflow and analytical objectives.

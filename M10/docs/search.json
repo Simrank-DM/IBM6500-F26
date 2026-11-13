@@ -1,0 +1,240 @@
+[
+  {
+    "objectID": "M10-Submission-Simran-Kaur.html",
+    "href": "M10-Submission-Simran-Kaur.html",
+    "title": "M10 Hands-on Practice: My Quarto Website",
+    "section": "",
+    "text": "This website brings together my background, a CEP project dashboard, and examples of website customization. I organized the content into four navigation tabs so visitors can find each topic easily.\n\n\n\n\n\n\n\nPage\nWhat visitors can explore\n\n\n\n\nHome\nMy background, career goals, skills, and education\n\n\nCEP Dashboard\nTBFI project objectives, coding workflow, and evidence needed for validation\n\n\nCSS/SCSS\nTheme settings, code examples, and a visible custom style\n\n\nListings\nProject cards with categories and filtering"
+  },
+  {
+    "objectID": "M10-Submission-Simran-Kaur.html#website-overview",
+    "href": "M10-Submission-Simran-Kaur.html#website-overview",
+    "title": "M10 Hands-on Practice: My Quarto Website",
+    "section": "",
+    "text": "This website brings together my background, a CEP project dashboard, and examples of website customization. I organized the content into four navigation tabs so visitors can find each topic easily.\n\n\n\n\n\n\n\nPage\nWhat visitors can explore\n\n\n\n\nHome\nMy background, career goals, skills, and education\n\n\nCEP Dashboard\nTBFI project objectives, coding workflow, and evidence needed for validation\n\n\nCSS/SCSS\nTheme settings, code examples, and a visible custom style\n\n\nListings\nProject cards with categories and filtering"
+  },
+  {
+    "objectID": "M10-Submission-Simran-Kaur.html#learning-reflection-draft",
+    "href": "M10-Submission-Simran-Kaur.html#learning-reflection-draft",
+    "title": "M10 Hands-on Practice: My Quarto Website",
+    "section": "Learning reflection draft",
+    "text": "Learning reflection draft\nBuilding this project helps me understand how separate QMD files work together as a website. The dashboard focuses on selected project information, while the listings organize content for visitors. Keeping the styling in an SCSS file also makes the design easier to maintain. Before submitting, I need to preview every page and confirm that the published links work."
+  },
+  {
+    "objectID": "M10-Submission-Simran-Kaur.html#appendix-submission-links",
+    "href": "M10-Submission-Simran-Kaur.html#appendix-submission-links",
+    "title": "M10 Hands-on Practice: My Quarto Website",
+    "section": "Appendix: Submission links",
+    "text": "Appendix: Submission links\n\n\n\n\n\n\nImportant\n\n\n\nReplace both placeholders below with your actual URLs after publishing. Revise this reflection to match your own experience before submitting.\n\n\n\nPublished website: M10 Portfolio Website\nGitHub repository: M10 Website Source Files"
+  },
+  {
+    "objectID": "styling.html",
+    "href": "styling.html",
+    "title": "Making My Website Easier to Read",
+    "section": "",
+    "text": "For my website, I use a white background, burgundy headings, and a sans-serif font. I want visitors to find the important information quickly and read it comfortably."
+  },
+  {
+    "objectID": "styling.html#why-styling-matters",
+    "href": "styling.html#why-styling-matters",
+    "title": "Making My Website Easier to Read",
+    "section": "",
+    "text": "For my website, I use a white background, burgundy headings, and a sans-serif font. I want visitors to find the important information quickly and read it comfortably."
+  },
+  {
+    "objectID": "styling.html#css-and-scss",
+    "href": "styling.html#css-and-scss",
+    "title": "Making My Website Easier to Read",
+    "section": "CSS and SCSS",
+    "text": "CSS and SCSS\nCSS controls the appearance of HTML elements. SCSS adds features such as variables and nesting, then compiles into CSS. In Quarto, a custom SCSS file can extend a Bootstrap theme."
+  },
+  {
+    "objectID": "styling.html#my-theme-settings",
+    "href": "styling.html#my-theme-settings",
+    "title": "Making My Website Easier to Read",
+    "section": "My theme settings",
+    "text": "My theme settings\nThe project configuration connects the built-in theme and my custom file:\nformat:\n  html:\n    theme: [cosmo, styles.scss]\nThe variables section sets reusable choices before Bootstrap is compiled:\n/*-- scss:defaults --*/\n$primary: #702338;\n$body-bg: #ffffff;\n$body-color: #252525;\n$font-family-sans-serif: Arial, sans-serif;\n$font-size-base: 1.125rem;"
+  },
+  {
+    "objectID": "styling.html#styling-a-specific-element",
+    "href": "styling.html#styling-a-specific-element",
+    "title": "Making My Website Easier to Read",
+    "section": "Styling a specific element",
+    "text": "Styling a specific element\nThe rules section adds CSS selectors. This example gives a highlighted paragraph a colored border and more space:\n/*-- scss:rules --*/\n.portfolio-note {\n  border-left: 5px solid $primary;\n  padding: 1rem;\n  background: #faf3f5;\n}\n\nA visible example: This paragraph uses the custom portfolio-note class from my SCSS file."
+  },
+  {
+    "objectID": "styling.html#where-html-fits",
+    "href": "styling.html#where-html-fits",
+    "title": "Making My Website Easier to Read",
+    "section": "Where HTML fits",
+    "text": "Where HTML fits\nQuarto converts Markdown into HTML. I can add a small HTML element when I need more control, while keeping most writing in Markdown.\n&lt;p class=\"portfolio-note\"&gt;A short project takeaway.&lt;/p&gt;"
+  },
+  {
+    "objectID": "styling.html#my-takeaway",
+    "href": "styling.html#my-takeaway",
+    "title": "Making My Website Easier to Read",
+    "section": "My takeaway",
+    "text": "My takeaway\nSeparating content from styling makes the website easier to update. I can change a color or font in one file and apply it across the site. I also need to check contrast, spacing, and navigation on smaller screens."
+  },
+  {
+    "objectID": "styling.html#reference",
+    "href": "styling.html#reference",
+    "title": "Making My Website Easier to Read",
+    "section": "Reference",
+    "text": "Reference\nQuarto HTML themes"
+  },
+  {
+    "objectID": "projects/creative.html",
+    "href": "projects/creative.html",
+    "title": "Design and Visual Communication",
+    "section": "",
+    "text": "My design background helps me think about hierarchy, readability, and storytelling. I want to apply these skills when explaining analytical findings to an audience. A useful portfolio should make both the question and the takeaway easy to understand."
+  },
+  {
+    "objectID": "listings.html",
+    "href": "listings.html",
+    "title": "Browse My Learning Projects",
+    "section": "",
+    "text": "A Quarto listing collects pages and displays their metadata in one place. Rather than adding every project card by hand, I can add another QMD file to the projects folder and render the website again.\nThe examples below introduce areas of my learning. They are short summaries, rather than full analysis reports.\n\n\n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\nAI Research\n\n\n\nAn overview of my TBFI culminating experience project.\n\n\n\n\n\n\n\n\n\n\n\nDesign\n\n\n\nBringing a creative background into marketing analytics.\n\n\n\n\n\n\n\n\n\n\n\nAnalytics\n\n\n\nConnecting query skills with marketing questions.\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "listings.html#organizing-a-growing-portfolio",
+    "href": "listings.html#organizing-a-growing-portfolio",
+    "title": "Browse My Learning Projects",
+    "section": "",
+    "text": "A Quarto listing collects pages and displays their metadata in one place. Rather than adding every project card by hand, I can add another QMD file to the projects folder and render the website again.\nThe examples below introduce areas of my learning. They are short summaries, rather than full analysis reports.\n\n\n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\nAI Research\n\n\n\nAn overview of my TBFI culminating experience project.\n\n\n\n\n\n\n\n\n\n\n\nDesign\n\n\n\nBringing a creative background into marketing analytics.\n\n\n\n\n\n\n\n\n\n\n\nAnalytics\n\n\n\nConnecting query skills with marketing questions.\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "listings.html#how-this-page-works",
+    "href": "listings.html#how-this-page-works",
+    "title": "Browse My Learning Projects",
+    "section": "How this page works",
+    "text": "How this page works\nlisting:\n  contents: projects\n  type: grid\n  fields: [title, description, categories]\n  categories: true\n  filter-ui: true\n  sort: title\nEach project provides a title, description, and categories in its YAML header. The listing reads those fields and creates the cards. Category controls help visitors browse by topic; the filter helps them find a specific entry."
+  },
+  {
+    "objectID": "listings.html#how-i-would-use-listings",
+    "href": "listings.html#how-i-would-use-listings",
+    "title": "Browse My Learning Projects",
+    "section": "How I would use listings",
+    "text": "How I would use listings\nFor my portfolio, I could organize marketing analytics, AI research, and creative projects in one place. This would help an employer explore work that matches the role they are hiring for."
+  },
+  {
+    "objectID": "listings.html#reference",
+    "href": "listings.html#reference",
+    "title": "Browse My Learning Projects",
+    "section": "Reference",
+    "text": "Reference\nQuarto document listings"
+  },
+  {
+    "objectID": "dashboard.html",
+    "href": "dashboard.html",
+    "title": "TBFI | CEP Project Overview",
+    "section": "",
+    "text": "Tarkington Business Futures Institute (TBFI)\nA project focused on AI-assisted research coding and validation.\n\n\n\nAI-assisted meta-analysis\nCompare CALIPER-assisted coding with human coding using secondary research materials.\n\n\n\nDashboard walkthrough and feedback\nHelp communicate the workflow clearly and identify where dashboard explanations need improvement.\n\n\n\n\n\n\nOur project focuses on personalization in marketing communication. We use a published meta-analysis as a benchmark for evaluating research coding with CALIPER.\nThe comparison centers on extracting effect-size information, aligning outcome constructs, and documenting coding decisions. This dashboard describes the project design; it does not report completed validation results.\n\n\n\n\n\n\nObjective\nFocus\n\n\n\n\nAO1\nEffect-size extraction accuracy\n\n\nAO2\nOutcome construct alignment with CALIPER\n\n\nAO3\nOptional synthetic versus human validation extension\n\n\nAO4\nDashboard walkthrough accuracy and feedback\n\n\n\n\n\n\n\n\n\n\nReview the source article and coding instructions.\nRecord human coding decisions with page-level evidence.\nReview CALIPER-assisted output.\nCompare fields and document disagreements.\nSummarize accuracy and agreement after validation.\n\n\n\n\n\n\n\n\n\n\n\nMeasure\nEvidence required\n\n\n\n\nExtraction accuracy\nVerified reference coding and matched AI fields\n\n\nOutcome alignment\nAgreed outcome categories and coding rules\n\n\nCoding agreement\nMatched independent ratings\n\n\nWalkthrough feedback\nDocumented review observations\n\n\n\nResults are pending. No simulated performance numbers are presented.\n\n\n\n\n\n\nGroup project website · Group repository · CALIPER\nProject description is based on our planning context and should be reviewed against the latest team decisions before submission."
+  },
+  {
+    "objectID": "dashboard.html#row",
+    "href": "dashboard.html#row",
+    "title": "TBFI | CEP Project Overview",
+    "section": "",
+    "text": "Tarkington Business Futures Institute (TBFI)\nA project focused on AI-assisted research coding and validation.\n\n\n\nAI-assisted meta-analysis\nCompare CALIPER-assisted coding with human coding using secondary research materials.\n\n\n\nDashboard walkthrough and feedback\nHelp communicate the workflow clearly and identify where dashboard explanations need improvement."
+  },
+  {
+    "objectID": "dashboard.html#row-1",
+    "href": "dashboard.html#row-1",
+    "title": "TBFI | CEP Project Overview",
+    "section": "",
+    "text": "Our project focuses on personalization in marketing communication. We use a published meta-analysis as a benchmark for evaluating research coding with CALIPER.\nThe comparison centers on extracting effect-size information, aligning outcome constructs, and documenting coding decisions. This dashboard describes the project design; it does not report completed validation results.\n\n\n\n\n\n\nObjective\nFocus\n\n\n\n\nAO1\nEffect-size extraction accuracy\n\n\nAO2\nOutcome construct alignment with CALIPER\n\n\nAO3\nOptional synthetic versus human validation extension\n\n\nAO4\nDashboard walkthrough accuracy and feedback"
+  },
+  {
+    "objectID": "dashboard.html#row-2",
+    "href": "dashboard.html#row-2",
+    "title": "TBFI | CEP Project Overview",
+    "section": "",
+    "text": "Review the source article and coding instructions.\nRecord human coding decisions with page-level evidence.\nReview CALIPER-assisted output.\nCompare fields and document disagreements.\nSummarize accuracy and agreement after validation.\n\n\n\n\n\n\n\n\n\n\n\nMeasure\nEvidence required\n\n\n\n\nExtraction accuracy\nVerified reference coding and matched AI fields\n\n\nOutcome alignment\nAgreed outcome categories and coding rules\n\n\nCoding agreement\nMatched independent ratings\n\n\nWalkthrough feedback\nDocumented review observations\n\n\n\nResults are pending. No simulated performance numbers are presented."
+  },
+  {
+    "objectID": "dashboard.html#row-3",
+    "href": "dashboard.html#row-3",
+    "title": "TBFI | CEP Project Overview",
+    "section": "",
+    "text": "Group project website · Group repository · CALIPER\nProject description is based on our planning context and should be reviewed against the latest team decisions before submission."
+  },
+  {
+    "objectID": "projects/cep.html",
+    "href": "projects/cep.html",
+    "title": "AI-Assisted Research Coding",
+    "section": "",
+    "text": "My CEP examines AI-assisted research coding with CALIPER. The focus is on comparing coding decisions against human-reviewed evidence. See the CEP dashboard for the workflow and analytical objectives."
+  },
+  {
+    "objectID": "projects/sql.html",
+    "href": "projects/sql.html",
+    "title": "SQL and Marketing Data",
+    "section": "",
+    "text": "I am developing SQL skills to select, filter, and summarize marketing data. Understanding the data structure first helps me write queries that answer a clear business question. This entry is a learning summary; it does not present a completed analysis."
+  },
+  {
+    "objectID": "index.html#marketing-analytics-and-creative-thinking",
+    "href": "index.html#marketing-analytics-and-creative-thinking",
+    "title": "Hi, I’m Simran Kaur",
+    "section": "Marketing, analytics, and creative thinking",
+    "text": "Marketing, analytics, and creative thinking\nI am pursuing my M.S. in Digital Marketing & Analytics at Cal Poly Pomona. My background includes graphic design, e-commerce, and visual storytelling. I enjoy combining creative ideas with data to understand customers and communicate insights clearly."
+  },
+  {
+    "objectID": "index.html#where-i-want-to-go",
+    "href": "index.html#where-i-want-to-go",
+    "title": "Hi, I’m Simran Kaur",
+    "section": "Where I want to go",
+    "text": "Where I want to go\nMy goal is to become a marketing analyst in the fashion industry. I want to use consumer insights, digital marketing data, and visual communication to help brands make informed decisions."
+  },
+  {
+    "objectID": "index.html#skills-i-am-developing",
+    "href": "index.html#skills-i-am-developing",
+    "title": "Hi, I’m Simran Kaur",
+    "section": "Skills I am developing",
+    "text": "Skills I am developing\n\n\n\n\n\n\n\nArea\nTools and interests\n\n\n\n\nMarketing analytics\nGA4, Tableau, and consumer research\n\n\nData analysis\nR, SQL/BigQuery basics, and Quarto\n\n\nCreative work\nAdobe Photoshop, Illustrator, Premiere Pro, and After Effects\n\n\nDesign and collaboration\nFigma, Canva, and GitHub"
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Hi, I’m Simran Kaur",
+    "section": "Education",
+    "text": "Education\nCalifornia State Polytechnic University, Pomona\nM.S. in Digital Marketing & Analytics · Expected 2026"
+  },
+  {
+    "objectID": "index.html#explore-my-work",
+    "href": "index.html#explore-my-work",
+    "title": "Hi, I’m Simran Kaur",
+    "section": "Explore my work",
+    "text": "Explore my work\nStart with my CEP dashboard, see how I style this website, or browse my project listings.\nLinkedIn · Creative portfolio"
+  },
+  {
+    "objectID": "M10-Hands-on Practice Assignment-Simran-Kaur.html",
+    "href": "M10-Hands-on Practice Assignment-Simran-Kaur.html",
+    "title": "M10 Hands-on Practice: My Quarto Website",
+    "section": "",
+    "text": "This website brings together my background, a CEP project dashboard, and examples of website customization. I organized the content into four navigation tabs so visitors can find each topic easily.\n\n\n\n\n\n\n\nPage\nWhat visitors can explore\n\n\n\n\nHome\nMy background, career goals, skills, and education\n\n\nCEP Dashboard\nTBFI project objectives, coding workflow, and evidence needed for validation\n\n\nCSS/SCSS\nTheme settings, code examples, and a visible custom style\n\n\nListings\nProject cards with categories and filtering"
+  },
+  {
+    "objectID": "M10-Hands-on Practice Assignment-Simran-Kaur.html#website-overview",
+    "href": "M10-Hands-on Practice Assignment-Simran-Kaur.html#website-overview",
+    "title": "M10 Hands-on Practice: My Quarto Website",
+    "section": "",
+    "text": "This website brings together my background, a CEP project dashboard, and examples of website customization. I organized the content into four navigation tabs so visitors can find each topic easily.\n\n\n\n\n\n\n\nPage\nWhat visitors can explore\n\n\n\n\nHome\nMy background, career goals, skills, and education\n\n\nCEP Dashboard\nTBFI project objectives, coding workflow, and evidence needed for validation\n\n\nCSS/SCSS\nTheme settings, code examples, and a visible custom style\n\n\nListings\nProject cards with categories and filtering"
+  },
+  {
+    "objectID": "M10-Hands-on Practice Assignment-Simran-Kaur.html#learning-reflection-draft",
+    "href": "M10-Hands-on Practice Assignment-Simran-Kaur.html#learning-reflection-draft",
+    "title": "M10 Hands-on Practice: My Quarto Website",
+    "section": "Learning reflection draft",
+    "text": "Learning reflection draft\nBuilding this project helps me understand how separate QMD files work together as a website. The dashboard focuses on selected project information, while the listings organize content for visitors. Keeping the styling in an SCSS file also makes the design easier to maintain. Before submitting, I need to preview every page and confirm that the published links work."
+  },
+  {
+    "objectID": "M10-Hands-on Practice Assignment-Simran-Kaur.html#appendix-submission-links",
+    "href": "M10-Hands-on Practice Assignment-Simran-Kaur.html#appendix-submission-links",
+    "title": "M10 Hands-on Practice: My Quarto Website",
+    "section": "Appendix: Submission links",
+    "text": "Appendix: Submission links\n\n\n\n\n\n\nImportant\n\n\n\nReplace both placeholders below with your actual URLs after publishing. Revise this reflection to match your own experience before submitting.\n\n\n\nPublished website: M10 Portfolio Website\nGitHub repository: M10 Website Source Files"
+  }
+]

@@ -1,0 +1,7 @@
+---
+title: "SQL and Marketing Data"
+description: "Connecting query skills with marketing questions."
+categories: ["Analytics"]
+---
+
+I am developing SQL skills to select, filter, and summarize marketing data. Understanding the data structure first helps me write queries that answer a clear business question. This entry is a learning summary; it does not present a completed analysis.

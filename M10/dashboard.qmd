@@ -1,0 +1,77 @@
+---
+title: "TBFI | CEP Project Overview"
+format:
+  dashboard:
+    theme: [cosmo, styles.scss]
+    orientation: rows
+    scrolling: true
+    embed-resources: true
+---
+
+# Project Overview
+
+## Row
+
+### Client
+
+**Tarkington Business Futures Institute (TBFI)**
+
+A project focused on AI-assisted research coding and validation.
+
+### Research approach
+
+**AI-assisted meta-analysis**
+
+Compare CALIPER-assisted coding with human coding using secondary research materials.
+
+### My focus
+
+**Dashboard walkthrough and feedback**
+
+Help communicate the workflow clearly and identify where dashboard explanations need improvement.
+
+## Row
+
+### What the project examines
+
+Our project focuses on personalization in marketing communication. We use a published meta-analysis as a benchmark for evaluating research coding with CALIPER.
+
+The comparison centers on extracting effect-size information, aligning outcome constructs, and documenting coding decisions. This dashboard describes the project design; it does not report completed validation results.
+
+### Analytical objectives
+
+| Objective | Focus |
+|---|---|
+| AO1 | Effect-size extraction accuracy |
+| AO2 | Outcome construct alignment with CALIPER |
+| AO3 | Optional synthetic versus human validation extension |
+| AO4 | Dashboard walkthrough accuracy and feedback |
+
+## Row
+
+### Coding workflow
+
+1. Review the source article and coding instructions.
+2. Record human coding decisions with page-level evidence.
+3. Review CALIPER-assisted output.
+4. Compare fields and document disagreements.
+5. Summarize accuracy and agreement after validation.
+
+### Evidence needed for a results dashboard
+
+| Measure | Evidence required |
+|---|---|
+| Extraction accuracy | Verified reference coding and matched AI fields |
+| Outcome alignment | Agreed outcome categories and coding rules |
+| Coding agreement | Matched independent ratings |
+| Walkthrough feedback | Documented review observations |
+
+**Results are pending.** No simulated performance numbers are presented.
+
+## Row
+
+### Project resources
+
+[Group project website](https://gabrielarq1.github.io/CEP--Group-8/CEP-G8-F26/Group8-CEP-F26.html) · [Group repository](https://github.com/gabrielarq1/CEP--Group-8) · [CALIPER](https://caliper-app-production.up.railway.app/#v=setup)
+
+Project description is based on our planning context and should be reviewed against the latest team decisions before submission.

@@ -1,0 +1,35 @@
+---
+title: "Hi, I’m Simran Kaur"
+---
+
+<img src="images/profile.jpg"
+     alt="Simran Kaur"
+     style="width:240px; height:240px; border-radius:50%; object-fit:cover; object-position:center 35%;">
+
+## Marketing, analytics, and creative thinking
+
+I am pursuing my M.S. in Digital Marketing & Analytics at Cal Poly Pomona. My background includes graphic design, e-commerce, and visual storytelling. I enjoy combining creative ideas with data to understand customers and communicate insights clearly.
+
+## Where I want to go
+
+My goal is to become a marketing analyst in the fashion industry. I want to use consumer insights, digital marketing data, and visual communication to help brands make informed decisions.
+
+## Skills I am developing
+
+| Area | Tools and interests |
+|---|---|
+| Marketing analytics | GA4, Tableau, and consumer research |
+| Data analysis | R, SQL/BigQuery basics, and Quarto |
+| Creative work | Adobe Photoshop, Illustrator, Premiere Pro, and After Effects |
+| Design and collaboration | Figma, Canva, and GitHub |
+
+## Education
+
+**California State Polytechnic University, Pomona**  
+M.S. in Digital Marketing & Analytics · Expected 2026
+
+## Explore my work
+
+Start with my [CEP dashboard](dashboard.qmd), see how I [style this website](styling.qmd), or browse my [project listings](listings.qmd).
+
+[LinkedIn](https://www.linkedin.com/in/simrank09/) · [Creative portfolio](https://www.simrankcreative.com)

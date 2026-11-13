@@ -1,0 +1,65 @@
+---
+title: "Making My Website Easier to Read"
+---
+
+## Why styling matters
+
+For my website, I use a white background, burgundy headings, and a sans-serif font. I want visitors to find the important information quickly and read it comfortably.
+
+## CSS and SCSS
+
+CSS controls the appearance of HTML elements. SCSS adds features such as variables and nesting, then compiles into CSS. In Quarto, a custom SCSS file can extend a Bootstrap theme.
+
+## My theme settings
+
+The project configuration connects the built-in theme and my custom file:
+
+```yaml
+format:
+  html:
+    theme: [cosmo, styles.scss]
+```
+
+The variables section sets reusable choices before Bootstrap is compiled:
+
+```scss
+/*-- scss:defaults --*/
+$primary: #702338;
+$body-bg: #ffffff;
+$body-color: #252525;
+$font-family-sans-serif: Arial, sans-serif;
+$font-size-base: 1.125rem;
+```
+
+## Styling a specific element
+
+The rules section adds CSS selectors. This example gives a highlighted paragraph a colored border and more space:
+
+```scss
+/*-- scss:rules --*/
+.portfolio-note {
+  border-left: 5px solid $primary;
+  padding: 1rem;
+  background: #faf3f5;
+}
+```
+
+::: {.portfolio-note}
+**A visible example:** This paragraph uses the custom `portfolio-note` class from my SCSS file.
+:::
+
+## Where HTML fits
+
+Quarto converts Markdown into HTML. I can add a small HTML element when I need more control, while keeping most writing in Markdown.
+
+```html
+<p class="portfolio-note">A short project takeaway.</p>
+```
+
+## My takeaway
+
+Separating content from styling makes the website easier to update. I can change a color or font in one file and apply it across the site. I also need to check contrast, spacing, and navigation on smaller screens.
+
+## Reference
+
+[Quarto HTML themes](https://quarto.org/docs/output-formats/html-themes.html)

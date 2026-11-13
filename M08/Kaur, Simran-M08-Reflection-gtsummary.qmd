@@ -712,7 +712,7 @@ Once the week-10 search is done, I'll replace the simulation chunk with `read_cs
 
 ## Appendix
 
-- **GitHub repository:** [M08 Reflection Files](https://github.com/Simrank-DM/IBM6500-F26/tree/main/M08)
-- **GitHub Pages (this deck):** [M08 gtsummary Reflection](https://simrank-dm.github.io/IBM6500-F26/M08/Kaur%2C%20Simran-M08-Reflection-gtsummary.html)
+-   **GitHub repository:** [M08 Reflection Files](https://github.com/Simrank-DM/IBM6500-F26/tree/main/M08)
+-   **GitHub Pages (this deck):** [M08 gtsummary Reflection](https://simrank-dm.github.io/IBM6500-F26/M08/Kaur%2C%20Simran-M08-Reflection-gtsummary.html)
 -   **Reproducibility:** R `r getRversion()`, gtsummary `r packageVersion("gtsummary")`, gt `r packageVersion("gt")`. The pilot data is generated with `set.seed(6400)`.
 -   **Data disclosure:** All AO4 tables in Parts 3 and 4 use simulated pilot data built from the approved AO4 design. No real screening records were analyzed.

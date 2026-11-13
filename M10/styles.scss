@@ -1,0 +1,18 @@
+/*-- scss:defaults --*/
+$primary: #702338;
+$body-bg: #ffffff;
+$body-color: #252525;
+$font-family-sans-serif: Arial, sans-serif;
+$font-size-base: 1.125rem;
+$link-color: #702338;
+
+/*-- scss:rules --*/
+h1, h2, h3 { font-weight: 700; }
+a { text-underline-offset: 0.18em; }
+.portfolio-note {
+  border-left: 5px solid $primary;
+  padding: 1rem;
+  background: #faf3f5;
+  margin: 1rem 0;
+}
+.navbar { font-weight: 700; }

@@ -87,4 +87,3 @@ Kenny, D. A. (2025, March 7). *Mediation*. <https://davidakenny.net/cm/mediate.h
 - **GitHub Pages website:** <https://Simrank-DM.github.io/IBM6500-F26/M11/mediator-moderator-summary-kaur.html>
 -   **Assigned article DOI:** <https://doi.org/10.1037/0022-3514.51.6.1173>
 -   **Full article PDF:** <https://www2.psych.ubc.ca/~schaller/528Readings/BaronKenny1986.pdf>
--   **Supplementary mediation guidance:** <https://davidakenny.net/cm/mediate.htm>

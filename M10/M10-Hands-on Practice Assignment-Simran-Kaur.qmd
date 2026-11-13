@@ -1,0 +1,34 @@
+---
+title: "M10 Hands-on Practice: My Quarto Website"
+author: "Simran Kaur"
+format:
+  html:
+    toc: true
+    embed-resources: true
+execute:
+  freeze: auto
+---
+
+## Website overview
+
+This website brings together my background, a CEP project dashboard, and examples of website customization. I organized the content into four navigation tabs so visitors can find each topic easily.
+
+| Page | What visitors can explore |
+|---|---|
+| Home | My background, career goals, skills, and education |
+| CEP Dashboard | TBFI project objectives, coding workflow, and evidence needed for validation |
+| CSS/SCSS | Theme settings, code examples, and a visible custom style |
+| Listings | Project cards with categories and filtering |
+
+## Learning reflection draft
+
+Building this project helps me understand how separate QMD files work together as a website. The dashboard focuses on selected project information, while the listings organize content for visitors. Keeping the styling in an SCSS file also makes the design easier to maintain. Before submitting, I need to preview every page and confirm that the published links work.
+
+## Appendix: Submission links
+
+::: {.callout-important}
+Replace both placeholders below with your actual URLs after publishing. Revise this reflection to match your own experience before submitting.
+:::
+
+- **Published website:** [M10 Portfolio Website](https://simrank-dm.github.io/IBM6500-F26/M10/docs/index.html)
+- **GitHub repository:** [M10 Website Source Files](https://github.com/Simrank-DM/IBM6500-F26/tree/main/M10)
