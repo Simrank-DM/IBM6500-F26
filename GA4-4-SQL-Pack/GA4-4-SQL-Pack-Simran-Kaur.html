@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Simran Kaur" />
+  <meta name="dcterms.date" content="2026-11-12" />
+  <title>GA4-4 SQL Pack — Simran Kaur</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+<style>body{font-family:Arial,sans-serif;color:#172620;max-width:1050px;margin:40px auto;padding:0 28px;line-height:1.65;background:white}h1,h2,h3{color:#124d36;line-height:1.25}h1{margin-top:2em;border-bottom:2px solid #c7dfd1;padding-bottom:.3em}h2{margin-top:2em}pre{background:#f3f7f4;border-left:4px solid #26744e;padding:20px;overflow:auto;font-size:14px;line-height:1.5}code{font-family:Consolas,monospace}table{border-collapse:collapse;width:100%}th,td{padding:10px;border:1px solid #ccdbd2;text-align:left}th{background:#e8f1eb}a{color:#146544}#TOC{background:#f3f7f4;padding:16px 24px}header h1{font-size:2.3em} @media(max-width:650px){body{padding:0 15px}pre{font-size:12px}}</style></head>
+<body>
+<header id="title-block-header">
+<h1 class="title">GA4-4 — SQL Pack (Individual)</h1>
+<p class="author">Simran Kaur</p>
+<p class="date">2026-11-12</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#purpose-and-dataset" id="toc-purpose-and-dataset">Purpose
+and dataset</a></li>
+<li><a href="#required-skill-coverage"
+id="toc-required-skill-coverage">Required skill coverage</a></li>
+<li><a href="#eight-googlesql-queries"
+id="toc-eight-googlesql-queries">Eight GoogleSQL queries</a>
+<ul>
+<li><a href="#query-1-inspect-recent-purchase-events"
+id="toc-query-1-inspect-recent-purchase-events">Query 1: Inspect recent
+purchase events</a></li>
+<li><a href="#query-2-daily-events-and-observed-users"
+id="toc-query-2-daily-events-and-observed-users">Query 2: Daily events
+and observed users</a></li>
+<li><a href="#query-3-page-views-by-device-category"
+id="toc-query-3-page-views-by-device-category">Query 3: Page views by
+device category</a></li>
+<li><a href="#query-4-top-page-urls-with-string-parameters"
+id="toc-query-4-top-page-urls-with-string-parameters">Query 4: Top page
+URLs with string parameters</a></li>
+<li><a href="#query-5-count-observed-sessions-using-integer-parameters"
+id="toc-query-5-count-observed-sessions-using-integer-parameters">Query
+5: Count observed sessions using integer parameters</a></li>
+<li><a href="#query-6-inspect-numeric-purchase-values-by-currency"
+id="toc-query-6-inspect-numeric-purchase-values-by-currency">Query 6:
+Inspect numeric purchase values by currency</a></li>
+<li><a href="#query-7-audit-page-view-parameter-coverage"
+id="toc-query-7-audit-page-view-parameter-coverage">Query 7: Audit
+page-view parameter coverage</a></li>
+<li><a href="#query-8-join-daily-traffic-and-purchase-summaries"
+id="toc-query-8-join-daily-traffic-and-purchase-summaries">Query 8: Join
+daily traffic and purchase summaries</a></li>
+</ul></li>
+<li><a href="#notes-for-reuse-and-validation"
+id="toc-notes-for-reuse-and-validation">Notes for reuse and
+validation</a></li>
+<li><a href="#learning-reflection" id="toc-learning-reflection">Learning
+reflection</a></li>
+<li><a href="#references" id="toc-references">References</a></li>
+<li><a href="#appendix-links" id="toc-appendix-links">Appendix:
+Links</a></li>
+</ul>
+</nav>
+<h1 id="purpose-and-dataset">Purpose and dataset</h1>
+<p>This SQL pack uses eight GoogleSQL queries to practice working with
+GA4 export data. My focus is on keeping the SQL readable and separating
+events, observed users, and sessions so the results have a clear
+meaning.</p>
+<p><strong>Dataset:</strong>
+<code>bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*</code><br />
+<strong>Analysis period:</strong> January 1–31, 2021, inclusive. Every
+base-table read uses a constant <code>_TABLE_SUFFIX</code> range to
+scope daily export tables. Dates summarized from <code>event_date</code>
+follow the property’s reporting date; Query 1 displays timestamps in
+UTC.</p>
+<p>The public Google Merchandise Store sample covers November 2020
+through January 2021. It is obfuscated, can contain placeholders, and is
+different from the live GA4 demo account (<a
+href="https://developers.google.com/analytics/bigquery/web-ecommerce-demo-dataset">Google
+sample documentation</a>). These examples demonstrate transferable
+skills for later team analysis; they do not measure TBFI website
+activity.</p>
+<p><strong>Validation status:</strong> SQL has been reviewed against
+Google’s documented export schema but has not been executed in BigQuery.
+No numeric results or business findings are claimed. The SQL blocks are
+displayed as source code and do not run when this report renders.</p>
+<h1 id="required-skill-coverage">Required skill coverage</h1>
+<table>
+<thead>
+<tr class="header">
+<th>Requirement</th>
+<th>Queries demonstrating it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A. Filtering and date scoping</td>
+<td>1–8</td>
+</tr>
+<tr class="even">
+<td>B. Grouping and aggregation</td>
+<td>2, 3, 4, 5, 6, 8</td>
+</tr>
+<tr class="odd">
+<td>C. UNNEST event parameters</td>
+<td>4, 5, 6, 7</td>
+</tr>
+<tr class="even">
+<td>D. CTE / modular structure</td>
+<td>4–8</td>
+</tr>
+<tr class="odd">
+<td>E. Join / combining</td>
+<td>8: LEFT JOIN of daily aggregates</td>
+</tr>
+<tr class="even">
+<td>F. Interpretation</td>
+<td>All eight queries</td>
+</tr>
+</tbody>
+</table>
+<h1 id="eight-googlesql-queries">Eight GoogleSQL queries</h1>
+<h2 id="query-1-inspect-recent-purchase-events">Query 1: Inspect recent
+purchase events</h2>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  event_date,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  TIMESTAMP_MICROS(event_timestamp) <span class="kw">AS</span> event_time_utc,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  user_pseudo_id,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  ecommerce.transaction_id</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.ga4_obfuscated_sample_ecommerce.events_<span class="op">*</span>`</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> _TABLE_SUFFIX <span class="kw">BETWEEN</span> <span class="st">&#39;20210101&#39;</span> <span class="kw">AND</span> <span class="st">&#39;20210131&#39;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> event_name <span class="op">=</span> <span class="st">&#39;purchase&#39;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> event_timestamp <span class="kw">DESC</span>, user_pseudo_id</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">50</span>;</span></code></pre></div>
+<p>This query returns up to 50 of the latest purchase-event records in
+January 2021. I would use it to inspect timestamps and transaction IDs
+before building a purchase summary. Each row is an event record, so
+repeated purchase tracking can produce multiple records for one order;
+LIMIT restricts the output, while the table-suffix filter restricts the
+scanned dates.</p>
+<h2 id="query-2-daily-events-and-observed-users">Query 2: Daily events
+and observed users</h2>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  PARSE_DATE(<span class="st">&#39;%Y%m%d&#39;</span>, event_date) <span class="kw">AS</span> activity_date,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> event_count,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> user_pseudo_id) <span class="kw">AS</span> observed_users</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.ga4_obfuscated_sample_ecommerce.events_<span class="op">*</span>`</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> _TABLE_SUFFIX <span class="kw">BETWEEN</span> <span class="st">&#39;20210101&#39;</span> <span class="kw">AND</span> <span class="st">&#39;20210131&#39;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> activity_date</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> activity_date;</span></code></pre></div>
+<p>This query summarizes event volume and distinct observed user
+identifiers for each day. I would use the output to spot unusual traffic
+changes and decide which dates need closer review. Event counts measure
+recorded activity, while observed users are distinct non-null
+browser/device identifiers rather than verified people; daily user
+counts should not be added to obtain monthly unique users.</p>
+<h2 id="query-3-page-views-by-device-category">Query 3: Page views by
+device category</h2>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  device.<span class="kw">category</span> <span class="kw">AS</span> device_category,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> page_views,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> user_pseudo_id) <span class="kw">AS</span> observed_viewers</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.ga4_obfuscated_sample_ecommerce.events_<span class="op">*</span>`</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> _TABLE_SUFFIX <span class="kw">BETWEEN</span> <span class="st">&#39;20210101&#39;</span> <span class="kw">AND</span> <span class="st">&#39;20210131&#39;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> event_name <span class="op">=</span> <span class="st">&#39;page_view&#39;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> device_category</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> page_views <span class="kw">DESC</span>;</span></code></pre></div>
+<p>This query compares page-view volume and distinct viewers across
+device categories. I would use it to prioritize which device experience
+to inspect first. A person can appear on multiple devices, and a high
+page-view count alone does not establish better engagement or
+conversion.</p>
+<h2 id="query-4-top-page-urls-with-string-parameters">Query 4: Top page
+URLs with string parameters</h2>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> page_events <span class="kw">AS</span> (</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    user_pseudo_id,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">SELECT</span> ep.<span class="fu">value</span>.string_value</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>     <span class="kw">FROM</span> UNNEST(event_params) <span class="kw">AS</span> ep</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>     <span class="kw">WHERE</span> ep.<span class="kw">key</span> <span class="op">=</span> <span class="st">&#39;page_location&#39;</span>) <span class="kw">AS</span> page_location</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.ga4_obfuscated_sample_ecommerce.events_<span class="op">*</span>`</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> _TABLE_SUFFIX <span class="kw">BETWEEN</span> <span class="st">&#39;20210101&#39;</span> <span class="kw">AND</span> <span class="st">&#39;20210131&#39;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> event_name <span class="op">=</span> <span class="st">&#39;page_view&#39;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  page_location,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> page_views,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> user_pseudo_id) <span class="kw">AS</span> observed_viewers</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> page_events</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> page_location <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> page_location</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> page_views <span class="kw">DESC</span>, page_location</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">20</span>;</span></code></pre></div>
+<p>This query extracts page_location from its string field and ranks the
+20 most-viewed full URLs. I would use the output to identify pages that
+deserve a content or navigation review. Missing URLs are excluded and
+query strings can split one page into several URLs; the scalar
+extraction assumes each event has no more than one matching key.</p>
+<h2 id="query-5-count-observed-sessions-using-integer-parameters">Query
+5: Count observed sessions using integer parameters</h2>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> extracted <span class="kw">AS</span> (</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    user_pseudo_id,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">SELECT</span> ep.<span class="fu">value</span>.int_value</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>     <span class="kw">FROM</span> UNNEST(event_params) <span class="kw">AS</span> ep</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>     <span class="kw">WHERE</span> ep.<span class="kw">key</span> <span class="op">=</span> <span class="st">&#39;ga_session_id&#39;</span>) <span class="kw">AS</span> ga_session_id</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.ga4_obfuscated_sample_ecommerce.events_<span class="op">*</span>`</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> _TABLE_SUFFIX <span class="kw">BETWEEN</span> <span class="st">&#39;20210101&#39;</span> <span class="kw">AND</span> <span class="st">&#39;20210131&#39;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>), sessions <span class="kw">AS</span> (</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> user_pseudo_id, ga_session_id</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> extracted</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> user_pseudo_id <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> ga_session_id <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">GROUP</span> <span class="kw">BY</span> user_pseudo_id, ga_session_id</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> observed_sessions</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> sessions;</span></code></pre></div>
+<p>This query extracts the integer ga_session_id and counts distinct
+user-and-session pairs observed during January. I would use it when I
+need a session denominator instead of treating events as sessions. A
+session ID alone is not unique across users, so both fields are
+required; missing identifiers are excluded and sessions crossing the
+date boundary are only partly observed. The result is an
+observed-session count, not a claim that it matches the GA4
+interface.</p>
+<h2 id="query-6-inspect-numeric-purchase-values-by-currency">Query 6:
+Inspect numeric purchase values by currency</h2>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> purchase_values <span class="kw">AS</span> (</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">SELECT</span> ep.<span class="fu">value</span>.string_value</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>     <span class="kw">FROM</span> UNNEST(event_params) <span class="kw">AS</span> ep</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>     <span class="kw">WHERE</span> ep.<span class="kw">key</span> <span class="op">=</span> <span class="st">&#39;currency&#39;</span>) <span class="kw">AS</span> currency,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">SELECT</span> <span class="fu">COALESCE</span>(ep.<span class="fu">value</span>.double_value,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">CAST</span>(ep.<span class="fu">value</span>.int_value <span class="kw">AS</span> FLOAT64))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>     <span class="kw">FROM</span> UNNEST(event_params) <span class="kw">AS</span> ep</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>     <span class="kw">WHERE</span> ep.<span class="kw">key</span> <span class="op">=</span> <span class="st">&#39;value&#39;</span>) <span class="kw">AS</span> purchase_value</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.ga4_obfuscated_sample_ecommerce.events_<span class="op">*</span>`</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> _TABLE_SUFFIX <span class="kw">BETWEEN</span> <span class="st">&#39;20210101&#39;</span> <span class="kw">AND</span> <span class="st">&#39;20210131&#39;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> event_name <span class="op">=</span> <span class="st">&#39;purchase&#39;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  currency,</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> purchase_events,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(purchase_value) <span class="kw">AS</span> events_with_numeric_value,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(purchase_value) <span class="kw">AS</span> reported_purchase_value,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">AVG</span>(purchase_value) <span class="kw">AS</span> avg_value_per_valued_event</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> purchase_values</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> currency</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> purchase_events <span class="kw">DESC</span>;</span></code></pre></div>
+<p>This query extracts currency as a string and value as a double, with
+an integer fallback, then summarizes purchase-event values separately by
+currency. I would use it to check value coverage before reporting
+monetary totals. SUM and AVG ignore missing values, and a null currency
+group means the currency was not supplied. These are reported event
+values, not deduplicated order revenue or net revenue after refunds;
+currencies must not be added together.</p>
+<h2 id="query-7-audit-page-view-parameter-coverage">Query 7: Audit
+page-view parameter coverage</h2>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> parameter_audit <span class="kw">AS</span> (</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">SELECT</span> COUNTIF(ep.<span class="kw">key</span> <span class="op">=</span> <span class="st">&#39;page_location&#39;</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>     <span class="kw">FROM</span> UNNEST(event_params) <span class="kw">AS</span> ep) <span class="kw">AS</span> location_key_count,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">SELECT</span> COUNTIF(ep.<span class="kw">key</span> <span class="op">=</span> <span class="st">&#39;page_location&#39;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                    <span class="kw">AND</span> ep.<span class="fu">value</span>.string_value <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                    <span class="kw">AND</span> ep.<span class="fu">value</span>.string_value <span class="op">!=</span> <span class="st">&#39;&#39;</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>     <span class="kw">FROM</span> UNNEST(event_params) <span class="kw">AS</span> ep) <span class="kw">AS</span> usable_location_count</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.ga4_obfuscated_sample_ecommerce.events_<span class="op">*</span>`</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> _TABLE_SUFFIX <span class="kw">BETWEEN</span> <span class="st">&#39;20210101&#39;</span> <span class="kw">AND</span> <span class="st">&#39;20210131&#39;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> event_name <span class="op">=</span> <span class="st">&#39;page_view&#39;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> page_view_events,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  COUNTIF(location_key_count <span class="op">=</span> <span class="dv">0</span>) <span class="kw">AS</span> events_missing_key,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  COUNTIF(location_key_count <span class="op">&gt;</span> <span class="dv">1</span>) <span class="kw">AS</span> events_with_duplicate_key,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  COUNTIF(usable_location_count <span class="op">&gt;</span> <span class="dv">0</span>) <span class="kw">AS</span> events_with_usable_url,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ROUND</span>(<span class="fl">100.0</span> <span class="op">*</span> SAFE_DIVIDE(</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    COUNTIF(usable_location_count <span class="op">&gt;</span> <span class="dv">0</span>), <span class="fu">COUNT</span>(<span class="op">*</span>)), <span class="dv">2</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AS</span> usable_url_pct</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> parameter_audit;</span></code></pre></div>
+<p>This query checks whether page-view events contain a usable
+page_location string and flags duplicate keys. I would use it to assess
+whether the top-page query is leaving out a meaningful share of page
+views. The percentage is based on events, and a nonempty URL is not
+proof that the URL is correct; duplicate matching keys should be
+investigated before using scalar extraction.</p>
+<h2 id="query-8-join-daily-traffic-and-purchase-summaries">Query 8: Join
+daily traffic and purchase summaries</h2>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> base <span class="kw">AS</span> (</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> event_date, event_name</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.ga4_obfuscated_sample_ecommerce.events_<span class="op">*</span>`</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> _TABLE_SUFFIX <span class="kw">BETWEEN</span> <span class="st">&#39;20210101&#39;</span> <span class="kw">AND</span> <span class="st">&#39;20210131&#39;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>), daily_events <span class="kw">AS</span> (</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> event_date, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> total_events</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> base</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">GROUP</span> <span class="kw">BY</span> event_date</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>), daily_purchases <span class="kw">AS</span> (</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> event_date, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> purchase_events</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> base</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> event_name <span class="op">=</span> <span class="st">&#39;purchase&#39;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">GROUP</span> <span class="kw">BY</span> event_date</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  PARSE_DATE(<span class="st">&#39;%Y%m%d&#39;</span>, d.event_date) <span class="kw">AS</span> activity_date,</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  d.total_events,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COALESCE</span>(p.purchase_events, <span class="dv">0</span>) <span class="kw">AS</span> purchase_events,</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ROUND</span>(<span class="fl">100.0</span> <span class="op">*</span> SAFE_DIVIDE(</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">COALESCE</span>(p.purchase_events, <span class="dv">0</span>), d.total_events), <span class="dv">2</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AS</span> purchase_event_share_pct</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> daily_events <span class="kw">AS</span> d</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> daily_purchases <span class="kw">AS</span> p</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ON</span> d.event_date <span class="op">=</span> p.event_date</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> activity_date;</span></code></pre></div>
+<p>This query joins two daily summaries and calculates purchase events
+as a percentage of all recorded events. I would use it to monitor how
+the mix of recorded activity changes across days; the left join retains
+traffic days with zero purchase events. Both sides have one row per
+date, which avoids multiplying event rows during the join. This is
+purchase-event share, not a user or session conversion rate, and it can
+change when other event tracking changes.</p>
+<h1 id="notes-for-reuse-and-validation">Notes for reuse and
+validation</h1>
+<ol type="1">
+<li>Open BigQuery with GoogleSQL enabled and use the US processing
+location for the public sample. Paste and run each query separately,
+checking the estimated bytes before execution.</li>
+<li>Confirm the output columns and metric definitions above. Save actual
+result evidence before describing findings; an empty output is not
+automatically a SQL error.</li>
+<li>Inspect Query 7 for missing and duplicate page-location keys.
+Queries 4–6 assume their selected parameter keys are unique within an
+event; check the corresponding keys if adapting the queries to another
+property.</li>
+<li>To reuse the code with team data, replace the table path and date
+bounds in every query. Check which events and parameters actually exist
+before substituting form or lead events.</li>
+</ol>
+<p><strong>Parameter types:</strong> Use <code>string_value</code> for
+text, <code>int_value</code> for integers, and <code>double_value</code>
+for double values. The field selected must match how the parameter was
+exported; a key can exist while the selected typed field is null (<a
+href="https://support.google.com/analytics/answer/7029846">GA4 export
+schema</a>).</p>
+<h1 id="learning-reflection">Learning reflection</h1>
+<p>The most useful part of this pack for me is seeing why the counting
+unit matters. Counting events is straightforward, but counting sessions
+requires extracting a parameter and combining it with the user
+identifier. I also understand why I need to check missing parameters and
+summarize each table before joining. These are the patterns I want to
+use when helping with the team’s BigQuery work.</p>
+<h1 id="references">References</h1>
+<ul>
+<li><a
+href="https://developers.google.com/analytics/bigquery/web-ecommerce-demo-dataset">Google:
+GA4 public sample dataset</a></li>
+<li><a
+href="https://support.google.com/analytics/answer/7029846">Google:
+BigQuery export schema</a></li>
+<li><a
+href="https://developers.google.com/analytics/bigquery/basic-queries">Google:
+Basic queries for GA4 event data</a></li>
+</ul>
+<h1 id="appendix-links">Appendix: Links</h1>
+<ul>
+<li><a
+href="https://github.com/Simrank-DM/IBM6500-F26/tree/main/GA4-4-SQL-Pack">GitHub
+repository — GA4-4 SQL Pack</a></li>
+<li><a
+href="https://simrank-dm.github.io/IBM6500-F26/GA4-4-SQL-Pack/GA4-4-SQL-Pack-Simran-Kaur.html">GitHub
+Pages — GA4-4 SQL Pack report</a></li>
+</ul>
+</body>
+</html>
