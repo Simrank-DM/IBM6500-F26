@@ -352,9 +352,9 @@ LIMIT 15;
 
 The most useful part for me was seeing how the same data can answer different marketing questions. Counting page views tells me how often a page was opened, while counting users tells me how many distinct users reached it. The cart page made that difference clear because the same shopper could visit it several times. In future reports, I’ll check what each row represents before I interpret a number as a sign of customer behavior.
 
-# Appendix: Project and BigQuery Lecture Links
+# Appendix: 
 
-- [GitHub Repository](https://github.com/Simrank-DM/IBM6500-F26/tree/main/Milestone-4-SQL-Pack)
-- [GitHub Pages](https://simrank-dm.github.io/IBM6500-F26/Milestone-4-SQL-Pack/IBM6500-M4-SQL-Pack-Kaur.html)
+- [GitHub Repository](https://github.com/Simrank-DM/IBM6500-F26/tree/main/BigQuery-SQL/GA4-4-SQL-Pack)
+- [SQL Pack ](https://simrank-dm.github.io/IBM6500-F26/BigQuery-SQL/GA4-4-SQL-Pack/IBM6500-M4-SQL-Pack-Kaur.html)
 - [BigQuery SQL Lecture 1](https://simrank-dm.github.io/IBM6500-F26/BigQuery-SQL/Lecture%201/IBM6500-BigQuery-SQL-lecture1-Kaur.html)
 - [BigQuery SQL Lecture 2](https://simrank-dm.github.io/IBM6500-F26/BigQuery-SQL/Lecture%202/IBM6500-BigQuery-SQL-lecture2-Kaur.html)
