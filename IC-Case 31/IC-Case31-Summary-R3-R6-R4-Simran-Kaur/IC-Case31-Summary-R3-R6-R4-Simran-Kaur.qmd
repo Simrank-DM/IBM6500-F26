@@ -1,0 +1,435 @@
+---
+title: "Case 31: Summary of Data Analysis for R3, R6 and R4"
+subtitle: "Employees Federal Credit Union"
+author: "Simran Kaur"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Roadmap"
+    number-sections: true
+    code-fold: true
+    code-tools: true
+    embed-resources: true
+    theme: cosmo
+    css: report.css
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+library(tidyverse)
+library(haven)
+library(knitr)
+options(knitr.kable.NA = "")
+
+teal <- "#0D9488"
+ink  <- "#052E2B"
+loc_pal <- c("Headquarters area" = "#0D9488", "Elsewhere" = "#052E2B")
+
+theme_set(
+  theme_minimal(base_size = 15, base_family = "sans") +
+    theme(panel.grid.minor = element_blank(),
+          plot.title.position = "plot",
+          axis.text  = element_text(color = ink, face = "bold"),
+          axis.title = element_text(color = ink, face = "bold"),
+          legend.text = element_text(color = ink, face = "bold"))
+)
+
+efcu <- read_sav("Case 31 Data_efcu_4.sav")
+d <- zap_labels(efcu) |>
+  mutate(
+    q12 = na_if(q12, 3),                                   # "No answer" -> missing
+    location = factor(q38, levels = 1:2, labels = c("Headquarters area", "Elsewhere"))
+  )
+
+fmt_p <- function(p) ifelse(p < .001, "< .001", sprintf("%.3f", p))
+
+item_labels <- c(
+  Att_employee = "Att_employee: Employee proficiency (Q3–Q6)",
+  q3  = "Q3: Employees are courteous",
+  q4  = "Q4: Employees are helpful",
+  q5  = "Q5: Employees are professional",
+  q6  = "Q6: Employees are available",
+  q9_r  = "Q9r: Statement frequency",
+  q10_r = "Q10r: Statement accuracy",
+  q31 = "Q31: Personnel keep info confidential",
+  q32 = "Q32: Prompt in processing loans",
+  q33 = "Q33: Services meet members' needs",
+  q34 = "Q34: Loan applications simple",
+  Q37_r = "Q37r: Overall management & operation"
+)
+
+# One-sample t-test row
+one_t <- function(var, mu = 3) {
+  x  <- na.omit(d[[var]])
+  tt <- t.test(x, mu = mu)
+  tibble(Item = item_labels[[var]], n = length(x), Mean = mean(x), SD = sd(x),
+         `Test value` = mu, t = unname(tt$statistic), df = unname(tt$parameter),
+         p = fmt_p(tt$p.value))
+}
+
+# Independent-groups (Welch) t-test row by location
+loc_t <- function(var) {
+  tt <- t.test(as.formula(paste(var, "~ location")), data = d)
+  g  <- d |> group_by(location) |>
+    summarise(m = mean(.data[[var]], na.rm = TRUE), s = sd(.data[[var]], na.rm = TRUE))
+  tibble(Item = item_labels[[var]],
+         `HQ M (SD)`        = sprintf("%.2f (%.2f)", g$m[1], g$s[1]),
+         `Elsewhere M (SD)` = sprintf("%.2f (%.2f)", g$m[2], g$s[2]),
+         Difference = g$m[1] - g$m[2],
+         t  = unname(tt$statistic), df = unname(tt$parameter),
+         p  = fmt_p(tt$p.value), p_raw = tt$p.value)
+}
+```
+
+## About this report
+
+This report answers three research questions using the cleaned Case 31 data (**n = 128 members**).
+
+- **R3:** What are members' attitudes toward the **proficiency of CU employees**?
+- **R6:** How **effectively** do members think the CU is operated?
+- **R4:** Do members who live in the **headquarters area** (n = 57) see things differently from those who live **elsewhere** (n = 71)? This covers (a) employee proficiency, (b) awareness of services and (c) operational effectiveness.
+
+**Building on the reliability and factor analysis:** Q3–Q6 formed one reliable factor (α = .87), so employee proficiency is measured with the composite **Att_employee** (the mean of Q3–Q6). Q31–Q34 did **not** form a scale (α = .47), so those four items are analyzed **one by one**. I don't repeat those results here.
+
+**How to read it:** each section leads with the **finding**. Test statistics are in parentheses and point to the numbered tables and figures. All tests use α = .05. Items ending in **r** are reverse-coded so that **higher = more favorable**.
+
+## R3: Attitudes toward employee proficiency
+
+### R3: Descriptive statistics
+
+```{r}
+#| label: tbl-r3-freq
+#| tbl-cap: "Employee proficiency items: % disagree, neutral and agree"
+agree_split <- function(var) {
+  x <- na.omit(d[[var]])
+  tibble(Item = item_labels[[var]], n = length(x),
+         `% disagree (1–2)` = 100 * mean(x <= 2),
+         `% uncertain (3)`  = 100 * mean(x == 3),
+         `% agree (4–5)`    = 100 * mean(x >= 4),
+         Mean = mean(x), SD = sd(x), Median = median(x))
+}
+map_dfr(c("q3", "q4", "q5", "q6"), agree_split) |> kable(digits = 2)
+```
+
+```{r}
+#| label: fig-r3
+#| fig-cap: "Mean agreement with each employee proficiency statement (1 = strongly disagree, 5 = strongly agree)"
+#| fig-height: 3.6
+#| fig-width: 9
+d |>
+  summarise(across(c(q3, q4, q5, q6), \(x) mean(x, na.rm = TRUE))) |>
+  pivot_longer(everything(), names_to = "item", values_to = "mean") |>
+  mutate(label = c("Courteous", "Helpful", "Professional", "Available"),
+         label = fct_reorder(label, mean)) |>
+  ggplot(aes(mean, label)) +
+  geom_col(fill = teal, width = 0.6) +
+  geom_vline(xintercept = 3, linetype = "dashed", color = "#9a9a9a") +
+  annotate("text", x = 3, y = 4.45, label = "Neutral", hjust = -0.1, color = "#6b6b6b", size = 4) +
+  geom_text(aes(label = sprintf("%.2f", mean)), hjust = -0.2, color = ink, fontface = "bold", size = 5) +
+  scale_x_continuous(limits = c(0, 5), breaks = 1:5, expand = c(0, 0)) +
+  labs(x = "Mean agreement", y = NULL) +
+  theme(panel.grid.major.y = element_blank())
+```
+
+### R3: One-sample t-test
+
+```{r}
+#| label: tbl-r3
+#| tbl-cap: "Employee proficiency: one-sample t-tests against the scale midpoint (3 = uncertain)"
+map_dfr(c("Att_employee", "q3", "q4", "q5", "q6"), one_t) |> kable(digits = 2)
+```
+
+### R3: Insight
+
+::: {.takeaway}
+**Members think highly of EFCU's employees.**
+:::
+
+- The **average attitude toward employee proficiency is 4.21 on a 5-point scale**, firmly between "agree" and "strongly agree," and **well above neutral** (*M* = `r sprintf("%.2f", mean(d$Att_employee))`, *t*(127) = `r sprintf("%.2f", t.test(d$Att_employee, mu = 3)$statistic)`, *p* < .001; @tbl-r3).
+- **`r round(100 * mean(d$Att_employee >= 4))`% of members average "agree" or higher** across the four statements, and **almost nobody disagrees with any of them** (@tbl-r3-freq).
+- Staff are seen as **most courteous (4.35)** and **most helpful (4.31)**. **Professional** and **available** trail slightly (both **4.08**), and availability has the **widest spread** of opinion (*SD* = 0.79; @fig-r3).
+- **So what:** **staff are a real strength**. If EFCU wants to improve here, **availability** (hours, staffing, wait times) is the one dimension with room to grow.
+
+## R6: Operational effectiveness
+
+### R6: Descriptive statistics
+
+```{r}
+#| label: tbl-r6-desc
+#| tbl-cap: "Interval items: % favorable and descriptive statistics"
+fav <- function(var, cut) {
+  x <- na.omit(d[[var]])
+  tibble(Item = item_labels[[var]], n = length(x),
+         `% favorable` = 100 * mean(x >= cut),
+         Mean = mean(x), SD = sd(x), Median = median(x))
+}
+bind_rows(fav("q10_r", 3), fav("q31", 4), fav("q32", 4), fav("q33", 4),
+          fav("q34", 4), fav("Q37_r", 4)) |>
+  kable(digits = 2)
+```
+
+*% favorable = good or excellent for Q10r and Q37r, agree or strongly agree for Q31–Q34. Frequencies for the categorical items (Q9, Q11, Q12) are in @tbl-r6-cat.*
+
+```{r}
+#| label: fig-r6
+#| fig-cap: "Share of members giving a favorable answer on each operational item"
+#| fig-height: 4.6
+#| fig-width: 10
+r6_fav <- tibble(
+  item = c("Statements easy to understand (Q11)", "Statement accuracy good+ (Q10)",
+           "Overall rating good+ (Q37)", "Info kept confidential (Q31)",
+           "Statement frequency about right (Q9)", "Info kept confidential, yes/no (Q12)",
+           "Prompt loan processing (Q32)", "Services meet needs (Q33)",
+           "Loan applications simple (Q34)"),
+  pct = c(100 * mean(d$q11 == 1), 100 * mean(d$q10_r >= 3),
+          100 * mean(d$Q37_r >= 4, na.rm = TRUE), 100 * mean(d$q31 >= 4),
+          100 * mean(d$q9 == 3), 100 * mean(d$q12 == 1, na.rm = TRUE),
+          100 * mean(d$q32 >= 4), 100 * mean(d$q33 >= 4), 100 * mean(d$q34 >= 4))
+) |>
+  mutate(item = fct_reorder(item, pct))
+
+ggplot(r6_fav, aes(pct, item)) +
+  geom_col(fill = teal, width = 0.65) +
+  geom_text(aes(label = sprintf("%.0f%%", pct)), hjust = -0.15, color = ink,
+            fontface = "bold", size = 4.6) +
+  scale_x_continuous(limits = c(0, 110), breaks = seq(0, 100, 25),
+                     labels = \(x) paste0(x, "%"), expand = c(0, 0)) +
+  labs(x = "% of members with a favorable answer", y = NULL) +
+  theme(panel.grid.major.y = element_blank())
+```
+
+### R6: Chi-square goodness-of-fit test
+
+```{r}
+#| label: tbl-r6-cat
+#| tbl-cap: "Frequency and yes/no items: frequencies and chi-square goodness-of-fit tests"
+gof <- function(var, labels, item) {
+  tab <- table(factor(d[[var]], levels = names(labels)))
+  tab <- tab[tab > 0]
+  ct  <- chisq.test(tab)
+  tibble(Item = item, Response = unname(labels[names(tab)]), n = as.integer(tab),
+         Percent = 100 * as.integer(tab) / sum(tab),
+         `Chi-square` = c(unname(ct$statistic), rep(NA, length(tab) - 1)),
+         df = c(unname(ct$parameter), rep(NA, length(tab) - 1)),
+         p  = c(fmt_p(ct$p.value), rep("", length(tab) - 1)))
+}
+bind_rows(
+  gof("q9",  c("1" = "Too often", "2" = "Very often", "3" = "About right",
+               "4" = "Not often enough", "5" = "Never"), "Q9: Statement frequency"),
+  gof("q11", c("1" = "Yes", "2" = "No"), "Q11: Statements easy to understand"),
+  gof("q12", c("1" = "Yes", "2" = "No"), "Q12: Account info kept confidential")
+) |> kable(digits = 1)
+```
+
+### R6: One-sample t-test
+
+```{r}
+#| label: tbl-r6-int
+#| tbl-cap: "Interval items: one-sample t-tests against the scale midpoint (2.5 for the 4-point Q10r, 3 otherwise)"
+bind_rows(
+  one_t("q10_r", mu = 2.5),
+  one_t("q31"), one_t("q32"), one_t("q33"), one_t("q34"),
+  one_t("Q37_r")
+) |> kable(digits = 2)
+```
+
+### R6: Insight
+
+::: {.takeaway}
+**Members think EFCU is WELL RUN, with two soft spots: statement frequency and privacy doubts.**
+:::
+
+- **At a glance:** most items are **favorable for 58–98% of members**. **Loan paperwork, meeting needs and loan speed** sit at the bottom, at roughly **60%** (@fig-r6).
+- **Overall:** **`r round(100 * mean(d$Q37_r >= 4, na.rm = TRUE))`% rate management and operations good or excellent** (@tbl-r6-desc; Q37r *M* = 4.07, *t*(120) = 16.12, *p* < .001; @tbl-r6-int).
+- **Statements are clear and accurate.** **98% find them easy to understand** (χ²(1) = 116.3, *p* < .001; @tbl-r6-cat), and accuracy averages **3.47 of 4** (*t*(127) = 17.15, *p* < .001).
+- **But 23% say statements don't come often enough**, and **nobody** says too often (χ²(1) = 38.3, *p* < .001). That's an **easy fix**.
+- **Privacy:** **78% agree staff keep information confidential** (Q31 *M* = 3.95, *p* < .001). But on the yes/no version, **30% said no** (Q12, χ²(1) = 16.6, *p* < .001), a **warning sign** for a financial institution.
+- **Loans and services:** all rated **above neutral** (all *p* < .001). **Prompt processing (3.72)** scores best, then **meeting needs (3.59)**. **Simple applications (3.46)** scores lowest.
+- **So what:** keep doing what works. **Send statements more often**, **review how privacy is communicated**, and **simplify loan paperwork**.
+
+## R4: Headquarters area vs. elsewhere
+
+### R4a: Descriptive statistics
+
+```{r}
+#| label: tbl-r4a-desc
+#| tbl-cap: "Employee proficiency by location: % agree and means"
+d |>
+  group_by(Location = location) |>
+  summarise(n = n(),
+            `% agree (Att ≥ 4)` = 100 * mean(Att_employee >= 4),
+            `Att_employee M` = mean(Att_employee), SD = sd(Att_employee),
+            Q3 = mean(q3), Q4 = mean(q4), Q5 = mean(q5), Q6 = mean(q6)) |>
+  kable(digits = 2)
+```
+
+### R4a: Independent-samples t-test
+
+```{r}
+#| label: tbl-r4a
+#| tbl-cap: "Employee proficiency by location: independent-groups (Welch) t-tests"
+map_dfr(c("Att_employee", "q3", "q4", "q5", "q6"), loc_t) |>
+  select(-p_raw) |>
+  kable(digits = 2)
+```
+
+### R4a: Insight
+
+::: {.takeaway}
+**Location makes NO difference to how members see employees.**
+:::
+
+- HQ-area members rate staff **slightly higher (4.28 vs. 4.14)**, and a few more of them average "agree" or higher (@tbl-r4a-desc; top row of @fig-r4c), but the gap is **small and not significant** (*t*(122.5) = 1.30, *p* = .196; @tbl-r4a). None of the four individual statements differ either (all *p* > .20).
+- **So what:** service quality is **consistent across locations**. Members outside the HQ area get the **same experience**.
+
+### R4b: Descriptive statistics (cross-tabulation)
+
+```{r}
+#| label: tbl-r4b
+#| tbl-cap: "Awareness of services by location: % unaware and % who have used each service"
+services <- c(
+  q13_r = "Regular share accounts", q14_r = "Special subaccounts",
+  q15_r = "Christmas club accounts", q16_r = "IRAs",
+  q17_r = "MasterCard credit card", q18_r = "Signature loans",
+  q19_r = "New car loans", q20_r = "Late model car loans",
+  q21_r = "Older model car loans", q22_r = "Household goods loans",
+  q23_r = "Recreational loans", q24_r = "Share collateralized loans",
+  q25_r = "IRA loans", q26_r = "Line of credit loans"
+)
+r4b <- map_dfr(names(services), function(v) {
+  tab <- table(d$location, factor(d[[v]], levels = 1:3))
+  tab <- tab[, colSums(tab) > 0, drop = FALSE]
+  ct  <- suppressWarnings(chisq.test(tab))
+  hq  <- d[[v]][d$q38 == 1]; el <- d[[v]][d$q38 == 2]
+  tibble(Service = services[[v]],
+         `HQ % unaware` = 100 * mean(hq == 1), `Else % unaware` = 100 * mean(el == 1),
+         `HQ % used`    = 100 * mean(hq == 3), `Else % used`    = 100 * mean(el == 3),
+         `Chi-square` = unname(ct$statistic), df = unname(ct$parameter),
+         p = fmt_p(ct$p.value), `Fisher p` = fmt_p(fisher.test(tab)$p.value))
+})
+r4b |> select(Service:`Else % used`) |> kable(digits = 0)
+```
+
+```{r}
+#| label: fig-r4b
+#| fig-cap: "Percent of members UNAWARE of each service, headquarters area vs. elsewhere"
+#| fig-height: 6
+#| fig-width: 10
+r4b |>
+  select(Service, `Headquarters area` = `HQ % unaware`, Elsewhere = `Else % unaware`) |>
+  pivot_longer(-Service, names_to = "location", values_to = "pct") |>
+  mutate(location = factor(location, levels = names(loc_pal)),
+         Service = fct_reorder(Service, pct, .fun = mean)) |>
+  ggplot(aes(pct, Service)) +
+  geom_line(aes(group = Service), color = "#c9c9c4", linewidth = 2) +
+  geom_point(aes(color = location), size = 4.5) +
+  scale_color_manual(values = loc_pal) +
+  scale_x_continuous(limits = c(0, 75), labels = \(x) paste0(x, "%")) +
+  labs(x = "% unaware of the service", y = NULL, color = NULL) +
+  theme(legend.position = "top", legend.justification = "left",
+        panel.grid.major.y = element_blank())
+```
+
+### R4b: Chi-square test of independence
+
+```{r}
+#| label: tbl-r4b-chi
+#| tbl-cap: "Awareness by location: chi-square tests of independence (Fisher's exact p shown because some expected counts are below 5)"
+r4b |> select(Service, `Chi-square`, df, p, `Fisher p`) |> kable(digits = 2)
+```
+
+### R4b: Insight
+
+::: {.takeaway}
+**Awareness gaps are the SAME everywhere. Location doesn't explain who knows what.**
+:::
+
+- The awareness percentages look **almost identical** in the two locations, and the two dots sit close together for nearly every service (@tbl-r4b, @fig-r4b), and **none of the 14 services** shows a significant difference (all *p* ≥ .15; @tbl-r4b-chi). Fisher's exact tests, used because some cells are small, agree.
+- The **biggest raw gap** is the **MasterCard**: **18% of HQ-area members are unaware vs. 7% elsewhere**, but even that isn't significant (χ²(2) = 3.79, *p* = .150).
+- The **low-awareness services**, like **IRA loans (about 60% unaware)** and **share-collateralized loans (54%)**, are **just as unknown** in the HQ area as outside it.
+- **So what:** EFCU's awareness problem is **CU-wide, not regional**. One **member-wide campaign** fits better than location-targeted messaging.
+
+### R4c: Descriptive statistics
+
+```{r}
+#| label: fig-r4c
+#| fig-cap: "Mean ratings by location. Only Q34 (simple loan applications) differs significantly"
+#| fig-height: 4.6
+#| fig-width: 10
+plot_items <- c("Att_employee", "q31", "q32", "q33", "q34", "Q37_r")
+short <- c(Att_employee = "Employee proficiency", q31 = "Q31 Confidentiality",
+           q32 = "Q32 Prompt loans", q33 = "Q33 Meets needs",
+           q34 = "Q34 Simple applications *", Q37_r = "Q37r Overall rating")
+d |>
+  select(location, all_of(plot_items)) |>
+  pivot_longer(-location, names_to = "item", values_to = "value") |>
+  group_by(item, location) |>
+  summarise(mean = mean(value, na.rm = TRUE), .groups = "drop") |>
+  mutate(item = factor(short[item], levels = rev(short[plot_items]))) |>
+  ggplot(aes(mean, item)) +
+  geom_line(aes(group = item), color = "#c9c9c4", linewidth = 2) +
+  geom_point(aes(color = location), size = 5) +
+  scale_color_manual(values = loc_pal) +
+  scale_x_continuous(limits = c(3, 4.5)) +
+  labs(x = "Mean rating (1–5)", y = NULL, color = NULL) +
+  theme(legend.position = "top", legend.justification = "left",
+        panel.grid.major.y = element_blank())
+```
+
+### R4c: Independent-samples t-test
+
+```{r}
+#| label: tbl-r4c-int
+#| tbl-cap: "Operational effectiveness by location: independent-groups (Welch) t-tests"
+r4c <- map_dfr(c("q9_r", "q10_r", "q31", "q32", "q33", "q34", "Q37_r"), loc_t)
+r4c |> select(-p_raw) |> kable(digits = 2)
+```
+
+### R4c: Chi-square test of independence
+
+```{r}
+#| label: tbl-r4c-cat
+#| tbl-cap: "Yes/no items by location: chi-square tests of independence"
+map_dfr(c(q11 = "Q11: Statements easy to understand", q12 = "Q12: Account info kept confidential") |>
+          imap(\(lab, v) list(v = v, lab = lab)), function(x) {
+  tab <- table(d$location, d[[x$v]])
+  ct  <- suppressWarnings(chisq.test(tab, correct = FALSE))
+  tibble(Item = x$lab,
+         `HQ % yes`   = 100 * tab[1, 1] / sum(tab[1, ]),
+         `Else % yes` = 100 * tab[2, 1] / sum(tab[2, ]),
+         `Chi-square` = unname(ct$statistic), df = unname(ct$parameter),
+         p = fmt_p(ct$p.value), `Fisher p` = fmt_p(fisher.test(tab)$p.value))
+}) |> kable(digits = 1)
+```
+
+
+
+### R4c: Insight
+
+::: {.takeaway}
+**Operations are rated the same in both locations, with ONE exception: HQ-area members find loan applications LESS simple.**
+:::
+
+- **Q34 is the only significant difference.** HQ-area members agree less that loan applications are simple and easy (**3.28 vs. 3.61**; *t*(94.2) = −2.28, *p* = .025; @tbl-r4c-int, @fig-r4c). Their answers are also **more spread out** (*SD* 0.92 vs. 0.62), so some HQ-area members are **clearly frustrated** with the paperwork. Because the variances differ, the **Welch t-test** is the right version here.
+- **Everything else is a tie:** statement frequency and accuracy, confidentiality, prompt processing, meeting needs and the overall rating (all *p* ≥ .10; @tbl-r4c-int). The yes/no items match too: **96% vs. 99%** find statements easy to understand, and **63% vs. 75%** say information is kept confidential (both *p* > .20; @tbl-r4c-cat).
+- **So what:** the survey doesn't say *why*. One possibility is that HQ-area members are more likely to **apply in person** and deal with the paperwork directly. Either way, **reviewing the loan application process at headquarters** is a focused, low-cost fix.
+
+## Summary
+
+| RQ | Finding | Key result | So what |
+|:--|:--|:--|:--|
+| **R3** | **Employees rated highly** | **Att_employee = 4.21**, *p* < .001 | Staff are a **strength**. **Availability** is the one area to grow |
+| **R6** | **CU seen as well run** | **84% good or excellent** overall | **More frequent statements**, **clearer privacy messaging**, **simpler loan forms** |
+| **R4a** | **No location difference** in employee ratings | 4.28 vs. 4.14, *p* = .196 | Service is **consistent** across locations |
+| **R4b** | **No location difference** in awareness of any service | all *p* ≥ .15 | Awareness gaps are **CU-wide**, so run **one campaign** |
+| **R4c** | **Only Q34 differs:** HQ-area members find loan applications **less simple** | **3.28 vs. 3.61**, *p* = .025 | **Review loan paperwork at headquarters** |
+
+## Appendix
+
+- **GitHub Pages:** <https://simrank-dm.github.io/IBM6500-F26/IC-Case31-Summary-R3-R6-R4/IC-Case31-Summary-R3-R6-R4-Simran-Kaur.html>
+- **GitHub Repository:** <https://github.com/Simrank-DM/IBM6500-F26>
