@@ -13,11 +13,39 @@ format:
     code-tools: true
     embed-resources: true
     theme: cosmo
-    css: report.css
+    code-summary: "R code"
+    grid:
+      body-width: 1100px
+      sidebar-width: 220px
+      margin-width: 80px
 execute:
   warning: false
   message: false
 ---
+
+```{=html}
+<style>
+body{background:#fff;color:#233c38;font-family:Arial,Helvetica,sans-serif;font-size:17px;line-height:1.65}
+main{min-width:0;background:transparent;padding:0;box-shadow:none}
+#title-block-header{box-sizing:border-box;max-width:800px;background:#f5f9f7;border:1px solid #d6e5df;border-top:6px solid #245e52;border-radius:12px;padding:28px 30px;margin-bottom:32px}
+#title-block-header .title{color:#245e52;font-size:2rem;font-weight:700}
+#title-block-header .subtitle{color:#426b61;font-size:1.05rem}
+h1,h2,h3{color:#245e52;font-weight:700}
+h2{font-size:1.5rem;border-bottom:1px solid #d6e5df;padding-bottom:8px;margin-top:32px}
+h3{font-size:1.15rem;margin-top:24px}
+a,summary{color:#245e52}summary{font-weight:700}
+table{width:100%;font-size:.9rem}thead{background:#245e52;color:#fff}
+tbody tr:nth-child(even){background:#eef5f1}
+td,th{padding:9px 11px!important;border-color:#d6e5df!important}
+pre{background:#f5f8f6;border:0;border-radius:4px;max-width:100%;overflow-x:auto}
+code{color:#245e52}details{margin:12px 0;min-width:0}
+.cell-output-display{overflow-x:auto}
+.cell-output-display img{max-width:100%;height:auto}
+#TOC{font-size:.9rem}#TOC a{color:#36584e}
+#TOC .active{color:#245e52;border-color:#245e52}
+@media(max-width:760px){body{font-size:16px}#title-block-header{padding:20px}#title-block-header .title{font-size:1.7rem}}
+</style>
+```
 
 ```{r}
 #| label: setup
@@ -26,9 +54,9 @@ library(haven)
 library(knitr)
 options(knitr.kable.NA = "")
 
-teal <- "#0D9488"
-ink  <- "#052E2B"
-loc_pal <- c("Headquarters area" = "#0D9488", "Elsewhere" = "#052E2B")
+teal <- "#245E52"
+ink  <- "#233C38"
+loc_pal <- c("Headquarters area" = "#245E52", "Elsewhere" = "#93B6A7")
 
 theme_set(
   theme_minimal(base_size = 15, base_family = "sans") +
@@ -88,15 +116,11 @@ loc_t <- function(var) {
 
 ## About this report
 
-This report answers three research questions using the cleaned Case 31 data (**n = 128 members**).
+I used the cleaned Case 31 data from **128 members** to examine employee proficiency (R3), operational effectiveness (R6), and differences by location (R4). The sample includes 57 members in the headquarters area and 71 elsewhere.
 
-- **R3:** What are members' attitudes toward the **proficiency of CU employees**?
-- **R6:** How **effectively** do members think the CU is operated?
-- **R4:** Do members who live in the **headquarters area** (n = 57) see things differently from those who live **elsewhere** (n = 71)? This covers (a) employee proficiency, (b) awareness of services and (c) operational effectiveness.
+Q3–Q6 support the employee proficiency index, **Att_employee** (α = .87). Q31–Q34 have lower reliability (α = .47), so I report them separately. Valid sample sizes vary where responses are missing.
 
-**Building on the reliability and factor analysis:** Q3–Q6 formed one reliable factor (α = .87), so employee proficiency is measured with the composite **Att_employee** (the mean of Q3–Q6). Q31–Q34 did **not** form a scale (α = .47), so those four items are analyzed **one by one**. I don't repeat those results here.
-
-**How to read it:** each section leads with the **finding**. Test statistics are in parentheses and point to the numbered tables and figures. All tests use α = .05. Items ending in **r** are reverse-coded so that **higher = more favorable**.
+The findings are summarized below, with expandable R code and supporting results. Tests use α = .05. Higher values indicate more favorable ratings on the rating items; statement frequency is interpreted through its response categories.
 
 ## R3: Attitudes toward employee proficiency
 
@@ -144,16 +168,11 @@ d |>
 map_dfr(c("Att_employee", "q3", "q4", "q5", "q6"), one_t) |> kable(digits = 2)
 ```
 
-### R3: Insight
+### R3: Findings
 
-::: {.takeaway}
-**Members think highly of EFCU's employees.**
-:::
+Members rated employees positively. The proficiency index averaged **4.21 out of 5**, above the neutral midpoint (*p* < .001; @tbl-r3).
 
-- The **average attitude toward employee proficiency is 4.21 on a 5-point scale**, firmly between "agree" and "strongly agree," and **well above neutral** (*M* = `r sprintf("%.2f", mean(d$Att_employee))`, *t*(127) = `r sprintf("%.2f", t.test(d$Att_employee, mu = 3)$statistic)`, *p* < .001; @tbl-r3).
-- **`r round(100 * mean(d$Att_employee >= 4))`% of members average "agree" or higher** across the four statements, and **almost nobody disagrees with any of them** (@tbl-r3-freq).
-- Staff are seen as **most courteous (4.35)** and **most helpful (4.31)**. **Professional** and **available** trail slightly (both **4.08**), and availability has the **widest spread** of opinion (*SD* = 0.79; @fig-r3).
-- **So what:** **staff are a real strength**. If EFCU wants to improve here, **availability** (hours, staffing, wait times) is the one dimension with room to grow.
+Courtesy (4.35) and helpfulness (4.31) received the highest ratings. Professionalism and availability averaged 4.08. Availability showed the widest variation (*SD* = 0.79), making it a useful area for follow-up rather than evidence of a specific staffing problem.
 
 ## R6: Operational effectiveness
 
@@ -173,7 +192,7 @@ bind_rows(fav("q10_r", 3), fav("q31", 4), fav("q32", 4), fav("q33", 4),
   kable(digits = 2)
 ```
 
-*% favorable = good or excellent for Q10r and Q37r, agree or strongly agree for Q31–Q34. Frequencies for the categorical items (Q9, Q11, Q12) are in @tbl-r6-cat.*
+*Favorable responses follow the thresholds in the code: Q10r ≥ 3, Q37r ≥ 4, and Q31–Q34 ≥ 4. Categorical responses are summarized in @tbl-r6-cat.*
 
 ```{r}
 #| label: fig-r6
@@ -238,19 +257,13 @@ bind_rows(
 ) |> kable(digits = 2)
 ```
 
-### R6: Insight
+### R6: Findings
 
-::: {.takeaway}
-**Members think EFCU is WELL RUN, with two soft spots: statement frequency and privacy doubts.**
-:::
+Overall, **84% of valid respondents rated management and operations good or excellent**. Statements were generally viewed as clear and accurate: 98% found them easy to understand, and accuracy averaged 3.47 out of 4.
 
-- **At a glance:** most items are **favorable for 58–98% of members**. **Loan paperwork, meeting needs and loan speed** sit at the bottom, at roughly **60%** (@fig-r6).
-- **Overall:** **`r round(100 * mean(d$Q37_r >= 4, na.rm = TRUE))`% rate management and operations good or excellent** (@tbl-r6-desc; Q37r *M* = 4.07, *t*(120) = 16.12, *p* < .001; @tbl-r6-int).
-- **Statements are clear and accurate.** **98% find them easy to understand** (χ²(1) = 116.3, *p* < .001; @tbl-r6-cat), and accuracy averages **3.47 of 4** (*t*(127) = 17.15, *p* < .001).
-- **But 23% say statements don't come often enough**, and **nobody** says too often (χ²(1) = 38.3, *p* < .001). That's an **easy fix**.
-- **Privacy:** **78% agree staff keep information confidential** (Q31 *M* = 3.95, *p* < .001). But on the yes/no version, **30% said no** (Q12, χ²(1) = 16.6, *p* < .001), a **warning sign** for a financial institution.
-- **Loans and services:** all rated **above neutral** (all *p* < .001). **Prompt processing (3.72)** scores best, then **meeting needs (3.59)**. **Simple applications (3.46)** scores lowest.
-- **So what:** keep doing what works. **Send statements more often**, **review how privacy is communicated**, and **simplify loan paperwork**.
+About 23% said statements did not arrive often enough. On privacy, 78% agreed that staff kept information confidential, while 30% answered “no” to the separate yes/no question. These questions use different wording and response formats, so the percentages should be interpreted separately.
+
+Loan processing (3.72), services meeting needs (3.59), and application simplicity (3.46) were rated above the neutral midpoint. Application simplicity received the lowest average rating. Reviewing statement preferences, privacy communication, and loan forms could help identify practical improvements.
 
 ## R4: Headquarters area vs. elsewhere
 
@@ -278,14 +291,11 @@ map_dfr(c("Att_employee", "q3", "q4", "q5", "q6"), loc_t) |>
   kable(digits = 2)
 ```
 
-### R4a: Insight
+### R4a: Findings
 
-::: {.takeaway}
-**Location makes NO difference to how members see employees.**
-:::
+Employee proficiency averaged **4.28 in the headquarters area and 4.14 elsewhere**. The difference was not statistically significant (*p* = .196; @tbl-r4a). The individual employee items also showed no statistically significant differences.
 
-- HQ-area members rate staff **slightly higher (4.28 vs. 4.14)**, and a few more of them average "agree" or higher (@tbl-r4a-desc; top row of @fig-r4c), but the gap is **small and not significant** (*t*(122.5) = 1.30, *p* = .196; @tbl-r4a). None of the four individual statements differ either (all *p* > .20).
-- **So what:** service quality is **consistent across locations**. Members outside the HQ area get the **same experience**.
+The sample provides limited evidence of a location difference; it does not establish that members have identical service experiences.
 
 ### R4b: Descriptive statistics (cross-tabulation)
 
@@ -343,28 +353,25 @@ r4b |>
 r4b |> select(Service, `Chi-square`, df, p, `Fisher p`) |> kable(digits = 2)
 ```
 
-### R4b: Insight
+### R4b: Findings
 
-::: {.takeaway}
-**Awareness gaps are the SAME everywhere. Location doesn't explain who knows what.**
-:::
+None of the 14 services showed a statistically significant association between location and awareness/use category (all chi-square *p* ≥ .15). Fisher’s exact tests led to the same conclusion.
 
-- The awareness percentages look **almost identical** in the two locations, and the two dots sit close together for nearly every service (@tbl-r4b, @fig-r4b), and **none of the 14 services** shows a significant difference (all *p* ≥ .15; @tbl-r4b-chi). Fisher's exact tests, used because some cells are small, agree.
-- The **biggest raw gap** is the **MasterCard**: **18% of HQ-area members are unaware vs. 7% elsewhere**, but even that isn't significant (χ²(2) = 3.79, *p* = .150).
-- The **low-awareness services**, like **IRA loans (about 60% unaware)** and **share-collateralized loans (54%)**, are **just as unknown** in the HQ area as outside it.
-- **So what:** EFCU's awareness problem is **CU-wide, not regional**. One **member-wide campaign** fits better than location-targeted messaging.
+The largest observed gap in unawareness was for MasterCard: **18% in the headquarters area versus 7% elsewhere**. Unawareness was high in both locations for IRA loans and share-collateralized loans.
+
+These results support considering outreach across the membership. They do not show whether a particular campaign would improve awareness.
 
 ### R4c: Descriptive statistics
 
 ```{r}
 #| label: fig-r4c
-#| fig-cap: "Mean ratings by location. Only Q34 (simple loan applications) differs significantly"
+#| fig-cap: "Mean ratings by location. Q34 has an unadjusted p = .025"
 #| fig-height: 4.6
 #| fig-width: 10
 plot_items <- c("Att_employee", "q31", "q32", "q33", "q34", "Q37_r")
 short <- c(Att_employee = "Employee proficiency", q31 = "Q31 Confidentiality",
            q32 = "Q32 Prompt loans", q33 = "Q33 Meets needs",
-           q34 = "Q34 Simple applications *", Q37_r = "Q37r Overall rating")
+           q34 = "Q34 Simple applications", Q37_r = "Q37r Overall rating")
 d |>
   select(location, all_of(plot_items)) |>
   pivot_longer(-location, names_to = "item", values_to = "value") |>
@@ -409,27 +416,30 @@ map_dfr(c(q11 = "Q11: Statements easy to understand", q12 = "Q12: Account info k
 
 
 
-### R4c: Insight
+### R4c: Findings
 
-::: {.takeaway}
-**Operations are rated the same in both locations, with ONE exception: HQ-area members find loan applications LESS simple.**
-:::
+Headquarters-area members rated loan application simplicity lower: **3.28 versus 3.61**, with an unadjusted *p* = .025 (@tbl-r4c-int). Because several items were tested, this is an exploratory finding that needs caution.
 
-- **Q34 is the only significant difference.** HQ-area members agree less that loan applications are simple and easy (**3.28 vs. 3.61**; *t*(94.2) = −2.28, *p* = .025; @tbl-r4c-int, @fig-r4c). Their answers are also **more spread out** (*SD* 0.92 vs. 0.62), so some HQ-area members are **clearly frustrated** with the paperwork. Because the variances differ, the **Welch t-test** is the right version here.
-- **Everything else is a tie:** statement frequency and accuracy, confidentiality, prompt processing, meeting needs and the overall rating (all *p* ≥ .10; @tbl-r4c-int). The yes/no items match too: **96% vs. 99%** find statements easy to understand, and **63% vs. 75%** say information is kept confidential (both *p* > .20; @tbl-r4c-cat).
-- **So what:** the survey doesn't say *why*. One possibility is that HQ-area members are more likely to **apply in person** and deal with the paperwork directly. Either way, **reviewing the loan application process at headquarters** is a focused, low-cost fix.
+The other tested rating items showed no statistically significant location differences. The yes/no items also showed no statistically significant differences.
+
+Reviewing the application process may be useful, but the survey does not explain the observed gap or establish that headquarters-area members were more frustrated.
+
 
 ## Summary
 
-| RQ | Finding | Key result | So what |
-|:--|:--|:--|:--|
-| **R3** | **Employees rated highly** | **Att_employee = 4.21**, *p* < .001 | Staff are a **strength**. **Availability** is the one area to grow |
-| **R6** | **CU seen as well run** | **84% good or excellent** overall | **More frequent statements**, **clearer privacy messaging**, **simpler loan forms** |
-| **R4a** | **No location difference** in employee ratings | 4.28 vs. 4.14, *p* = .196 | Service is **consistent** across locations |
-| **R4b** | **No location difference** in awareness of any service | all *p* ≥ .15 | Awareness gaps are **CU-wide**, so run **one campaign** |
-| **R4c** | **Only Q34 differs:** HQ-area members find loan applications **less simple** | **3.28 vs. 3.61**, *p* = .025 | **Review loan paperwork at headquarters** |
+| Question | Main finding | Practical takeaway |
+|:--|:--|:--|
+| **R3: Employees** | Proficiency averaged **4.21/5** | Maintain positive staff service; explore availability |
+| **R6: Operations** | **84%** rated operations good or excellent | Review statement preferences, privacy communication, and loan forms |
+| **R4a: Employee ratings by location** | No statistically significant difference (*p* = .196) | Avoid assuming the groups have identical experiences |
+| **R4b: Awareness by location** | No statistically significant associations across 14 services | Consider outreach across the membership |
+| **R4c: Operations by location** | Q34 differed at unadjusted *p* = .025 | Treat the result as exploratory |
 
-## Appendix
+## Reflection
 
-- **GitHub Pages:** <https://simrank-dm.github.io/IBM6500-F26/IC-Case31-Summary-R3-R6-R4/IC-Case31-Summary-R3-R6-R4-Simran-Kaur.html>
-- **GitHub Repository:** <https://github.com/Simrank-DM/IBM6500-F26>
+This analysis helped me connect each research question to a suitable test. I also learned to separate a small observed difference from a statistically significant result. For EFCU, the useful next step is to review the lower-rated areas and ask members what would improve their experience.
+
+## Appendix: Links
+
+- [GitHub Pages report](https://simrank-dm.github.io/IBM6500-F26/IC-Case%2031/IC-Case31-Summary-R3-R6-R4-Simran-Kaur/IC-Case31-Summary-R3-R6-R4-Simran-Kaur.html)
+- [GitHub source folder](https://github.com/Simrank-DM/IBM6500-F26/tree/main/IC-Case%2031/IC-Case31-Summary-R3-R6-R4-Simran-Kaur)
