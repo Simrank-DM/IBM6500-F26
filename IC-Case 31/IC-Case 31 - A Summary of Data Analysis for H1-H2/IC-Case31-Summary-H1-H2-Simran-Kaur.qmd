@@ -1,0 +1,247 @@
+---
+title: "Case 31: Summary of Data Analysis for H1 and H2"
+subtitle: "Employees Federal Credit Union"
+author: "Simran Kaur"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Roadmap"
+    number-sections: true
+    code-fold: true
+    code-tools: true
+    embed-resources: true
+    theme: cosmo
+    css: report.css
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+library(tidyverse)
+library(haven)
+library(knitr)
+options(knitr.kable.NA = "")
+
+teal <- "#0D9488"
+ink  <- "#052E2B"
+
+theme_set(
+  theme_minimal(base_size = 15, base_family = "sans") +
+    theme(panel.grid.minor = element_blank(),
+          plot.title.position = "plot",
+          axis.text  = element_text(color = ink, face = "bold"),
+          axis.title = element_text(color = ink, face = "bold"),
+          legend.text = element_text(color = ink, face = "bold"))
+)
+
+efcu <- read_sav("Case 31 Data_efcu_4.sav")
+d <- zap_labels(efcu) |>
+  mutate(awareness = factor(q13_r, levels = 1:3,
+                            labels = c("Unaware", "Aware, not used", "Aware and used")))
+
+fmt_p <- function(p) ifelse(p < .001, "< .001", sprintf("%.3f", p))
+```
+
+## About this report
+
+This report tests the first two hypotheses for Case 31 using the cleaned data (**n = 128 members**).
+
+- **H1:** Members' **awareness of regular share accounts** (Q13r) will influence their opinion on **how well the CU's financial services meet members' needs** (Q33).
+- **H2:** Members will **not differ** in their opinion of **the CU's loan rates** (Q8r) and their agreement that **CU loan rates are lower than competitors'** (Q30).
+
+The tests follow the data analysis table: a **one-way ANOVA** for H1 and a **paired-samples t-test** for H2. Each section shows the **descriptive statistics first**, then the test, then the **insight**. Statistics stay in parentheses and point to numbered tables and figures.
+
+## H1: Awareness of regular share accounts → services meet needs
+
+### H1: Descriptive statistics
+
+```{r}
+#| label: tbl-h1-desc
+#| tbl-cap: "Agreement that the CU's services meet members' needs (Q33), by awareness of regular share accounts (Q13r)"
+h1_desc <- d |>
+  group_by(Awareness = awareness) |>
+  summarise(n = n(),
+            `% agree (4–5)` = 100 * mean(q33 >= 4),
+            `% disagree (1–2)` = 100 * mean(q33 <= 2),
+            Mean = mean(q33), SD = sd(q33), Median = median(q33))
+h1_desc |> kable(digits = 2)
+```
+
+```{r}
+#| label: fig-h1
+#| fig-cap: "Mean agreement that services meet members' needs, with 95% confidence intervals, by awareness of regular share accounts"
+#| fig-height: 4
+#| fig-width: 9
+d |>
+  group_by(awareness) |>
+  summarise(n = n(), mean = mean(q33), se = sd(q33) / sqrt(n),
+            lo = mean - qt(.975, n - 1) * se, hi = mean + qt(.975, n - 1) * se) |>
+  ggplot(aes(mean, fct_rev(awareness))) +
+  geom_vline(xintercept = 3, linetype = "dashed", color = "#9a9a9a") +
+  geom_errorbarh(aes(xmin = lo, xmax = hi), height = 0.18, color = ink, linewidth = 0.8) +
+  geom_point(size = 5, color = teal) +
+  geom_text(aes(label = sprintf("%.2f  (n = %d)", mean, n)), vjust = -1.3,
+            color = ink, fontface = "bold", size = 4.6) +
+  scale_x_continuous(limits = c(2.5, 4.3), breaks = seq(2.5, 4.5, 0.5)) +
+  labs(x = "Mean agreement: services meet my needs (1–5)", y = NULL) +
+  theme(panel.grid.major.y = element_blank())
+```
+
+### H1: Assumption check (equal variances)
+
+```{r}
+#| label: h1-bartlett
+h1_bart <- bartlett.test(q33 ~ awareness, data = d)
+h1_bart
+```
+
+The three groups have **similar spread** (Bartlett's K²(2) = `r sprintf("%.2f", h1_bart$statistic)`, *p* = `r fmt_p(h1_bart$p.value)`), so the regular ANOVA is appropriate.
+
+### H1: One-way ANOVA
+
+```{r}
+#| label: tbl-h1-anova
+#| tbl-cap: "One-way ANOVA: Q33 by awareness of regular share accounts"
+h1_aov <- aov(q33 ~ awareness, data = d)
+h1_tab <- summary(h1_aov)[[1]]
+eta2   <- h1_tab[["Sum Sq"]][1] / sum(h1_tab[["Sum Sq"]])
+tibble(Source = c("Awareness (Q13r)", "Residuals"),
+       df = h1_tab$Df, `Sum Sq` = h1_tab$`Sum Sq`, `Mean Sq` = h1_tab$`Mean Sq`,
+       F = h1_tab$`F value`, p = c(fmt_p(h1_tab$`Pr(>F)`[1]), "")) |>
+  kable(digits = 2)
+```
+
+```{r}
+#| label: h1-robust
+h1_welch <- oneway.test(q33 ~ awareness, data = d)
+h1_kw    <- kruskal.test(q33 ~ awareness, data = d)
+```
+
+### H1: Post-hoc test (Tukey HSD)
+
+```{r}
+#| label: tbl-h1-tukey
+#| tbl-cap: "Tukey HSD pairwise comparisons of mean Q33"
+TukeyHSD(h1_aov)$awareness |>
+  as.data.frame() |>
+  rownames_to_column("Comparison") |>
+  transmute(Comparison, `Mean difference` = diff, `95% CI lower` = lwr,
+            `95% CI upper` = upr, `Adjusted p` = fmt_p(`p adj`)) |>
+  kable(digits = 2)
+```
+
+### H1: Insight
+
+::: {.takeaway}
+**H1 is SUPPORTED, but in a surprising direction: the members who actually USE regular share accounts are the LEAST satisfied that EFCU meets their needs.**
+:::
+
+- **Unaware and aware-but-not-used members look the same.** About **63% agree** that services meet their needs, with means of **3.63 and 3.72** (@tbl-h1-desc).
+- **Members who have used regular share accounts stand apart.** Only **31% agree** and their mean drops to **3.08**, barely above neutral (@fig-h1).
+- **The differences are real, not chance** (*F*(2, 125) = `r sprintf("%.2f", h1_tab$"F value"[1])`, *p* = `r fmt_p(h1_tab$"Pr(>F)"[1])`, η² = `r sprintf("%.2f", eta2)`; @tbl-h1-anova). The **"used" group is lower than both other groups** (Tukey *p* = .017 and .011), while the other two don't differ (*p* = .782; @tbl-h1-tukey).
+- **The result holds up** with the Welch ANOVA (*p* = `r fmt_p(h1_welch$p.value)`) and the non-parametric Kruskal-Wallis test (*p* = `r fmt_p(h1_kw$p.value)`), which matters because the "used" group is **small (n = 13)**.
+- **So what:** the people with the **most hands-on experience** of EFCU's core account are the **least convinced** it meets their needs. Experience seems to expose gaps that non-users never see. EFCU should **talk to its active account users** to find out what's missing, whether that's rates, features or convenience. Because the group is small, this is a **strong signal to investigate**, not a final verdict.
+
+## H2: Opinion of CU loan rates vs. "CU rates are lower than competitors"
+
+### H2: Descriptive statistics
+
+```{r}
+#| label: h2-data
+h2 <- d |> select(Q8_r, q30, q8) |> drop_na()
+```
+
+```{r}
+#| label: tbl-h2-desc
+#| tbl-cap: "Loan rate opinions among members who answered both questions"
+tibble(
+  Item = c("Q8r: CU loan rates (1 = very low, 5 = very high)",
+           "Q30: CU loan rates lower than others (1 = strongly disagree, 5 = strongly agree)"),
+  n = nrow(h2),
+  `% at midpoint (3)` = c(100 * mean(h2$Q8_r == 3), 100 * mean(h2$q30 == 3)),
+  `% 4–5` = c(100 * mean(h2$Q8_r >= 4), 100 * mean(h2$q30 >= 4)),
+  `% 1–2` = c(100 * mean(h2$Q8_r <= 2), 100 * mean(h2$q30 <= 2)),
+  Mean = c(mean(h2$Q8_r), mean(h2$q30)),
+  SD = c(sd(h2$Q8_r), sd(h2$q30))
+) |> kable(digits = 2)
+```
+
+```{r}
+#| label: fig-h2
+#| fig-cap: "Distribution of answers to Q8r and Q30 (same members, n = 107)"
+#| fig-height: 4.2
+#| fig-width: 10
+h2 |>
+  select(`Q8r: CU loan rates are high` = Q8_r, `Q30: CU rates lower than others` = q30) |>
+  pivot_longer(everything(), names_to = "item", values_to = "value") |>
+  count(item, value) |>
+  group_by(item) |>
+  mutate(pct = 100 * n / sum(n)) |>
+  ggplot(aes(factor(value), pct)) +
+  geom_col(fill = teal, width = 0.65) +
+  geom_text(aes(label = sprintf("%.0f%%", pct)), vjust = -0.4, color = ink,
+            fontface = "bold", size = 4.4) +
+  facet_wrap(~ factor(item, levels = c("Q8r: CU loan rates are high", "Q30: CU rates lower than others"))) +
+  scale_y_continuous(limits = c(0, 65), labels = \(x) paste0(x, "%")) +
+  labs(x = "Response (1–5)", y = "% of members") +
+  theme(panel.grid.major.x = element_blank(),
+        strip.text = element_text(color = ink, face = "bold", size = 14))
+```
+
+### H2: Paired-samples t-test
+
+```{r}
+#| label: h2-ttest
+h2_t <- t.test(h2$Q8_r, h2$q30, paired = TRUE)
+h2_t
+```
+
+```{r}
+#| label: tbl-h2-t
+#| tbl-cap: "Paired-samples t-test: Q8r vs. Q30"
+tibble(Comparison = "Q8r − Q30", n = nrow(h2),
+       `Mean difference` = unname(h2_t$estimate),
+       `95% CI lower` = h2_t$conf.int[1], `95% CI upper` = h2_t$conf.int[2],
+       t = unname(h2_t$statistic), df = unname(h2_t$parameter),
+       p = fmt_p(h2_t$p.value)) |>
+  kable(digits = 2)
+```
+
+### H2: Direction check (correlation and aligned comparison)
+
+The two items **run in opposite directions**. A high Q8r means a member thinks EFCU's rates are **high** (bad for the member), while a high Q30 means they agree EFCU's rates are **lower** than competitors' (good for the member). The correlation confirms it:
+
+```{r}
+#| label: h2-direction
+h2_r       <- cor.test(h2$Q8_r, h2$q30)
+h2_aligned <- t.test(h2$q8, h2$q30, paired = TRUE)
+h2_r
+h2_aligned
+```
+
+### H2: Insight
+
+::: {.takeaway}
+**H2 is SUPPORTED as stated: members see EFCU's loan rates as "average," and they're no more convinced the rates beat competitors'.**
+:::
+
+- **Both answers cluster in the middle.** **55% call EFCU's loan rates "average"** on Q8r, and **41% are uncertain** whether they beat other lenders on Q30 (@tbl-h2-desc, @fig-h2).
+- **The two means are practically identical**: **3.14 vs. 3.06**, with no significant difference (*t*(106) = `r sprintf("%.2f", h2_t$statistic)`, *p* = `r fmt_p(h2_t$p.value)`; @tbl-h2-t). So the hypothesis of no difference holds.
+- **A caution on reading this:** the two items point in **opposite directions**, and members answer them consistently. Those who think rates are high tend to disagree that rates beat competitors (*r* = `r sprintf("%.2f", h2_r$estimate)`, *p* < .001). When Q8 is put on the same direction as Q30 (original Q8, where 5 = very low), members are **slightly more positive about rates compared with competitors** than about rates in absolute terms, though the gap is **small** (2.86 vs. 3.06; *t*(106) = `r sprintf("%.2f", h2_aligned$statistic)`, *p* = `r fmt_p(h2_aligned$p.value)`).
+- **So what:** **price is not a selling point for EFCU loans**. Members see the rates as neither cheap nor expensive, and they aren't sure EFCU beats the competition. That matches R2, which pointed to **loan rates as the most likely reason members borrow elsewhere**. **Sharper, clearly communicated loan pricing** is the lever.
+
+## Summary
+
+| Hypothesis | Test | Result | Insight |
+|:--|:--|:--|:--|
+| **H1** | One-way ANOVA + Tukey | **Supported** (*F*(2, 125) = 4.63, *p* = .012) | **Members who use regular share accounts are the LEAST satisfied** that EFCU meets their needs (31% agree vs. ~63%) |
+| **H2** | Paired-samples t-test | **Supported: no difference** (*t*(106) = 0.60, *p* = .549) | Members see loan rates as **average** and **aren't sure they beat competitors**, so **price isn't a selling point** |
+
+## Appendix
+
+- **GitHub Pages:** <https://simrank-dm.github.io/IBM6500-F26/IC-Case31-Summary-H1-H2/IC-Case31-Summary-H1-H2-Simran-Kaur.html>
+- **GitHub Repository:** <https://github.com/Simrank-DM/IBM6500-F26>
