@@ -243,5 +243,7 @@ h2_aligned
 
 ## Appendix
 
-- **GitHub Pages:** <https://simrank-dm.github.io/IBM6500-F26/IC-Case31-Summary-H1-H2/IC-Case31-Summary-H1-H2-Simran-Kaur.html>
-- **GitHub Repository:** <https://github.com/Simrank-DM/IBM6500-F26>
+## Appendix
+
+- **GitHub Repository:** [Case 31 H1–H2](https://github.com/Simrank-DM/IBM6500-F26/tree/main/IC-Case%2031/IC-Case%2031%20-%20A%20Summary%20of%20Data%20Analysis%20for%20H1-H2)
+- **GitHub Pages:** [Case 31 H1–H2 Report](https://simrank-dm.github.io/IBM6500-F26/IC-Case%2031/IC-Case%2031%20-%20A%20Summary%20of%20Data%20Analysis%20for%20H1-H2/IC-Case31-Summary-H1-H2-Simran-Kaur.html)
