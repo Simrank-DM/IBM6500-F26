@@ -1,0 +1,72 @@
+---
+title: "Class notes for Week 13"
+subtitle: "IBM 6500 · IC-W13-1 (11/19) · Class Participation"
+author: "Simran Kaur"
+date: "November 19, 2026"
+execute:
+  freeze: auto
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 2
+    embed-resources: true
+---
+
+## Overview of Week 13 through Week 15
+
+- Dr. Jung went over the schedule for the next few weeks and what we need to complete.
+- He mentioned the upcoming SEM assignments, group work, and presentations.
+
+## Assignments on SEM
+
+- Dr. Jung talked about SEM assignments and how they connect with the hypothesis-testing work.
+- He mentioned reviewing the examples and understanding the analysis steps before applying them.
+- Dr. Jung introduced SEM and explained how it connects the conceptual model with hypothesis testing.
+- He discussed **mediation** and **moderation** using the class model.
+- In one example, **Civic Consciousness** was the mediator between Need for Cognition and Social Community Engagement.
+- He mentioned that a moderator, such as age, changes the strength of a relationship.
+
+## Review Qualtrics 
+
+- Dr. Jung reviewed Qualtrics settings, including controlling response types and hiding question numbers.
+- He mentioned using clear variable names and labels to make the exported data easier to understand.
+
+## Presentation
+
+- Dr. Jung showed an example presentation and asked us to focus on **what has changed** since the earlier presentation.
+- He mentioned keeping objectives short and spending more time on **data, analysis, and findings**.
+- He also said the presentation should tell a clear story, with relevant links included.
+- Groups without their own data could use Google's GA4 sample data.
+
+## SEM
+
+- Dr. Jung demonstrated **CFA** using six factors and 31 survey items.
+- He showed how to check the SPSS dataset, variable labels, and missing values before analysis.
+- In Positron, he showed the Variables panel and data viewer.
+- He explained that `=~` connects factors with their survey items and `cfa()` fits the model.
+
+| Package / function | Use |
+|---|---|
+| `tidyverse` | Clean and organize data |
+| `haven::read_sav()` | Read SPSS files |
+| `skimr::skim()` | Check data and missing values |
+| `sjPlot::view_df()` | View variable labels |
+| `lavaan::cfa()` | Run CFA |
+| `semPlot::semPaths()` | Draw the model diagram |
+| `semTools` | Additional SEM tools |
+
+- He mentioned keeping the data file in the correct folder so the file path works.
+- We looked at standardized estimates and model-fit results.
+- The example showed **χ² = 1115.894**, **df = 419**, **p < .001**, **CFI = .957**, and **TLI = .946**.
+- Dr. Jung explained that **CFI was good** and **TLI was acceptable**. RMSEA and SRMR should be lower for better fit.
+- He mentioned interpreting the fit measures together, rather than relying on one number.
+
+## My thoughts
+
+- Today's class helped me see how data preparation connects with CFA and SEM.
+- Following Dr. Jung's example in R made the functions easier to understand. The model-fit results also helped me see how to explain the numbers in simple words.
+
+## Appendix {.unnumbered}
+
+- **GitHub Repository:** [IBM6500-F26](https://github.com/Simrank-DM/IBM6500-F26)
