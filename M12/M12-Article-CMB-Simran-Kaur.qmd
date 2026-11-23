@@ -1,0 +1,156 @@
+---
+title: "M12: Article Reading & Summary"
+subtitle: "Common Method Bias (CMB) | Podsakoff et al. (2012)"
+author: "Simran Kaur"
+date: 2026-11-16
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-location: left
+    toc-depth: 2
+    number-sections: false
+    embed-resources: true
+bibliography: references.bib
+link-citations: true
+nocite: |
+  @podsakoff2012a
+---
+
+```{=html}
+<style>
+:root { --forest:#245c47; --leaf:#43876a; --mint:#eaf5ee; }
+body { font-family: Arial, Helvetica, sans-serif; color:#263b30; font-size:17px; line-height:1.65; }
+h1,h2,h3,.title { font-family: Arial, Helvetica, sans-serif; font-weight:750; color:var(--forest); }
+h1 { font-size:1.47rem; border-bottom:2px solid #b6d8c4; padding-bottom:.35rem; margin-top:1.75rem; }
+h2 { font-size:1.17rem; margin-top:1.2rem; }
+.title { font-size:2.1rem; } .subtitle { color:#54816c; }
+strong { color:#245c47; font-weight:750; } a { color:#277554; }
+#TOC { font-size:.94rem; } #TOC .active { color:var(--forest)!important; font-weight:700; }
+blockquote { background:var(--mint); border-left:4px solid var(--leaf); padding:.7rem 1rem; }
+table { font-size:.94rem; } thead th { background:var(--forest)!important; color:white!important; }
+td,th { padding:.55rem .7rem!important; } tbody tr:nth-child(even) { background:#f1f8f3; }
+@media(max-width:800px){body{font-size:16px}.title{font-size:1.8rem}}
+</style>
+```
+
+# Article Overview
+
+| Detail | Notes |
+|---|---|
+| **Article** | Podsakoff, MacKenzie, and Podsakoff (2012), *Sources of Method Bias in Social Science Research and Recommendations on How to Control It* |
+| **Type** | Review article, building on earlier work [@podsakoff2003a] |
+| **Main focus** | Why measurement methods can distort research results and how researchers can prevent or control the problem |
+
+**Main takeaway:** Good research design is the first defense against common method bias. Statistical tests can help, but they cannot replace careful data collection.
+
+# Key Concepts
+
+| Concept | Meaning |
+|---|---|
+| **Method** | How a construct is measured, including question wording, scales, respondents, setting, and timing |
+| **Method variance** | Variation in responses caused by the measurement approach instead of the underlying construct |
+| **Method bias** | When method-related variation changes estimated relationships or conclusions |
+| **Common method variance (CMV)** | Shared variation associated with the method used for different measures; it does not automatically mean bias |
+
+- **Important difference:** Method variance may be present without necessarily biasing a relationship.
+- **Example:** If one survey asks about both brand attitude and purchase intention, response habits or wanting to appear consistent may influence both answers.
+- Bias may **inflate or weaken** an observed relationship, so we should not assume one direction.
+
+# Why Does Method Bias Happen?
+
+The authors connect method bias to the way people answer survey questions. Respondents need to understand a question, remember information, form a judgment, and select an answer. When this feels difficult, they may use **shortcuts (satisficing)** [@krosnick1991].
+
+| Cause | Examples |
+|---|---|
+| **Low ability** | Unfamiliar topics, poor recall, confusing wording, technical terms |
+| **Low motivation** | Survey fatigue, repetitive questions, low interest in the topic |
+| **High task difficulty** | Long questionnaires, complex scales, unclear response options |
+| **Response tendencies** | Agreeing automatically, selecting midpoint answers, or giving socially desirable answers |
+
+**What I noted:** The problem is not simply that the same person answers multiple questions. It depends on the respondent, the question design, and the conditions of data collection.
+
+# How Serious Is the Problem?
+
+- The article reviews evidence that method-related variance can be substantial, although its amount varies across studies and constructs.
+- A previous synthesis of multitrait–multimethod studies found that method variance represented a meaningful share of measurement variance [@cote1987].
+- More abstract concepts, such as attitudes and perceptions, may be especially sensitive to how questions are presented.
+- **Single-source data is not automatically invalid.** Researchers need to consider the actual risk factors rather than assume bias is always present.
+
+# Procedural Remedies: Before Collecting Data
+
+The article emphasizes preventing bias as early as possible.
+
+| Remedy | Why it helps |
+|---|---|
+| **Use different sources** | Measure predictors and outcomes using different people or records when possible |
+| **Separate measurement times** | Reduces immediate carryover and pressure to answer consistently |
+| **Separate survey sections** | Makes connections between predictor and outcome questions less obvious |
+| **Vary measurement formats** | Reduces shared response-format effects when appropriate |
+| **Improve question wording** | Use short, clear, specific questions without double meanings |
+| **Protect anonymity** | Helps reduce the pressure to give socially acceptable answers |
+| **Keep respondents engaged** | Explain the study, avoid excessive repetition, and keep surveys manageable |
+
+**Example for marketing research:** Instead of asking one participant about both advertising attitude and purchase behavior, a researcher could collect attitude through a survey and use actual purchase records for the outcome.
+
+**Caution:** Reverse-worded items are not always a solution. They may discourage automatic agreement, but they can also confuse respondents.
+
+# Statistical Remedies: After Collecting Data
+
+These methods may help identify or account for method effects. Each has limitations.
+
+| Method | Main point |
+|---|---|
+| **Harman's single-factor test** | A common check, but too weak to conclude that CMB is absent |
+| **Marker variable** | Uses an unrelated variable as a possible indication of shared method effects [@lindell2001] |
+| **CFA marker approach** | Estimates method-related effects within a confirmatory factor analysis framework [@williams2010] |
+| **Measured method factor** | Models a suspected source of bias, such as social desirability, if it was actually measured |
+| **Common latent factor (CLF/ULMC)** | Adds a shared factor to model possible common-method effects; requires assumptions and careful interpretation |
+| **Multitrait–multimethod designs** | Compare traits measured through different methods, when the research design supports this |
+
+## Choosing the Right Approach
+
+1. **Start with the research design.** Can predictors and outcomes be collected from different sources or at different times?
+2. **Identify the likely cause.** Is the issue social desirability, similar scale formats, fatigue, or something else?
+3. **Choose a matching method.** A statistical correction should fit the suspected source and the available data.
+4. **Report the limitations.** No single method proves that common method bias has been eliminated.
+
+**Key reminder:** Harman's test alone is not sufficient evidence that the results are free from CMB [@fuller2016].
+
+# Connection to CFA and SEM
+
+- **CFA** checks whether observed items represent their intended latent constructs.
+- **SEM** estimates relationships between constructs, so method-related variation may affect those estimates.
+- If predictors and outcomes come from the same self-report survey, the researcher should discuss possible common-method effects.
+- A latent method factor can be considered in an appropriately specified and identified model, but it may also capture real construct variance.
+- It is important to **compare findings cautiously** and describe exactly what checks were performed.
+
+**Example:** A strong relationship between attitude and purchase intention could partly reflect respondents' tendency to answer similar survey items consistently. This possibility should be assessed, not automatically assumed.
+
+# Quick Summary
+
+| Question | What I learned |
+|---|---|
+| **What is CMB?** | Bias in findings associated with how information is measured |
+| **Why does it happen?** | Survey wording, response habits, low effort, or shared measurement conditions |
+| **What works best?** | Preventive design choices before data collection |
+| **What about analysis?** | CFA-based and other remedies can be useful with appropriate assumptions |
+| **What should be reported?** | Precautions taken, checks used, findings, and remaining limitations |
+
+# Reflection
+
+This article helped me understand that **common method bias is not just a statistical issue**. It can start when researchers design a survey or decide how to collect responses. I found the distinction between **method variance and method bias** especially useful because they do not mean exactly the same thing.
+
+For future **CFA and SEM assignments**, I would pay more attention to question wording, survey structure, and data sources before selecting a statistical check. My main takeaway is that researchers should explain what they did to reduce possible bias instead of relying on one test to say there is no problem.
+
+# References {.unnumbered}
+
+::: {#refs}
+:::
+
+
+## Appendix {.unnumbered}
+
+- **GitHub Repository:** [M12 Article Reading & Summary](https://github.com/Simrank-DM/IBM6500-F26/tree/main/M12)
+- **GitHub Pages:** [M12 Common Method Bias](https://simrank-dm.github.io/IBM6500-F26/M12/M12-Article-CMB-Simran-Kaur.html)
+
