@@ -1,0 +1,472 @@
+---
+title: "Portfolio Website Project Proposal"
+subtitle: "IBM 6500 | Module 10"
+author: "Simran Kaur"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-title: "Proposal contents"
+    toc-depth: 2
+    toc-location: left
+    embed-resources: true
+    section-divs: true
+    anchor-sections: false
+    grid:
+      sidebar-width: 260px
+      body-width: 980px
+      margin-width: 0px
+---
+
+```{=html}
+<style>
+:root{--blush:#F6CDE5;--lav:#C8B6EA;--blue:#BDDDED;--purple:#340963;--berry:#C52B83;--white:#FCF9FD;--ink:#292332}
+html,body{background:var(--white);color:var(--ink);font:700 14pt/1.8 Arial,Helvetica,sans-serif;margin:0}
+body{background:linear-gradient(135deg,#F6CDE540,#C8B6EA35 45%,#BDDDED50);background-attachment:fixed}
+h1,h2,h3,h4,p,li,a,td,th{font-family:Arial,Helvetica,sans-serif;font-weight:700}
+main.content{min-width:0}
+a{color:var(--purple);text-underline-offset:4px}a:hover{color:var(--berry)}
+strong{color:var(--purple)}
+#TOC{padding-top:20px}#TOC h2{font-size:12pt;border:0;margin:0 0 8px;padding:0;color:var(--ink)}#TOC h2:before{display:none}
+#TOC ul{list-style:none;padding-left:10px;margin:0}#TOC li{margin:0 0 10px;line-height:1.3}#TOC a{font-size:12pt;text-decoration:none;color:var(--purple)}#TOC a.active{color:var(--berry)}
+#title-block-header{background:var(--purple);color:var(--white);padding:35px;border-radius:24px 24px 0 0;margin:20px 0 0}
+h1.title{font-size:clamp(30px,4vw,46px);line-height:1.2;color:var(--white);margin:0 0 8px}
+.subtitle,.quarto-title-meta-heading,.quarto-title-meta-contents{color:var(--blush)!important;font-size:13pt;margin:0}
+.quarto-title-meta{margin-top:18px}.quarto-title-meta-heading{text-transform:uppercase;font-size:10pt!important;letter-spacing:1px}
+.identity-hero{display:grid;grid-template-columns:1fr 1.5fr;gap:30px;align-items:center;padding:36px 30px;background:linear-gradient(115deg,var(--blush),var(--lav) 52%,var(--blue));border-radius:0 0 26px 26px;margin-bottom:30px}
+.photo-wrap{aspect-ratio:4/5;overflow:hidden;border-radius:50% 50% 8px 8px;border:3px solid var(--white);box-shadow:0 8px 22px #34096320;max-width:300px}
+.photo-wrap img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.identity-hero h2{border:0;margin:12px 0;font-size:30px;padding:0}.identity-hero h2:before{display:none}
+.kicker{font-size:12pt;letter-spacing:1px;color:var(--purple);text-transform:uppercase}
+.palette-strip{display:flex;gap:8px;margin-top:18px}.palette-strip i{width:28px;height:28px;border-radius:50%;border:1px solid #34096330}
+section.proposal-panel{padding:28px;margin:28px 0;background:#FCF9FDee;border:1px solid var(--lav);border-radius:8px 28px 8px 8px;box-shadow:0 12px 32px #34096308}
+h2.proposal-panel{padding:0 0 14px;margin:0 0 22px;background:none;border:0;border-bottom:2px solid var(--lav);border-radius:0;box-shadow:none}
+h2{color:var(--purple);font-size:27px;line-height:1.4;border-bottom:2px solid var(--lav);padding-bottom:14px;margin:0 0 22px}
+h2:before{content:'✦';color:var(--berry);margin-right:12px}
+h3{color:var(--purple);font-size:22px;background:linear-gradient(90deg,#F6CDE570,#C8B6EA40,#BDDDED35);padding:12px 16px;margin:34px 0 18px;border-radius:8px}
+h4{color:var(--purple);font-size:17px;margin:0 0 8px}
+p{margin:0 0 14px}li{margin-bottom:8px}li::marker{color:var(--berry)}
+code{color:var(--purple);background:#C8B6EA30;padding:1px 5px;border-radius:4px;font-size:12pt;overflow-wrap:anywhere}
+table{width:100%;border-collapse:collapse;margin:20px 0}td,th{padding:13px;border-bottom:1px solid var(--lav);text-align:left;vertical-align:top}
+table th,.table>thead>tr>th{background:var(--purple)!important;color:var(--white)!important;box-shadow:none}td:first-child,th:first-child{width:90px}
+.flow .step code{font-size:10pt;padding:0 3px}tbody tr:nth-child(even){background:#C8B6EA1c}
+.sitemap{display:block;width:100%;max-width:820px;margin:10px auto}
+
+/* workflow */
+.flow{display:flex;flex-wrap:wrap;gap:12px 0;align-items:stretch;margin:18px 0 8px;counter-reset:step}
+.flow .step{position:relative;flex:1 1 0;min-width:112px;background:var(--white);border:1.5px solid var(--lav);border-radius:12px;padding:14px 14px 12px;margin-right:26px;counter-increment:step;font-size:11.5pt;line-height:1.45}
+.flow .step:before{content:counter(step);display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--purple);color:var(--white);font-size:11pt;margin-bottom:8px}
+.flow .step:after{content:'→';position:absolute;right:-22px;top:50%;transform:translateY(-50%);color:var(--berry);font-size:18px}
+.flow .step:last-child{margin-right:0}.flow .step:last-child:after{display:none}
+.flow .step b{display:block;color:var(--purple);font-size:12.5pt;margin-bottom:4px}
+.flow .step span{font-weight:400;color:#4a4256}
+.flow .step:nth-child(3n+1){background:#F6CDE530}.flow .step:nth-child(3n+2){background:#C8B6EA28}.flow .step:nth-child(3n){background:#BDDDED40}
+.flow .step.out{background:var(--purple);border-color:var(--purple)}.flow .step.out b,.flow .step.out span{color:var(--white)}.flow .step.out:before{background:var(--berry)}
+.flow-label{font-size:11pt;letter-spacing:1px;text-transform:uppercase;color:var(--berry);margin:20px 0 0}
+
+/* project blocks */
+.proj{border:1.5px solid var(--lav);border-radius:18px;overflow:hidden;margin:26px 0;background:var(--white)}
+.proj-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;padding:20px 22px;background:linear-gradient(100deg,var(--blush),var(--lav),var(--blue))}
+.proj-head h4{font-size:20px;margin:2px 0 0}.proj-head .where{font-size:10.5pt;letter-spacing:1px;text-transform:uppercase;color:var(--purple)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}.tags i{font-style:normal;font-size:10.5pt;background:var(--white);color:var(--purple);border:1px solid var(--purple);border-radius:20px;padding:2px 10px}
+.proj-body{padding:20px 22px 22px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fact{background:#C8B6EA18;border:1px solid #C8B6EA90;border-radius:10px;padding:13px 15px;font-size:12pt;line-height:1.55}
+.fact.wide{grid-column:1/-1}
+.fact h5{margin:0 0 5px;font-size:10.5pt;letter-spacing:1px;text-transform:uppercase;color:var(--berry)}
+.fact p,.fact li{font-weight:400;font-size:12pt;margin:0}.fact ul{margin:0;padding-left:18px}.fact li{margin-bottom:3px}
+
+/* wireframes */
+.wireframe{border:2px solid var(--lav);border-radius:18px;overflow:hidden;background:var(--white);margin:22px 0;font-size:12pt}
+.wire-nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;background:var(--purple);color:var(--white);padding:15px 22px}
+.wire-nav span.on{color:var(--blush);text-decoration:underline;text-underline-offset:5px}
+.wire-nav .links{display:flex;gap:18px;flex-wrap:wrap}
+.wire-hero{display:grid;grid-template-columns:1fr 1.6fr;align-items:center;gap:24px;padding:28px;background:linear-gradient(120deg,var(--blush),var(--lav),var(--blue))}
+.wire-arch{display:grid;place-items:center;aspect-ratio:4/5;max-width:190px;background:var(--purple);color:var(--white);border-radius:50% 50% 8px 8px}
+.wireframe h4{font-size:17px;margin:0 0 8px;color:var(--purple)}.wireframe p{margin:0 0 10px;font-size:12pt}
+.wire-button{background:var(--berry);color:white;padding:8px 14px;border-radius:7px;display:inline-block;font-size:11.5pt;margin:4px 6px 0 0}
+.wire-button.ghost{background:transparent;color:var(--purple);border:1.5px solid var(--purple)}
+.wire-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:20px}
+.wire-grid.three{grid-template-columns:repeat(3,1fr)}
+.wire-card{background:#C8B6EA22;border:1px solid var(--lav);border-radius:12px;padding:14px;font-size:11.5pt;line-height:1.45}
+.wire-card:nth-child(3n+2){background:#BDDDED40}.wire-card:nth-child(3n){background:#F6CDE540}
+.wire-thumb{height:70px;border-radius:8px;margin-bottom:10px;background:repeating-linear-gradient(45deg,#C8B6EA40 0 10px,#FCF9FD 10px 20px);border:1px dashed var(--lav);display:grid;place-items:center;font-size:10pt;color:var(--purple)}
+.wire-card .chips{margin-top:8px;display:flex;gap:5px;flex-wrap:wrap}.wire-card .chips i{font-style:normal;font-size:9.5pt;background:var(--white);border:1px solid var(--lav);border-radius:12px;padding:0 8px}
+.wire-card .more{color:var(--berry);font-size:10.5pt;margin-top:6px;display:block}
+.wire-band{background:linear-gradient(100deg,var(--blush),var(--lav),var(--blue));padding:22px 24px}
+.wire-band .crumb{font-size:10.5pt;color:var(--purple);letter-spacing:1px;text-transform:uppercase}
+.wire-strip{display:flex;gap:10px;flex-wrap:wrap;padding:0 20px 20px}.wire-strip div{flex:1 1 150px;border:1px dashed var(--lav);border-radius:10px;padding:10px 12px;font-size:11pt}
+.wire-chart{position:relative;display:flex;align-items:end;justify-content:center;gap:18px;height:150px;margin:0 20px 20px;background:#C8B6EA15;border:1px dashed var(--lav);border-radius:10px;padding:14px}
+.wire-chart span{width:11%;background:var(--lav)}.wire-chart span:nth-child(2){height:35%}.wire-chart span:nth-child(3){height:60%;background:var(--blue)}.wire-chart span:nth-child(4){height:45%;background:var(--blush)}.wire-chart span:nth-child(5){height:82%;background:var(--berry)}
+.wire-chart strong{position:absolute;left:14px;top:8px;font-size:11pt}
+.wire-callouts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 20px 20px}.wire-callouts div{border-left:4px solid var(--berry);background:#F6CDE530;padding:10px 12px;font-size:11pt;border-radius:0 8px 8px 0}
+.wire-bottom{background:#F6CDE570;padding:16px;text-align:center;font-size:11.5pt}
+.wire-two{display:grid;grid-template-columns:1.4fr 1fr;gap:14px;padding:20px}
+.wire-two>div{border:1px solid var(--lav);border-radius:10px;padding:14px;font-size:11.5pt;line-height:1.5}
+.wire-filters{display:flex;gap:8px;flex-wrap:wrap;padding:16px 20px 0}.wire-filters i{font-style:normal;font-size:10.5pt;border:1px solid var(--purple);border-radius:16px;padding:2px 11px;color:var(--purple)}.wire-filters i.on{background:var(--purple);color:var(--white)}
+.note{font-weight:400;font-size:12pt;color:#4a4256;margin-top:6px}
+@media(max-width:760px){.identity-hero,.wire-hero,.wire-grid,.wire-grid.three,.wire-two,.wire-callouts,.facts{grid-template-columns:1fr}.photo-wrap{margin:auto}section.proposal-panel{padding:20px 16px}.flow .step{flex-basis:100%;margin-right:0}.flow .step:after{content:'↓';right:auto;left:20px;top:auto;bottom:-22px;transform:none}.flow{gap:24px}}
+@media print{body{background:white}.proposal-panel,.proj,.wireframe{box-shadow:none;break-inside:avoid}#TOC{display:none}}
+</style>
+
+<div class="identity-hero">
+  <div class="photo-wrap"><img src="images/simran.jpg" alt="Simran Kaur"></div>
+  <div>
+    <div class="kicker">Simran Kaur / Portfolio concept</div>
+    <h2>Creative thinking.<br>Analytical curiosity.</h2>
+    <p>Proposed structure, project workflows and page layouts for a Quarto portfolio aimed at marketing analyst roles in fashion and beauty.</p>
+    <div class="palette-strip" aria-label="Color palette">
+      <i style="background:#F6CDE5"></i><i style="background:#C8B6EA"></i><i style="background:#BDDDED"></i><i style="background:#340963"></i><i style="background:#C52B83"></i><i style="background:#FCF9FD"></i><i style="background:#292332"></i>
+    </div>
+  </div>
+</div>
+```
+
+## Overview {.proposal-panel}
+
+My goal is a professional portfolio that brings my digital marketing, creative strategy and marketing analytics work into one place. I want it to show more than final results. Each project page should show how I frame a business problem, work with the data and turn it into a recommendation.
+
+The site will be built in Quarto, kept in a GitHub repo and deployed on Netlify, which rebuilds the site on every push. The site also becomes a data source: GA4 tracks it, and that traffic becomes one of the analytics projects.
+
+## Website structure {.proposal-panel}
+
+Four tabs in the navigation: Home, Digital Marketing Projects, Marketing Analytics Projects and Resume. The GA4 traffic report and the Reveal.js presentation are projects inside Marketing Analytics, not separate tabs.
+
+```{=html}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 880" role="img" aria-label="Portfolio sitemap" class="sitemap">
+<rect width="900" height="880" rx="24" fill="#FCF9FD"/>
+<path d="M450 89 V118 H42 V805 M42 166 H90 M42 256 H90 M42 446 H90 M42 805 H90" stroke="#9b80be" stroke-width="3" fill="none"/>
+<rect x="245" y="28" width="410" height="62" rx="12" fill="#340963"/><text x="450" y="67" text-anchor="middle" fill="#FCF9FD" font-family="Arial" font-weight="700" font-size="25">Portfolio Website</text>
+<rect x="90" y="135" width="760" height="62" rx="12" fill="#BDDDED"/><text x="112" y="174" fill="#340963" font-family="Arial" font-weight="700" font-size="25">Home</text>
+<rect x="90" y="225" width="760" height="62" rx="12" fill="#F6CDE5"/><text x="112" y="264" fill="#340963" font-family="Arial" font-weight="700" font-size="25">Digital Marketing Projects</text>
+<g fill="none" stroke="#9b80be" stroke-width="2"><path d="M114 287 V325 H148"/><path d="M114 287 V370 H148"/></g>
+<g fill="#292332" font-family="Arial" font-weight="700" font-size="23"><text x="165" y="333">GA4 Channel Performance</text><text x="165" y="378">Creative Brand Campaign</text></g>
+<rect x="90" y="415" width="760" height="62" rx="12" fill="#C8B6EA"/><text x="112" y="454" fill="#340963" font-family="Arial" font-weight="700" font-size="25">Marketing Analytics Projects</text>
+<g fill="none" stroke="#9b80be" stroke-width="2"><path d="M114 477 V520 H148"/><path d="M114 477 V570 H148"/><path d="M114 477 V620 H148"/><path d="M114 477 V670 H148"/><path d="M114 477 V720 H148"/></g>
+<g fill="#292332" font-family="Arial" font-weight="700" font-size="23"><text x="165" y="528">Portfolio Website Traffic – GA4</text><text x="165" y="578">BigQuery SQL Analysis</text><text x="165" y="628">Case 31 Analysis</text><text x="165" y="678">CEP – AI-Assisted Meta-Analysis</text><text x="165" y="728">Reveal.js Presentation</text></g>
+<rect x="90" y="774" width="760" height="62" rx="12" fill="#BDDDED"/><text x="112" y="813" fill="#340963" font-family="Arial" font-weight="700" font-size="25">Resume</text>
+</svg>
+```
+
+### What each tab holds
+
+```{=html}
+<div class="wireframe">
+  <div class="wire-nav"><span>✦ Simran Kaur</span><div class="links"><span class="on">Home</span><span>Digital Marketing</span><span>Marketing Analytics</span><span>Resume</span></div></div>
+  <div class="wire-grid">
+    <div class="wire-card"><h4>Home</h4>Intro and personal statement · featured projects · education · certifications · experience · contact links</div>
+    <div class="wire-card"><h4>Digital Marketing Projects</h4>2 project cards<div class="chips"><i>GA4 Channel Performance</i><i>Creative Brand Campaign</i></div></div>
+    <div class="wire-card"><h4>Marketing Analytics Projects</h4>Blog-style listing, 5 project posts with category filters<div class="chips"><i>Website Traffic – GA4</i><i>BigQuery SQL</i><i>Case 31</i><i>CEP</i><i>Reveal.js</i></div></div>
+    <div class="wire-card"><h4>Resume</h4>CV built with Markdown and the vitae package · PDF download</div>
+  </div>
+</div>
+```
+
+### Repo layout
+
+```{=html}
+<div class="wire-two" style="padding:0;margin:10px 0 0">
+<div><code>_quarto.yml</code> site config and navbar<br><code>index.qmd</code> Home<br><code>digital-marketing.qmd</code> tab listing<br><code>marketing-analytics.qmd</code> tab listing<br><code>resume.qmd</code> + <code>resume/cv.Rmd</code> (vitae)</div>
+<div><code>projects/dm/</code> one folder per digital marketing project<br><code>projects/ma/</code> one folder per analytics project<br><code>images/</code> shared assets<br><code>_site/</code> build output, deployed by Netlify</div>
+</div>
+```
+
+## Build and tracking workflow {.proposal-panel}
+
+Two workflows run the site. The first publishes it. The second turns its traffic into data for the GA4 report.
+
+```{=html}
+<p class="flow-label">Publishing workflow</p>
+<div class="flow">
+  <div class="step"><b>Write</b><span>Pages and reports as .qmd in Positron</span></div>
+  <div class="step"><b>Render</b><span><code>quarto render</code> locally to check pages</span></div>
+  <div class="step"><b>Commit</b><span>Push to the GitHub repo</span></div>
+  <div class="step"><b>Deploy</b><span>Netlify builds from the repo on every push</span></div>
+  <div class="step out"><b>Live site</b><span>Public portfolio link for applications</span></div>
+</div>
+
+<p class="flow-label">Tracking and analytics workflow</p>
+<div class="flow">
+  <div class="step"><b>GA4 tag</b><span>Added to every page through <code>_quarto.yml</code></span></div>
+  <div class="step"><b>Search Console</b><span>Verify site, submit sitemap, get indexed</span></div>
+  <div class="step"><b>Link GSC → GA4</b><span>Search queries appear next to traffic</span></div>
+  <div class="step"><b>BigQuery export</b><span>Daily GA4 event export</span></div>
+  <div class="step"><b>Looker Studio</b><span>Traffic and conversion dashboard</span></div>
+  <div class="step out"><b>Quarto report</b><span>Insights published as a project page</span></div>
+</div>
+```
+
+## Home page {.proposal-panel}
+
+The Home page introduces me and sends visitors to the work. It carries over the content I've already drafted: my education (bachelor's in Graphic Design from Iowa State, graduate study in International Apparel Management and the MS in Digital Marketing & Analytics at Cal Poly Pomona), certifications in GA4, HubSpot, SQL and BigQuery, and my experience as a freelance designer and with the Trauma Resource Institute.
+
+```{=html}
+<div class="wireframe">
+  <div class="wire-nav"><span>✦ Simran Kaur</span><div class="links"><span class="on">Home</span><span>Digital Marketing</span><span>Marketing Analytics</span><span>Resume</span></div></div>
+  <div class="wire-hero">
+    <div class="wire-arch">Photo</div>
+    <div><p class="kicker" style="margin:0">Hello, I'm Simran</p><h4 style="font-size:22px">Creative thinking. Analytical curiosity.</h4><p>Two lines on who I am, what I do and the role I want.</p><span class="wire-button">Explore my work</span><span class="wire-button ghost">Resume</span></div>
+  </div>
+  <div class="wire-grid">
+    <div class="wire-card"><h4>Digital Marketing</h4>Campaigns, channel performance and creative strategy<span class="more">2 projects →</span></div>
+    <div class="wire-card"><h4>Marketing Analytics</h4>Data, research and insights<span class="more">5 projects →</span></div>
+  </div>
+  <p style="padding:0 20px;margin:0" class="kicker">Featured projects</p>
+  <div class="wire-grid three">
+    <div class="wire-card"><div class="wire-thumb">dashboard preview</div>Portfolio Website Traffic – GA4</div>
+    <div class="wire-card"><div class="wire-thumb">chart preview</div>CEP – AI-Assisted Meta-Analysis</div>
+    <div class="wire-card"><div class="wire-thumb">campaign visual</div>Creative Brand Campaign</div>
+  </div>
+  <div class="wire-strip"><div><b>Education</b><br>3 degree cards</div><div><b>Certifications</b><br>GA4 · HubSpot · SQL · BigQuery</div><div><b>Experience</b><br>Timeline</div><div><b>Skills</b><br>R · SQL · GA4 · Tableau · Adobe</div></div>
+  <div class="wire-bottom">LinkedIn · GitHub · Email · Back to top</div>
+</div>
+```
+
+## Digital Marketing Projects {.proposal-panel}
+
+This tab shows strategy, channel and creative work. It uses a two-card grid, and each card opens a full project page.
+
+```{=html}
+<div class="wireframe">
+  <div class="wire-nav"><span>✦ Simran Kaur</span><div class="links"><span>Home</span><span class="on">Digital Marketing</span><span>Marketing Analytics</span><span>Resume</span></div></div>
+  <div class="wire-band"><div class="crumb">Selected work</div><h4 style="font-size:22px;margin:4px 0">Digital Marketing Projects</h4><p style="margin:0">Channel strategy, content and brand positioning.</p></div>
+  <div class="wire-grid">
+    <div class="wire-card"><div class="wire-thumb">GA4 report screenshot</div><h4>GA4 Channel Performance</h4>Which channels bring engaged visitors and revenue<div class="chips"><i>GA4</i><i>Acquisition</i><i>Strategy</i></div><span class="more">Read project →</span></div>
+    <div class="wire-card"><div class="wire-thumb">campaign moodboard</div><h4>Creative Brand Campaign</h4>Positioning and campaign direction for a brand concept<div class="chips"><i>Branding</i><i>Content</i><i>Creative</i></div><span class="more">Read project →</span></div>
+  </div>
+</div>
+```
+
+```{=html}
+<div class="proj">
+  <div class="proj-head"><div><div class="where">Digital Marketing · Project 1</div><h4>GA4 Channel Performance and Marketing Strategy</h4></div><div class="tags"><i>GA4</i><i>Descriptive analytics</i><i>Channel strategy</i></div></div>
+  <div class="proj-body">
+    <div class="facts">
+      <div class="fact"><h5>Data and source</h5><p>GA4 e-commerce reporting data from the course micro-assignments (Google Merchandise Store demo account).</p></div>
+      <div class="fact"><h5>Target audience</h5><p>Digital marketing managers and e-commerce teams.</p></div>
+      <div class="fact wide"><h5>Managerial problem</h5><p>The channels that bring the most sessions aren't always the ones that bring engaged visitors or revenue. Budget should follow value, not traffic.</p></div>
+      <div class="fact wide"><h5>Research questions</h5><ul><li>Which channels drive the most engaged sessions, conversions and revenue?</li><li>How have revenue and engagement by channel changed over time?</li><li>Where do new and returning users differ?</li></ul></div>
+      <div class="fact"><h5>Methods</h5><p>Descriptive statistics, percentage change, channel comparisons and a chi-square test on conversion rate by channel.</p></div>
+      <div class="fact"><h5>Expected impact</h5><p>A clear case for prioritizing channels. Revenue attribution only where the data supports it.</p></div>
+    </div>
+    <p class="flow-label">Project workflow</p>
+    <div class="flow">
+      <div class="step"><b>Access</b><span>GA4 demo property</span></div>
+      <div class="step"><b>Pull reports</b><span>Acquisition, engagement, monetization</span></div>
+      <div class="step"><b>Compare</b><span>Rates and % change by channel</span></div>
+      <div class="step"><b>Visualize</b><span>Bar and trend charts</span></div>
+      <div class="step out"><b>Recommend</b><span>Channel priorities</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="proj">
+  <div class="proj-head"><div><div class="where">Digital Marketing · Project 2</div><h4>Creative Brand Campaign Concept</h4></div><div class="tags"><i>Brand strategy</i><i>Content audit</i><i>Creative direction</i></div></div>
+  <div class="proj-body">
+    <div class="facts">
+      <div class="fact"><h5>Data and source</h5><p>My original creative assets and brand concept, plus public competitor campaign examples I collect.</p></div>
+      <div class="fact"><h5>Target audience</h5><p>Brand managers and creative marketing teams.</p></div>
+      <div class="fact wide"><h5>Managerial problem</h5><p>Building a distinctive, consistent brand identity in a crowded market.</p></div>
+      <div class="fact wide"><h5>Research questions</h5><ul><li>Where is there open positioning space compared with competitors?</li><li>Which visual direction and message fit the target customer?</li><li>How should the campaign be tested once it runs?</li></ul></div>
+      <div class="fact"><h5>Methods</h5><p>Structured competitor content review, frequency counts of creative themes, a positioning map and descriptive comparisons. Performance testing would need extra data, so I'll design an A/B test plan.</p></div>
+      <div class="fact"><h5>Expected impact</h5><p>A clear creative direction and a plan for testing it.</p></div>
+    </div>
+    <p class="flow-label">Project workflow</p>
+    <div class="flow">
+      <div class="step"><b>Brief</b><span>Audience, goal, positioning</span></div>
+      <div class="step"><b>Audit</b><span>Code competitor content themes</span></div>
+      <div class="step"><b>Position</b><span>Map gaps and pick a direction</span></div>
+      <div class="step"><b>Create</b><span>Moodboard, visuals, copy</span></div>
+      <div class="step out"><b>Test plan</b><span>A/B hooks and KPIs</span></div>
+    </div>
+  </div>
+</div>
+```
+
+## Marketing Analytics Projects {.proposal-panel}
+
+This tab is blog-style. It's a Quarto listing of five project posts with category filters, so new analyses can be added over time.
+
+```{=html}
+<div class="wireframe">
+  <div class="wire-nav"><span>✦ Simran Kaur</span><div class="links"><span>Home</span><span>Digital Marketing</span><span class="on">Marketing Analytics</span><span>Resume</span></div></div>
+  <div class="wire-band"><div class="crumb">Selected work</div><h4 style="font-size:22px;margin:4px 0">Marketing Analytics Projects</h4><p style="margin:0">Case studies, data visualization, performance metrics and modeling.</p></div>
+  <div class="wire-filters"><i class="on">All</i><i>Web analytics</i><i>SQL</i><i>Survey research</i><i>Research synthesis</i><i>Presentation</i></div>
+  <div class="wire-grid three">
+    <div class="wire-card"><div class="wire-thumb">Looker dashboard</div><h4>Portfolio Website Traffic – GA4</h4><div class="chips"><i>GA4</i><i>BigQuery</i><i>Looker</i></div></div>
+    <div class="wire-card"><div class="wire-thumb">funnel chart</div><h4>BigQuery SQL Analysis</h4><div class="chips"><i>SQL</i><i>E-commerce</i></div></div>
+    <div class="wire-card"><div class="wire-thumb">regression table</div><h4>Case 31 Analysis</h4><div class="chips"><i>R</i><i>Survey</i><i>CFA</i></div></div>
+    <div class="wire-card"><div class="wire-thumb">dashboard view</div><h4>CEP – AI-Assisted Meta-Analysis</h4><div class="chips"><i>CALIPER</i><i>Usability</i></div></div>
+    <div class="wire-card"><div class="wire-thumb">title slide</div><h4>Reveal.js Presentation</h4><div class="chips"><i>Quarto</i><i>Storytelling</i></div></div>
+  </div>
+</div>
+
+<div class="proj">
+  <div class="proj-head"><div><div class="where">Marketing Analytics · Project 1 · Required</div><h4>Portfolio Website Traffic Analysis (GA4)</h4></div><div class="tags"><i>GA4</i><i>Search Console</i><i>BigQuery</i><i>Looker Studio</i></div></div>
+  <div class="proj-body">
+    <div class="facts">
+      <div class="fact"><h5>Data and source</h5><p>GA4 events from this website, Search Console queries and rankings, and the daily BigQuery export.</p></div>
+      <div class="fact"><h5>Target audience</h5><p>Me as the site owner, and hiring managers reviewing my work.</p></div>
+      <div class="fact wide"><h5>Managerial problem</h5><p>A portfolio only helps if the right people find it and reach the resume or contact links. Right now I don't know how visitors arrive or where they drop off.</p></div>
+      <div class="fact wide"><h5>Research questions</h5><ul><li>Which channels and search queries bring visitors?</li><li>Which project pages get the most views and engagement?</li><li>What share of visitors reach a key event: resume download, LinkedIn or GitHub click?</li><li>How does engagement change over time?</li></ul></div>
+      <div class="fact"><h5>Methods</h5><p>SQL on the <code>events_*</code> tables to build sessions and key-event rates, engagement rates, traffic-source comparisons, Search Console CTR by position, and time-series charts in Looker Studio.</p></div>
+      <div class="fact"><h5>Expected impact</h5><p>Better navigation, page order and calls to action, based on what visitors actually do.</p></div>
+      <div class="fact wide"><h5>Limitation</h5><p>Traffic will be small, so the report stays descriptive and I'll avoid strong conclusions from thin numbers.</p></div>
+    </div>
+    <p class="flow-label">Project workflow</p>
+    <div class="flow">
+      <div class="step"><b>Collect</b><span>GA4 events and key events</span></div>
+      <div class="step"><b>Export</b><span>GA4 → BigQuery daily</span></div>
+      <div class="step"><b>Query</b><span>UNNEST params, sessions, key events</span></div>
+      <div class="step"><b>Dashboard</b><span>Looker Studio traffic and conversions</span></div>
+      <div class="step out"><b>Report</b><span>Quarto insights page</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="proj">
+  <div class="proj-head"><div><div class="where">Marketing Analytics · Project 2</div><h4>GA4 E-commerce Analysis Using BigQuery SQL</h4></div><div class="tags"><i>BigQuery</i><i>SQL</i><i>Funnel</i></div></div>
+  <div class="proj-body">
+    <div class="facts">
+      <div class="fact"><h5>Data and source</h5><p>Google's public dataset <code>bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*</code>.</p></div>
+      <div class="fact"><h5>Target audience</h5><p>E-commerce managers and marketing analysts.</p></div>
+      <div class="fact wide"><h5>Managerial problem</h5><p>The GA4 interface only shows summaries. Finding patterns in purchase behavior takes raw event data.</p></div>
+      <div class="fact wide"><h5>Research questions</h5><ul><li>How often do key events happen, and how active are users?</li><li>Which acquisition sources bring buyers?</li><li>Where do users drop out between product view, add to cart, checkout and purchase?</li></ul></div>
+      <div class="fact"><h5>Methods</h5><p>SQL filtering, grouping and aggregation, UNNEST, joins, window functions and CTEs, then descriptive analysis and charts.</p></div>
+      <div class="fact"><h5>Expected impact</h5><p>Shows how raw event data becomes e-commerce insights a team can act on.</p></div>
+    </div>
+    <p class="flow-label">Project workflow</p>
+    <div class="flow">
+      <div class="step"><b>Explore</b><span>Schema and event types</span></div>
+      <div class="step"><b>Flatten</b><span>UNNEST event params</span></div>
+      <div class="step"><b>Model</b><span>CTEs and window functions</span></div>
+      <div class="step"><b>Summarize</b><span>Funnel and source tables</span></div>
+      <div class="step out"><b>Insights</b><span>Charts and findings</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="proj">
+  <div class="proj-head"><div><div class="where">Marketing Analytics · Project 3</div><h4>Case 31: Credit Union Member Analysis</h4></div><div class="tags"><i>R</i><i>Survey research</i><i>Factor analysis</i></div></div>
+  <div class="proj-body">
+    <div class="facts">
+      <div class="fact"><h5>Data and source</h5><p>Case 31 member opinion survey for Employees Federal Credit Union, provided in IBM 6500.</p></div>
+      <div class="fact"><h5>Target audience</h5><p>Credit union management and marketing teams.</p></div>
+      <div class="fact wide"><h5>Managerial problem</h5><p>Understanding member awareness, how members see staff and service, and how those views differ between member groups.</p></div>
+      <div class="fact wide"><h5>Research questions</h5><ul><li>How do awareness and perceptions differ across member groups? (R1–R6)</li><li>How do perceived employee proficiency and operational effectiveness relate to member outcomes? (H1–H2, H5a–H5d)</li></ul></div>
+      <div class="fact"><h5>Methods</h5><p>Descriptive statistics, cross-tabs, chi-square and t-tests, ANOVA, reliability and factor analysis, multiple regression with diagnostics, and CFA in lavaan.</p></div>
+      <div class="fact"><h5>Expected impact</h5><p>Shows where to improve member communication and service awareness, and whether staff training or operations matters more.</p></div>
+    </div>
+    <p class="flow-label">Project workflow</p>
+    <div class="flow">
+      <div class="step"><b>Import</b><span>SPSS file into R</span></div>
+      <div class="step"><b>Prepare</b><span>Label, missing values, reverse-code</span></div>
+      <div class="step"><b>Measure</b><span>Reliability and EFA</span></div>
+      <div class="step"><b>Test</b><span>Group tests and regression</span></div>
+      <div class="step"><b>Validate</b><span>CFA measurement model</span></div>
+      <div class="step out"><b>Report</b><span>Insights for management</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="proj">
+  <div class="proj-head"><div><div class="where">Marketing Analytics · Project 4</div><h4>CEP: AI-Assisted Marketing Meta-Analysis</h4></div><div class="tags"><i>CALIPER</i><i>Meta-analysis</i><i>Dashboard usability</i></div></div>
+  <div class="proj-body">
+    <div class="facts">
+      <div class="fact"><h5>Data and source</h5><p>Published research on personalization in marketing communication, Group 8 coding data and CALIPER outputs. Secondary data only.</p></div>
+      <div class="fact"><h5>Target audience</h5><p>Tarkington Business Futures Institute (TBFI), marketing researchers and business decision-makers.</p></div>
+      <div class="fact wide"><h5>Managerial problem</h5><p>Can an AI-assisted research workflow produce evidence reliable and clear enough for marketing decisions?</p></div>
+      <div class="fact wide"><h5>Research questions</h5><ul><li>How closely does AI-assisted extraction match human coding?</li><li>Can users answer practical questions from the dashboard correctly? (my objective)</li><li>How do users rate its clarity and usefulness?</li></ul></div>
+      <div class="fact"><h5>Methods</h5><p>Coding comparisons, agreement summaries with Krippendorff's alpha where it applies, a task-based dashboard walkthrough (accuracy and time per task) and structured feedback.</p></div>
+      <div class="fact"><h5>Expected impact</h5><p>Shows the strengths and limits of AI-assisted evidence synthesis and makes the research output easier to use.</p></div>
+      <div class="fact wide"><h5>Confidentiality</h5><p>Only summary results and my own work go on the public site. Nothing TBFI hasn't cleared.</p></div>
+    </div>
+    <p class="flow-label">Project workflow</p>
+    <div class="flow">
+      <div class="step"><b>Studies</b><span>Published personalization research</span></div>
+      <div class="step"><b>Extract</b><span>CALIPER AI-assisted coding</span></div>
+      <div class="step"><b>Check</b><span>Compare with human coding</span></div>
+      <div class="step"><b>Dashboard</b><span>Evidence for decisions</span></div>
+      <div class="step"><b>Walkthrough</b><span>Users answer practical questions</span></div>
+      <div class="step out"><b>Recommend</b><span>Fixes and findings</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="proj">
+  <div class="proj-head"><div><div class="where">Marketing Analytics · Project 5 · Required</div><h4>Reveal.js Presentation: Understanding Portfolio Website Engagement</h4></div><div class="tags"><i>Quarto Reveal.js</i><i>Data storytelling</i></div></div>
+  <div class="proj-body">
+    <div class="facts">
+      <div class="fact"><h5>Data and source</h5><p>The same portfolio GA4 data from Project 1.</p></div>
+      <div class="fact"><h5>Target audience</h5><p>Marketing managers, instructors and portfolio reviewers.</p></div>
+      <div class="fact wide"><h5>Managerial problem</h5><p>Turning website analytics into a short presentation that supports decisions.</p></div>
+      <div class="fact wide"><h5>Research questions</h5><ul><li>What are the main traffic and engagement patterns?</li><li>Which practical website improvements does the data support?</li></ul></div>
+      <div class="fact"><h5>Methods</h5><p>KPI summaries, descriptive comparisons, trend charts and visual storytelling in Quarto Reveal.js.</p></div>
+      <div class="fact"><h5>Expected impact</h5><p>Makes the analysis easy to understand and act on in a few minutes.</p></div>
+    </div>
+    <p class="flow-label">Project workflow</p>
+    <div class="flow">
+      <div class="step"><b>Findings</b><span>From the GA4 report</span></div>
+      <div class="step"><b>Select</b><span>3–4 KPIs that matter</span></div>
+      <div class="step"><b>Storyboard</b><span>One idea per slide</span></div>
+      <div class="step"><b>Build</b><span>Charts in Reveal.js</span></div>
+      <div class="step out"><b>Publish</b><span>Linked project page</span></div>
+    </div>
+  </div>
+</div>
+```
+
+## Project page template {.proposal-panel}
+
+Every project page follows the same analytics report structure: executive summary, business problem, objectives, data and preparation, methods, results with visuals, recommendations, limitations and references.
+
+```{=html}
+<div class="wireframe">
+  <div class="wire-nav"><span>✦ Project title</span><div class="links"><span>← Back to projects</span></div></div>
+  <div class="wire-band"><div class="crumb">Marketing Analytics / Project</div><h4 style="font-size:22px;margin:4px 0">Project title</h4><p style="margin:0">Role · Tools · Data source · Date</p></div>
+  <div class="wire-two"><div><h4>Executive summary</h4>The answer in three sentences, written for the target audience.</div><div><h4>Business problem</h4>Who needs this and why it matters.</div></div>
+  <div class="wire-grid" style="padding-top:0"><div class="wire-card"><h4>Data and objectives</h4>Source, scope, preparation and research questions.</div><div class="wire-card"><h4>Methods</h4>Analysis approach, with code folded under each step.</div></div>
+  <div class="wire-chart"><strong>Results and visualizations</strong><span style="height:20%"></span><span></span><span></span><span></span><span></span></div>
+  <div class="wire-callouts"><div>Insight 1</div><div>Insight 2</div><div>Insight 3</div></div>
+  <div class="wire-bottom">Recommendations · Limitations · References · Next project →</div>
+</div>
+```
+
+## Resume {.proposal-panel}
+
+My CV written in Markdown with the vitae package, shown on the page with a downloadable PDF. It covers education, experience, technical skills, certifications and selected projects.
+
+```{=html}
+<div class="wireframe">
+  <div class="wire-nav"><span>✦ Simran Kaur</span><div class="links"><span>Home</span><span>Digital Marketing</span><span>Marketing Analytics</span><span class="on">Resume</span></div></div>
+  <div class="wire-band" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px"><h4 style="font-size:22px;margin:0">Resume</h4><span class="wire-button">Download PDF</span></div>
+  <div class="wire-two"><div><h4>Experience</h4>Trauma Resource Institute · Freelance designer · Fashion brand design roles<h4 style="margin-top:12px">Education</h4>MS Digital Marketing & Analytics · Apparel Management · Bachelor's in Graphic Design</div><div><h4>Skills</h4>R · SQL · BigQuery · GA4 · Looker Studio · Tableau · Adobe CC<h4 style="margin-top:12px">Certifications</h4>GA4 · HubSpot · SQL · BigQuery</div></div>
+</div>
+```
+
+## Timeline {.proposal-panel}
+
+| Stage | Work | Output |
+|--|------------------------------------------------------|------------------------|
+| 1 | Set up the Quarto site, navbar and repo, connect Netlify | Live skeleton site |
+| 2 | Add GA4, verify Search Console, link GSC to GA4, turn on BigQuery export | Tracking running |
+| 3 | Move project content into the page template | Project pages |
+| 4 | Run the analyses, build the Looker dashboard and Reveal.js deck | Reports and deck |
+| 5 | Write the GA4 traffic report once data builds up | Traffic report page |
+| 6 | Check links, mobile layout and accessibility, then final push | Final site |
+
+## Color direction {.proposal-panel}
+
+The ombré blends blush pink (`#F6CDE5`), lavender (`#C8B6EA`) and powder blue (`#BDDDED`). Deep purple (`#340963`) anchors headings and navigation. Berry pink (`#C52B83`) marks links, buttons and workflow arrows, and warm white (`#FCF9FD`) with charcoal (`#292332`) keeps text readable. The arched photo frame and the ✦ mark tie the site to my creative work.
+
+## Reflection {.proposal-panel}
+
+I want the portfolio to show both sides of how I work, the creative and the analytical. Building it pulls together what I've done across the program into something a hiring manager can scan in a few minutes. Tracking the site with GA4 also means the portfolio tests itself: I'll see which projects people actually open, and I can adjust from there.
+
+## Appendix {.proposal-panel}
+
+- [IBM 6500 course repository](https://github.com/Simrank-DM/IBM6500-F26)
+- [Group 8 CEP project](https://gabrielarq1.github.io/CEP--Group-8/CEP-G8-F26/Group8-CEP-F26.html)
+- [Portfolio website template](https://github.com/CCIDM/portfolio-website-template)
+- [Quarto websites documentation](https://quarto.org/docs/websites/)
+- [Quarto Reveal.js documentation](https://quarto.org/docs/presentations/revealjs/)
